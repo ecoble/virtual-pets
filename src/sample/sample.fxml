@@ -5,11 +5,14 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
-<GridPane fx:controller="sample.Controller"
-          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
-    <ImageView fx:id="backgroundimage" fitWidth="500" preserveRatio="true">
+<GridPane fx:controller="sample.Controller" fx:id="pane"
+         xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
+    <ImageView fx:id="backgroundImage" fitWidth="${pane.width}" fitHeight="${pane.height}">
         <image>
             <Image url="@../images/LivingRoom.jpg"/>
         </image>
     </ImageView>
+
 </GridPane>
+
+
