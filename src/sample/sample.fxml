@@ -1,18 +1,38 @@
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.GridPane?>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
-<GridPane fx:controller="sample.Controller" fx:id="pane"
-         xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
-    <ImageView fx:id="backgroundImage" fitWidth="${pane.width}" fitHeight="${pane.height}">
-        <image>
-            <Image url="@../images/LivingRoom.jpg"/>
-        </image>
-    </ImageView>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Text?>
 
-</GridPane>
-
-
+<?import javafx.geometry.Insets?>
+<BorderPane fx:id="pane" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+    <top>
+        <StackPane prefHeight="300.0" prefWidth="500.0">
+            <ImageView fx:id="backgroundImage" fitHeight="${pane.height}" fitWidth="${pane.width}" preserveRatio="true"> <!--fitHeight="300.0" fitWidth="500.0">-->
+                <image>
+                    <Image url="@../images/LivingRoom.jpg" />
+                </image>
+            </ImageView>
+            <padding>
+                <Insets bottom="20.0"/>
+            </padding>
+        </StackPane>
+    </top>
+    <center>
+        <Text text="Welcome to Virtual Pets! You need to buy your first pet!"/>
+    </center>
+    <bottom>
+        <HBox alignment="CENTER" prefHeight="150.0">
+            <Button fx:id="dogButton" text="Buy Dog" />
+            <Button text="Buy Cat" />
+            <Button mnemonicParsing="false" text="Buy Fish" GridPane.columnIndex="2" />
+            <Button mnemonicParsing="false" text="Buy Bird" />
+            <Button text="Buy Rabbit"/>
+        </HBox>
+    </bottom>
+</BorderPane>

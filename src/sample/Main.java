@@ -14,7 +14,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("Virtual Pets");
-        primaryStage.setScene(new Scene(root, 500, 350));
+        primaryStage.setScene(new Scene(root, 500, 500));
         primaryStage.show();
 
         //Image image = new Image("http://www.impressiveinteriordesign.com/wp-content/uploads/2012/09/Photos-Of-Modern-Living-Room-Interior-Design-Ideas-0.jpg");
