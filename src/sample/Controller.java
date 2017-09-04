@@ -1,14 +1,67 @@
 package sample;
 
 import javafx.fxml.FXML;
+import javafx.scene.Group;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
+
+import java.awt.event.ActionEvent;
 
 public class Controller
 {
-    private void initialize()
-    {
+    @FXML
+    private Group petContainer;
 
+    @FXML
+    private Text userMessage;
+
+    @FXML
+    protected void buyDog(MouseEvent event)
+    {
+        addAnimal("dog","images/golden-retriever.png", 250);
     }
+
+    @FXML
+    protected void buyCat(MouseEvent event)
+    {
+        addAnimal("cat", "images/cat_image.png", 150);
+    }
+
+    @FXML
+    protected void buyFish(MouseEvent event)
+    {
+        addAnimal("fish", "images/goldfish.png", 75);
+    }
+
+    @FXML
+    protected void buyBird(MouseEvent event)
+    {
+        addAnimal("bird", "images/bird.png", 150);
+    }
+
+    @FXML
+    protected void buyRabbit(MouseEvent event)
+    {
+        addAnimal("rabbit", "images/rabbit.png", 50);
+    }
+
+    private void addAnimal(String petType, String url, int size)
+    {
+        userMessage.setText("You bought a " + petType + "!");
+
+        Image image = new Image(url);
+        ImageView img = new ImageView();
+        img.setPreserveRatio(true);
+        img.setFitWidth(size);
+
+        petContainer.getChildren().add(img);
+        img.setImage(image);
+    }
+
+
 
 }
