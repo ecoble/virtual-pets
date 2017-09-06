@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Text?>
 
+<?import javafx.scene.layout.AnchorPane?>
 <BorderPane fx:id="pane" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
     <top>
         <StackPane fx:id="stackPane" prefHeight="300.0" prefWidth="500.0">
@@ -18,7 +19,20 @@
                     <Image url="@../images/LivingRoom.jpg" />
                 </image>
             </ImageView>
-            <Group fx:id="petContainer" StackPane.alignment="BOTTOM_CENTER" >
+            <HBox fx:id="birdContainer" StackPane.alignment="TOP_CENTER">
+            </HBox>
+            <Group StackPane.alignment="BOTTOM_CENTER">
+                <HBox fx:id="landPetContainer"  >
+                </HBox>
+            </Group>
+            <Group StackPane.alignment="BOTTOM_RIGHT">
+                <StackPane fx:id="fishContainer" >
+                    <ImageView fitHeight="75" preserveRatio="true">
+                        <image>
+                            <Image url="@../images/fishTank.png"/>
+                        </image>
+                    </ImageView>
+                </StackPane>
             </Group>
             <padding>
                 <Insets bottom="20.0" />

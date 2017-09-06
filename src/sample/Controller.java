@@ -5,7 +5,9 @@ import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 
@@ -14,7 +16,13 @@ import java.awt.event.ActionEvent;
 public class Controller
 {
     @FXML
-    private Group petContainer;
+    private HBox landPetContainer;
+
+    @FXML
+    private HBox birdContainer;
+
+    @FXML
+    private StackPane fishContainer;
 
     @FXML
     private Text userMessage;
@@ -58,8 +66,23 @@ public class Controller
         img.setPreserveRatio(true);
         img.setFitWidth(size);
 
-        petContainer.getChildren().add(img);
-        img.setImage(image);
+        if(petType.equals("bird"))
+        {
+            birdContainer.getChildren().add(img);
+            img.setImage(image);
+        }
+        else if(petType.equals("fish"))
+        {
+            fishContainer.getChildren().add(img);
+            img.setImage(image);
+        }
+        else
+        {
+            AnchorPane anchor = new AnchorPane(img);
+            anchor.setBottomAnchor(img, 0.0);
+            img.setImage(image);
+            landPetContainer.getChildren().add(anchor);
+        }
     }
 
 
