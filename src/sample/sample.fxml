@@ -22,7 +22,7 @@
             <HBox fx:id="birdContainer" StackPane.alignment="TOP_CENTER">
             </HBox>
             <Group StackPane.alignment="BOTTOM_CENTER">
-                <HBox fx:id="landPetContainer"  >
+                <HBox fx:id="landPetContainer">
                 </HBox>
             </Group>
             <Group StackPane.alignment="BOTTOM_RIGHT">
@@ -35,7 +35,7 @@
                 </StackPane>
             </Group>
             <padding>
-                <Insets bottom="20.0" />
+                <Insets bottom="20.0"/>
             </padding>
         </StackPane>
     </top>

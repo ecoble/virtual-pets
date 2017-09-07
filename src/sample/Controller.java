@@ -65,22 +65,20 @@ public class Controller
         ImageView img = new ImageView();
         img.setPreserveRatio(true);
         img.setFitWidth(size);
+        img.setImage(image);
 
         if(petType.equals("bird"))
         {
             birdContainer.getChildren().add(img);
-            img.setImage(image);
         }
         else if(petType.equals("fish"))
         {
             fishContainer.getChildren().add(img);
-            img.setImage(image);
         }
         else
         {
             AnchorPane anchor = new AnchorPane(img);
             anchor.setBottomAnchor(img, 0.0);
-            img.setImage(image);
             landPetContainer.getChildren().add(anchor);
         }
     }
