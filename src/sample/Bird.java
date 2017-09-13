@@ -1,3 +1,4 @@
+package sample;
 public class Bird extends Pet
 {
     final static int price = 200;
