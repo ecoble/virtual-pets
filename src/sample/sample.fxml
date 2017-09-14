@@ -35,7 +35,7 @@
                 </StackPane>
             </Group>
             <padding>
-                <Insets bottom="20.0"/>
+            <Insets bottom="20.0"/>
             </padding>
         </StackPane>
     </top>
@@ -43,26 +43,29 @@
         <Text fx:id="userMessage" text="Welcome to Virtual Pets! You need to buy your first pet!"/>
     </center>
     <bottom>
-        <HBox alignment="CENTER" prefHeight="150.0">
-
-            <Button fx:id="morePetsButton" onMouseClicked="#morePets" text="Buy more pets" visible="false" managed="false"/>
-            <Button fx:id="interactButton" onMouseClicked="#interact" text="Interact with pets" visible="false" managed="false"/>
-            <Button fx:id="storeButton" onMouseClicked="#store" text="Go to store" visible="false" managed="false"/>
-
-            <Button fx:id="dogButton" onMouseClicked="#buyDog" text="Buy Dog" visible="false" managed="false"/>
-            <Button fx:id="catButton" onMouseClicked="#buyCat" text="Buy Cat" visible="false" managed="false"/>
-            <Button fx:id="fishButton" onMouseClicked="#buyFish" text="Buy Fish" visible="false" managed="false"/>
-            <Button fx:id="birdButton" onMouseClicked="#buyBird" text="Buy Bird" visible="false" managed="false"/>
-            <Button fx:id="rabbitButton" onMouseClicked="#buyRabbit" text="Buy Rabbit" visible="false" managed="false"/>
-
-            <Button fx:id="foodButton" onMouseClicked="#feed" text="Feed pet" visible="false" managed="false"/>
-            <Button fx:id="drinkButton" onMouseClicked="#drink" text="Give water to pet" visible="false" managed="false"/>
-            <Button fx:id="walkButton" onMouseClicked="#walk" text="Walk pet" visible="false" managed="false"/>
-            <Button fx:id="washButton" onMouseClicked="#wash" text="Wash pet" visible="false" managed="false"/>
-            <Button fx:id="trainButton" onMouseClicked="#train" text="Train Pet" visible="false" managed="false"/>
-
-            <Button fx:id="buyFoodButton" onMouseClicked="#buyFood" text="Buy food" visible="false" managed="false"/>
-
+        <HBox alignment="CENTER" prefHeight="100">
+            <HBox fx:id="homeBox" visible="false" managed="false">
+                <Button fx:id="morePetsButton" onMouseClicked="#showMorePets" text="Buy more pets"/>
+                <Button fx:id="interactButton" onMouseClicked="#showInteract" text="Interact with pets"/>
+                <Button fx:id="storeButton" onMouseClicked="#showStore" text="Go to store"/>
+            </HBox>
+            <HBox fx:id="petBox" visible="false" managed="false">
+                <Button fx:id="dogButton" onMouseClicked="#buyDog" text="Buy Dog"/>
+                <Button fx:id="catButton" onMouseClicked="#buyCat" text="Buy Cat"/>
+                <Button fx:id="fishButton" onMouseClicked="#buyFish" text="Buy Fish"/>
+                <Button fx:id="birdButton" onMouseClicked="#buyBird" text="Buy Bird"/>
+                <Button fx:id="rabbitButton" onMouseClicked="#buyRabbit" text="Buy Rabbit"/>
+            </HBox>
+            <HBox fx:id="interactBox" visible="false" managed="false">
+                <Button fx:id="foodButton" onMouseClicked="#interact" userData="You fed your pet!" text="Feed pet"/>
+                <Button fx:id="drinkButton" onMouseClicked="#interact" userData="You gave water to your pet!" text="Give water to pet"/>
+                <Button fx:id="walkButton" onMouseClicked="#interact" userData="You walked your pet!" text="Walk pet"/>
+                <Button fx:id="washButton" onMouseClicked="#interact" userData="You washed your pet!" text="Wash pet"/>
+                <Button fx:id="trainButton" onMouseClicked="#interact" userData="You trained your pet!" text="Train Pet"/>
+            </HBox>
+            <HBox fx:id="storeBox" visible="false" managed="false">
+                <Button fx:id="buyFoodButton" onMouseClicked="#buyFood" text="Buy food"/>
+            </HBox>
         </HBox>
     </bottom>
 </BorderPane>

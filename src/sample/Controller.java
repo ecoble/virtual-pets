@@ -73,6 +73,18 @@ public class Controller {
     private Button buyFoodButton;
 
     @FXML
+    private HBox homeBox;
+
+    @FXML
+    private HBox petBox;
+
+    @FXML
+    private HBox interactBox;
+
+    @FXML
+    private HBox storeBox;
+
+    @FXML
     protected void buyDog(MouseEvent event) {
         addAnimal("dog", "images/golden-retriever.png", 250);
     }
@@ -98,78 +110,44 @@ public class Controller {
     }
 
     @FXML
-    protected void morePets(MouseEvent event)
+    protected void showMorePets(MouseEvent event)
     {
-        hideHomeButtons();
-        showMorePetsButtons();
+        hideHomeBox();
+        showPetBox();
     }
 
     @FXML
-    protected void interact(MouseEvent event)
+    protected void showInteract(MouseEvent event)
     {
-        hideHomeButtons();
-        showInteractButtons();
+        hideHomeBox();
+        showInteractBox();
     }
 
     @FXML
-    protected void store(MouseEvent event)
+    protected void showStore(MouseEvent event)
     {
-        hideHomeButtons();
-        showStoreButtons();
-    }
-
-    @FXML
-    protected void feed(MouseEvent event)
-    {
-        hideInteractButtons();
-        showHomeButtons();
-        userMessage.setText("You fed your pet!");
-        returnToHomeMessage();
-    }
-
-    @FXML
-    protected void drink(MouseEvent event)
-    {
-        hideInteractButtons();
-        showHomeButtons();
-        userMessage.setText("You gave water to your pet!");
-        returnToHomeMessage();
-    }
-
-    @FXML
-    protected void walk(MouseEvent event)
-    {
-        hideInteractButtons();
-        showHomeButtons();
-        userMessage.setText("You walked your pet!");
-        returnToHomeMessage();
-    }
-
-    @FXML
-    protected void wash(MouseEvent event)
-    {
-        hideInteractButtons();
-        showHomeButtons();
-        userMessage.setText("You washed your pet!");
-        returnToHomeMessage();
-    }
-
-    @FXML
-    protected void train(MouseEvent event)
-    {
-        hideInteractButtons();
-        showHomeButtons();
-        userMessage.setText("You trained your pet!");
-        returnToHomeMessage();
+        hideHomeBox();
+        showStoreBox();
     }
 
     @FXML
     protected void buyFood(MouseEvent event)
     {
-        hideStoreButtons();
-        showHomeButtons();
+        hideStoreBox();
+        showHomeBox();
         userMessage.setText("You bought food!");
         returnToHomeMessage();
+    }
+
+    @FXML
+    protected void interact(MouseEvent event)
+    {
+        hideInteractBox();
+        showHomeBox();
+        Button b = (Button) event.getSource();
+        userMessage.setText(b.getUserData().toString());
+        returnToHomeMessage();
+
     }
 
 
@@ -177,8 +155,9 @@ public class Controller {
     @FXML
     protected void initialize()
     {
-        showMorePetsButtons();
+        showPetBox();
     }
+
 
     private void addAnimal(String petType, String url, int size) {
         userMessage.setText("You bought a " + petType + "!");
@@ -200,93 +179,57 @@ public class Controller {
             landPetContainer.getChildren().add(anchor);
         }
 
-        hideMorePetsButtons();
-        showHomeButtons();
+        hidePetBox();
+        showHomeBox();
 
     }
 
-    private void showHomeButtons() {
-        morePetsButton.setVisible(true);
-        morePetsButton.setManaged(true);
-        interactButton.setVisible(true);
-        interactButton.setManaged(true);
-        storeButton.setVisible(true);
-        storeButton.setManaged(true);
-    }
-
-    private void hideHomeButtons() {
-        morePetsButton.setVisible(false);
-        morePetsButton.setManaged(false);
-        interactButton.setVisible(false);
-        interactButton.setManaged(false);
-        storeButton.setVisible(false);
-        storeButton.setManaged(false);
-
-    }
-
-    private void showMorePetsButtons() {
-        dogButton.setVisible(true);
-        dogButton.setManaged(true);
-        catButton.setVisible(true);
-        catButton.setManaged(true);
-        fishButton.setVisible(true);
-        fishButton.setManaged(true);
-        birdButton.setVisible(true);
-        birdButton.setManaged(true);
-        rabbitButton.setVisible(true);
-        rabbitButton.setManaged(true);
-
-    }
-
-    private void hideMorePetsButtons() {
-        dogButton.setVisible(false);
-        dogButton.setManaged(false);
-        catButton.setVisible(false);
-        catButton.setManaged(false);
-        fishButton.setVisible(false);
-        fishButton.setManaged(false);
-        birdButton.setVisible(false);
-        birdButton.setManaged(false);
-        rabbitButton.setVisible(false);
-        rabbitButton.setManaged(false);
-    }
-
-    private void showInteractButtons() {
-        foodButton.setVisible(true);
-        foodButton.setManaged(true);
-        drinkButton.setVisible(true);
-        drinkButton.setManaged(true);
-        walkButton.setVisible(true);
-        walkButton.setManaged(true);
-        washButton.setVisible(true);
-        washButton.setManaged(true);
-        trainButton.setVisible(true);
-        trainButton.setManaged(true);
-    }
-
-    private void hideInteractButtons() {
-        foodButton.setVisible(false);
-        foodButton.setManaged(false);
-        drinkButton.setVisible(false);
-        drinkButton.setManaged(false);
-        walkButton.setVisible(false);
-        walkButton.setManaged(false);
-        washButton.setVisible(false);
-        washButton.setManaged(false);
-        trainButton.setVisible(false);
-        trainButton.setManaged(false);
-    }
-
-    private void showStoreButtons()
+    private void showHomeBox()
     {
-        buyFoodButton.setVisible(true);
-        buyFoodButton.setManaged(true);
+        homeBox.setVisible(true);
+        homeBox.setManaged(true);
     }
 
-    private void hideStoreButtons()
+    private void hideHomeBox()
     {
-        buyFoodButton.setVisible(false);
-        buyFoodButton.setManaged(false);
+        homeBox.setVisible(false);
+        homeBox.setManaged(false);
+    }
+
+    private void showPetBox()
+    {
+        petBox.setVisible(true);
+        petBox.setManaged(true);
+    }
+
+    private void hidePetBox()
+    {
+        petBox.setVisible(false);
+        petBox.setManaged(false);
+    }
+
+    private void showInteractBox()
+    {
+        interactBox.setVisible(true);
+        interactBox.setManaged(true);
+    }
+
+    private void hideInteractBox()
+    {
+        interactBox.setVisible(false);
+        interactBox.setManaged(false);
+    }
+
+    private void showStoreBox()
+    {
+        storeBox.setVisible(true);
+        storeBox.setManaged(true);
+    }
+
+    private void hideStoreBox()
+    {
+        storeBox.setVisible(false);
+        storeBox.setManaged(false);
     }
 
     private void returnToHomeMessage()
