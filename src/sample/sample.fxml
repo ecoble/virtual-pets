@@ -11,6 +11,7 @@
 <?import javafx.scene.text.Text?>
 
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.TextField?>
 <BorderPane fx:id="pane" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
     <top>
         <StackPane fx:id="stackPane" prefHeight="300.0" prefWidth="500.0">
@@ -40,7 +41,7 @@
         </StackPane>
     </top>
     <center>
-        <Text fx:id="userMessage" text="Welcome to Virtual Pets! You need to buy your first pet!"/>
+        <Text fx:id="userMessage"/>
     </center>
     <bottom>
         <HBox alignment="CENTER" prefHeight="100">

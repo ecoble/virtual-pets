@@ -5,8 +5,11 @@ import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -15,7 +18,9 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
+import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.util.Optional;
 
 public class Controller {
     @FXML
@@ -29,48 +34,6 @@ public class Controller {
 
     @FXML
     private Text userMessage;
-
-    @FXML
-    private Button dogButton;
-
-    @FXML
-    private Button catButton;
-
-    @FXML
-    private Button fishButton;
-
-    @FXML
-    private Button birdButton;
-
-    @FXML
-    private Button rabbitButton;
-
-    @FXML
-    private Button morePetsButton;
-
-    @FXML
-    private Button interactButton;
-
-    @FXML
-    private Button storeButton;
-
-    @FXML
-    private Button foodButton;
-
-    @FXML
-    private Button drinkButton;
-
-    @FXML
-    private Button walkButton;
-
-    @FXML
-    private Button washButton;
-
-    @FXML
-    private Button trainButton;
-
-    @FXML
-    private Button buyFoodButton;
 
     @FXML
     private HBox homeBox;
@@ -155,7 +118,9 @@ public class Controller {
     @FXML
     protected void initialize()
     {
+        userMessage.setText("You need to buy your first pet!");
         showPetBox();
+        User user1 = new User(collectInput("Enter your name:", "Welcome to Virtual Pets!"));
     }
 
 
@@ -240,6 +205,19 @@ public class Controller {
         );
 
         timeline.play();
+    }
+
+    private String collectInput(String message, String header)
+    {
+        TextInputDialog input = new TextInputDialog();
+        input.setTitle("Virtual Pets");
+        input.setHeaderText(header);
+        input.setContentText(message);
+        Optional<String> name = input.showAndWait();
+
+
+        return name.toString();
+
     }
 
 }
