@@ -1,9 +1,13 @@
 package sample;
+
+import java.util.ArrayList;
+
 public class User{
 
     private String name;
     private int money;
-    private int petCount;
+    ArrayList<Pet> petList;
+
 
     public User(String name)
     {
@@ -26,8 +30,9 @@ public class User{
         money = money + gainMoney;
     }
 
-    public int getPetCount()
+    public String getName()
     {
-        return petCount;
+        return name;
     }
+
 }

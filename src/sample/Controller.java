@@ -23,6 +23,8 @@ import java.awt.event.ActionEvent;
 import java.util.Optional;
 
 public class Controller {
+    private User user;
+
     @FXML
     private HBox landPetContainer;
 
@@ -48,28 +50,72 @@ public class Controller {
     private HBox storeBox;
 
     @FXML
-    protected void buyDog(MouseEvent event) {
-        addAnimal("dog", "images/golden-retriever.png", 250);
+    protected void buyDog(MouseEvent event)
+    {
+        buyPet("dog", "images/golden-retriever.png",  250);
+        Dog newDog = new Dog(collectInput("Enter Pet Name", "Name your pet!"));
+        user.petList.add(newDog);
+        pauseForMessage("What would you like to do now?");
     }
 
     @FXML
-    protected void buyCat(MouseEvent event) {
-        addAnimal("cat", "images/cat_image.png", 150);
+    protected void buyCat(MouseEvent event)
+    {
+        buyPet("cat", "images/cat_image.png", 150);
+        Cat newCat = new Cat(collectInput("Enter Pet Name", "Name your pet!"));
+        user.petList.add(newCat);
+        pauseForMessage("What would you like to do now?");
     }
 
     @FXML
-    protected void buyFish(MouseEvent event) {
-        addAnimal("fish", "images/goldfish.png", 75);
+    protected void buyFish(MouseEvent event)
+    {
+        buyPet("fish", "images/goldfish.png", 75);
+        Fish newFish = new Fish(collectInput("Enter Pet Name", "Name your pet!"));
+        user.petList.add(newFish);
+        pauseForMessage("What would you like to do now?");
     }
 
     @FXML
-    protected void buyBird(MouseEvent event) {
-        addAnimal("bird", "images/bird.png", 150);
+    protected void buyBird(MouseEvent event)
+    {
+        buyPet("bird", "images/bird.png", 150);
+        Bird newBird = new Bird(collectInput("Enter Pet Name", "Name your pet!"));
+        user.petList.add(newBird);
+        pauseForMessage("What would you like to do now?");
     }
 
     @FXML
-    protected void buyRabbit(MouseEvent event) {
-        addAnimal("rabbit", "images/rabbit.png", 50);
+    protected void buyRabbit(MouseEvent event)
+    {
+        buyPet("rabbit", "images/rabbit.png", 50);
+        Rabbit newRabbit = new Rabbit(collectInput("Enter Pet Name", "Name your pet!"));
+        user.petList.add(newRabbit);
+    }
+
+    private void buyPet(String petType, String url, int size) {
+        userMessage.setText("You bought a " + petType + "!");
+        pauseForMessage("You need to name your " + petType + "!");
+
+        Image image = new Image(url);
+        ImageView img = new ImageView();
+        img.setPreserveRatio(true);
+        img.setFitWidth(size);
+        img.setImage(image);
+
+        if (petType.equals("bird")) {
+            birdContainer.getChildren().add(img);
+        } else if (petType.equals("fish")) {
+            fishContainer.getChildren().add(img);
+        } else {
+            AnchorPane anchor = new AnchorPane(img);
+            anchor.setBottomAnchor(img, 0.0);
+            landPetContainer.getChildren().add(anchor);
+        }
+
+        hidePetBox();
+        showHomeBox();
+
     }
 
     @FXML
@@ -99,7 +145,7 @@ public class Controller {
         hideStoreBox();
         showHomeBox();
         userMessage.setText("You bought food!");
-        returnToHomeMessage();
+        pauseForMessage("What would you like to do now?");
     }
 
     @FXML
@@ -109,44 +155,17 @@ public class Controller {
         showHomeBox();
         Button b = (Button) event.getSource();
         userMessage.setText(b.getUserData().toString());
-        returnToHomeMessage();
+        pauseForMessage("What would you like to do now?");
 
     }
-
 
     //Welcome sequence
     @FXML
     protected void initialize()
     {
-        userMessage.setText("You need to buy your first pet!");
+        user = new User(collectInput("Enter your name:", "Welcome to Virtual Pets!"));
+        userMessage.setText("Hello " + user.getName() + "! You need to buy your first pet!");
         showPetBox();
-        User user1 = new User(collectInput("Enter your name:", "Welcome to Virtual Pets!"));
-    }
-
-
-    private void addAnimal(String petType, String url, int size) {
-        userMessage.setText("You bought a " + petType + "!");
-        returnToHomeMessage();
-
-        Image image = new Image(url);
-        ImageView img = new ImageView();
-        img.setPreserveRatio(true);
-        img.setFitWidth(size);
-        img.setImage(image);
-
-        if (petType.equals("bird")) {
-            birdContainer.getChildren().add(img);
-        } else if (petType.equals("fish")) {
-            fishContainer.getChildren().add(img);
-        } else {
-            AnchorPane anchor = new AnchorPane(img);
-            anchor.setBottomAnchor(img, 0.0);
-            landPetContainer.getChildren().add(anchor);
-        }
-
-        hidePetBox();
-        showHomeBox();
-
     }
 
     private void showHomeBox()
@@ -197,11 +216,11 @@ public class Controller {
         storeBox.setManaged(false);
     }
 
-    private void returnToHomeMessage()
+    private void pauseForMessage(String message)
     {
         Timeline timeline = new Timeline(new KeyFrame(
                 Duration.millis(1500),
-                ae -> userMessage.setText("What would you like to do now?"))
+                ae -> userMessage.setText(message))
         );
 
         timeline.play();
@@ -209,14 +228,16 @@ public class Controller {
 
     private String collectInput(String message, String header)
     {
-        TextInputDialog input = new TextInputDialog();
+        TextInputDialog input = new TextInputDialog("Player1");
         input.setTitle("Virtual Pets");
         input.setHeaderText(header);
         input.setContentText(message);
         Optional<String> name = input.showAndWait();
 
-
-        return name.toString();
+        if(!header.equals("Welcome to Virtual Pets!")) {
+            pauseForMessage("What would you like to do now?");
+        }
+        return name.get();
 
     }
 
