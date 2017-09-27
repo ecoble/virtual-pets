@@ -120,7 +120,7 @@ public class Controller {
     }
 
     private void buyPet(String petType, String url, int size) {
-        pauseForMessage("You bought a " + petType + "! You need to name your " + petType + "!");
+        userMessage.setText("You bought a " + petType + "! You need to name your " + petType + "!");
 
         Image image = new Image(url);
         ImageView img = new ImageView();
@@ -272,7 +272,7 @@ public class Controller {
         Optional<String> name = input.showAndWait();
 
         if(!header.equals("Welcome to Virtual Pets!")) {
-            pauseForMessage("What would you like to do now?");
+            userMessage.setText("What would you like to do now?");
         }
         return name.orElse("");
 
