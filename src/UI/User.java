@@ -1,4 +1,4 @@
-package sample;
+package UI;
 
 import Commands.PurchaseCommand;
 
@@ -68,7 +68,7 @@ public class User{
     {
         if(!canAfford(command.getPrice()))
         {
-            return;
+            throw new IllegalStateException("Attempted to overspend");
         }
 
         command.execute(this);

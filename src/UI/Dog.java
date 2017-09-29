@@ -1,6 +1,4 @@
-package sample;
-
-import javafx.fxml.FXML;
+package UI;
 
 public class Dog extends Pet
 {
@@ -8,6 +6,6 @@ public class Dog extends Pet
 
     public Dog(String name)
     {
-        super(name, "dog");
+        super("dog");
     }
 }

@@ -1,8 +1,7 @@
-package sample;
+package UI;
 
 import Commands.FoodPurchaseCommand;
 import Commands.PetPurchaseCommand;
-import Commands.PurchaseCommand;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
@@ -67,70 +66,62 @@ public class Controller {
     @FXML
     protected void buyDog(MouseEvent event)
     {
-        buyPet("dog", "images/golden-retriever.png",  250);
-        Dog dog = new Dog(collectInput("Enter Pet Name", "Name your pet!"));
-
-        PetPurchaseCommand command = new PetPurchaseCommand(dog, Dog.price);
-        user.purchase(command);
-        
-
+        PetView view = new PetView(new Dog("dog"), "images/golden-retriever.png", 250, landPetContainer);
+        buyPet(view, Dog.price);
     }
 
     @FXML
     protected void buyCat(MouseEvent event)
     {
-        buyPet("cat", "images/cat_image.png", 150);
-        Cat cat = new Cat(collectInput("Enter Pet Name", "Name your pet!"));
-
-        PetPurchaseCommand command = new PetPurchaseCommand(cat, Cat.price);
-        user.purchase(command);
+        PetView view = new PetView(new Cat("cat"), "images/cat_image.png", 150, landPetContainer);
+        buyPet(view, Cat.price);
 
     }
 
     @FXML
     protected void buyFish(MouseEvent event)
     {
-        buyPet("fish", "images/goldfish.png", 75);
-        Fish fish = new Fish(collectInput("Enter Pet Name", "Name your pet!"));
-
-        PetPurchaseCommand command = new PetPurchaseCommand(fish, Fish.price);
-        user.purchase(command);
+        PetView view = new PetView(new Fish("fish"),"images/goldfish.png", 75, fishContainer);
+        buyPet(view, Fish.price);
 
     }
 
     @FXML
     protected void buyBird(MouseEvent event)
     {
-        buyPet("bird", "images/bird.png", 150);
-        Bird bird = new Bird(collectInput("Enter Pet Name", "Name your pet!"));
-
-        PetPurchaseCommand command = new PetPurchaseCommand(bird, Bird.price);
-        user.purchase(command);
+        PetView view = new PetView(new Bird("bird"), "images/bird.png", 150, birdContainer);
+        buyPet(view, Bird.price);
     }
 
     @FXML
-    protected void buyRabbit(MouseEvent event) {
-
-        buyPet("rabbit", "images/rabbit.png", 50);
-        Rabbit rabbit = new Rabbit(collectInput("Enter Pet Name", "Name your pet!"));
-
-        PetPurchaseCommand command = new PetPurchaseCommand(rabbit, Rabbit.price);
-        user.purchase(command);
+    protected void buyRabbit(MouseEvent event)
+    {
+        PetView view = new PetView(new Rabbit("rabbit"),"images/rabbit.png", 50, landPetContainer);
+        buyPet(view, Rabbit.price);
 
     }
 
-    private void buyPet(String petType, String url, int size) {
-        userMessage.setText("You bought a " + petType + "! You need to name your " + petType + "!");
+    private void buyPet(PetView view, int price) {
+        if(!user.canAfford(price))
+        {
+            userMessage.setText("You don't have enough money for that!");
+            hidePetBox();
+            showHomeBox();
+            pauseForMessage("What would you like to do now?");
+            return;
+        }
 
-        Image image = new Image(url);
+        userMessage.setText("You bought a " + view.getPet().getSpecies() + "! You need to name your " + view.getPet().getSpecies() + "!");
+
+        Image image = new Image(view.getImageUrl());
         ImageView img = new ImageView();
         img.setPreserveRatio(true);
-        img.setFitWidth(size);
+        img.setFitWidth(view.getImageSize());
         img.setImage(image);
 
-        if (petType.equals("bird")) {
+        if (view.getPet().getSpecies().equals("bird")) {
             birdContainer.getChildren().add(img);
-        } else if (petType.equals("fish")) {
+        } else if (view.getPet().getSpecies().equals("fish")) {
             fishContainer.getChildren().add(img);
         } else {
             AnchorPane anchor = new AnchorPane(img);
@@ -138,8 +129,15 @@ public class Controller {
             landPetContainer.getChildren().add(anchor);
         }
 
+
         hidePetBox();
         showHomeBox();
+
+        view.getPet().setName(collectInput("Enter Pet Name", "Name your pet!"));
+
+        PetPurchaseCommand command = new PetPurchaseCommand(view.getPet(), price);
+        user.purchase(command);
+
 
     }
 
@@ -184,7 +182,7 @@ public class Controller {
         hideInteractBox();
         showHomeBox();
         Button b = (Button) event.getSource();
-        userMessage.setText(b.getUserData().toString() + "What would you like to do now?");
+        userMessage.setText(b.getUserData().toString() + " What would you like to do now?");
 
     }
 

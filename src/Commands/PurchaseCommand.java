@@ -1,6 +1,6 @@
 package Commands;
 
-import sample.User;
+import UI.User;
 
 /**
  * Created by M5sp on 9/22/17.

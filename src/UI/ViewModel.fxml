@@ -12,7 +12,7 @@
 
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.control.TextField?>
-<BorderPane fx:id="pane" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<BorderPane fx:id="pane" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.Controller">
     <top>
         <StackPane fx:id="stackPane" prefHeight="300.0" prefWidth="500.0">
             <ImageView fx:id="backgroundImage" fitHeight="${pane.height}" fitWidth="${pane.width}" preserveRatio="true"> <!--fitHeight="300.0" fitWidth="500.0">-->

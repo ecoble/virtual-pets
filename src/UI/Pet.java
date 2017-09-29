@@ -1,13 +1,12 @@
-package sample;
+package UI;
 public class Pet
 {
     private String name;
     private String species;
     final static int foodPrice = 5;
 
-    public Pet(String name, String species)
+    public Pet(String species)
     {
-        this.name = name;
         this.species = species;
     }
 
@@ -19,5 +18,10 @@ public class Pet
     public String getSpecies()
     {
         return species;
+    }
+
+    public void setName(String name)
+    {
+        this.name = name;
     }
 }
