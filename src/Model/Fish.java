@@ -1,4 +1,5 @@
-package UI;
+package Model;
+
 public class Fish extends Pet
 {
     public final static int price = 5;

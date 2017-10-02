@@ -1,7 +1,7 @@
 package UI;
-
 import Commands.FoodPurchaseCommand;
 import Commands.PetPurchaseCommand;
+import Model.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
@@ -102,12 +102,8 @@ public class Controller {
     }
 
     private void buyPet(PetView view, int price) {
-        if(!user.canAfford(price))
+        if(!checkPrice(price))
         {
-            userMessage.setText("You don't have enough money for that!");
-            hidePetBox();
-            showHomeBox();
-            pauseForMessage("What would you like to do now?");
             return;
         }
 
@@ -169,6 +165,11 @@ public class Controller {
     {
         hideStoreBox();
         showHomeBox();
+
+        if(!checkPrice(Pet.foodPrice))
+        {
+            return;
+        }
 
         FoodPurchaseCommand command = new FoodPurchaseCommand(Pet.foodPrice);
         user.purchase(command);
@@ -273,7 +274,20 @@ public class Controller {
             userMessage.setText("What would you like to do now?");
         }
         return name.orElse("");
+    }
 
+    private boolean checkPrice(int price)
+    {
+        if(!user.canAfford(price))
+        {
+            userMessage.setText("You don't have enough money for that!");
+            hidePetBox();
+            showHomeBox();
+            pauseForMessage("What would you like to do now?");
+            return false;
+        }
+
+        return true;
 
     }
 

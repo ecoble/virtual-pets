@@ -1,5 +1,6 @@
 package UI;
 
+import Model.Pet;
 import javafx.scene.layout.Pane;
 
 /**

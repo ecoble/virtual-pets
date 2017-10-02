@@ -1,9 +1,9 @@
-package UI;
+package Model;
 public class Pet
 {
     private String name;
     private String species;
-    final static int foodPrice = 5;
+    final static public int foodPrice = 5;
 
     public Pet(String species)
     {

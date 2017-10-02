@@ -1,6 +1,7 @@
-package UI;
+package Model;
 
 import Commands.PurchaseCommand;
+import Model.Pet;
 
 import java.util.ArrayList;
 
@@ -10,6 +11,9 @@ public class User{
     private int money;
     private int food;
     private ArrayList<Pet> pets;
+    private int landPetUnits;
+    private int numBirds;
+    private int numFish;
 
 
     public User(String name)

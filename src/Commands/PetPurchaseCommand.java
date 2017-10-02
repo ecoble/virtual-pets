@@ -1,7 +1,7 @@
 package Commands;
 
-import UI.Pet;
-import UI.User;
+import Model.Pet;
+import Model.User;
 
 /**
  * Created by M5sp on 9/25/17.
