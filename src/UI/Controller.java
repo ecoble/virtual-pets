@@ -107,6 +107,11 @@ public class Controller {
             return;
         }
 
+        if(!checkSpace(view.getPet()))
+        {
+            return;
+        }
+
         userMessage.setText("You bought a " + view.getPet().getSpecies() + "! You need to name your " + view.getPet().getSpecies() + "!");
 
         Image image = new Image(view.getImageUrl());
@@ -286,9 +291,21 @@ public class Controller {
             pauseForMessage("What would you like to do now?");
             return false;
         }
+        return true;
+    }
+
+    private boolean checkSpace(Pet pet)
+    {
+        if(!user.hasSpace(pet))
+        {
+            userMessage.setText("You don't have enough space for that!");
+            hidePetBox();
+            showHomeBox();
+            pauseForMessage("What would you like to do now?");
+            return false;
+        }
 
         return true;
-
     }
 
 }

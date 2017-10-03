@@ -12,8 +12,9 @@ public class User{
     private int food;
     private ArrayList<Pet> pets;
     private int landPetUnits;
-    private int numBirds;
-    private int numFish;
+    private int birdUnits;
+    private int fishUnits;
+    public final static int maxUnits = 8;
 
 
     public User(String name)
@@ -58,6 +59,21 @@ public class User{
         return pets;
     }
 
+    public void addLandPetUnits(int units)
+    {
+        landPetUnits += units;
+    }
+
+    public void addBirdUnits(int units)
+    {
+        birdUnits += units;
+    }
+
+    public void addFishUnits(int units)
+    {
+        fishUnits += units;
+    }
+
     public boolean canAfford(int price)
     {
         if(money >= price)
@@ -67,6 +83,47 @@ public class User{
 
         return false;
     }
+
+    public boolean hasSpace(Pet pet)
+    {
+        switch(pet.getSpecies()) {
+            case "dog":
+                if(landPetUnits + Dog.numUnits > maxUnits)
+                {
+                    return false;
+                }
+                break;
+            case "cat":
+                if(landPetUnits + Cat.numUnits > maxUnits)
+                {
+                    return false;
+                }
+                break;
+            case "rabbit":
+                if(landPetUnits + Rabbit.numUnits > maxUnits)
+                {
+                    return false;
+                }
+                break;
+            case "bird":
+                if(birdUnits + Bird.numUnits > maxUnits)
+                {
+                    return false;
+                }
+                break;
+            case "fish":
+                if(fishUnits + Fish.numUnits > maxUnits)
+                {
+                    return false;
+                }
+                break;
+        }
+
+        return true;
+
+    }
+
+
 
     public void purchase(PurchaseCommand command)
     {

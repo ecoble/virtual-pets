@@ -1,5 +1,6 @@
 package Commands;
 
+import Model.Pet;
 import Model.User;
 
 /**
