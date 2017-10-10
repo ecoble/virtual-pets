@@ -120,21 +120,30 @@ public class Controller {
         img.setFitWidth(view.getImageSize());
         img.setImage(image);
 
-        if (view.getPet().getSpecies().equals("bird")) {
-            birdContainer.getChildren().add(img);
-        } else if (view.getPet().getSpecies().equals("fish")) {
-            fishContainer.getChildren().add(img);
-        } else {
-            AnchorPane anchor = new AnchorPane(img);
-            anchor.setBottomAnchor(img, 0.0);
-            landPetContainer.getChildren().add(anchor);
+        switch(view.getPet().getType()) {
+            case LAND:
+                AnchorPane anchor = new AnchorPane(img);
+                anchor.setBottomAnchor(img, 0.0);
+                landPetContainer.getChildren().add(anchor);
+                break;
+            case BIRD:
+                birdContainer.getChildren().add(img);
+                break;
+            case FISH:
+                fishContainer.getChildren().add(img);
+                break;
         }
-
 
         hidePetBox();
         showHomeBox();
 
-        view.getPet().setName(collectInput("Enter Pet Name", "Name your pet!"));
+        String name = collectInput("Enter Pet Name", "Name your pet!");
+        while(checkIfSameName(name))
+        {
+            userMessage.setText("You already have a pet with that name!");
+            name = collectInput("Enter Pet Name", "Name your pet!");
+        }
+        view.getPet().setName(name);
 
         PetPurchaseCommand command = new PetPurchaseCommand(view.getPet(), price);
         user.purchase(command);
@@ -306,6 +315,19 @@ public class Controller {
         }
 
         return true;
+    }
+
+    private boolean checkIfSameName(String name)
+    {
+        for(Pet pet : user.getPets())
+        {
+            if(name.equals(pet.getName()))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
 }
