@@ -20,7 +20,7 @@ public class User{
     public User(String name)
     {
         this.name = name;
-        this.money = 1000;
+        this.money = 2000;
         pets = new ArrayList<Pet>();
     }
 
@@ -86,33 +86,21 @@ public class User{
 
     public boolean hasSpace(Pet pet)
     {
-        switch(pet.getSpecies()) {
-            case "dog":
-                if(landPetUnits + Dog.numUnits > maxUnits)
+        switch(pet.getType()) {
+            case LAND:
+                if(landPetUnits + pet.getNumUnits() > maxUnits)
                 {
                     return false;
                 }
                 break;
-            case "cat":
-                if(landPetUnits + Cat.numUnits > maxUnits)
+            case BIRD:
+                if(birdUnits + pet.getNumUnits() > maxUnits)
                 {
                     return false;
                 }
                 break;
-            case "rabbit":
-                if(landPetUnits + Rabbit.numUnits > maxUnits)
-                {
-                    return false;
-                }
-                break;
-            case "bird":
-                if(birdUnits + Bird.numUnits > maxUnits)
-                {
-                    return false;
-                }
-                break;
-            case "fish":
-                if(fishUnits + Fish.numUnits > maxUnits)
+            case FISH:
+                if(fishUnits + pet.getNumUnits() > maxUnits)
                 {
                     return false;
                 }

@@ -9,4 +9,14 @@ public class Bird extends Pet
     {
         super("bird");
     }
+
+    public PetType getType()
+    {
+        return PetType.BIRD;
+    }
+
+    public int getNumUnits()
+    {
+        return numUnits;
+    }
 }

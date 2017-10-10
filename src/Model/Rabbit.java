@@ -11,4 +11,14 @@ public class Rabbit extends Pet
     {
         super("rabbit");
     }
+
+    public PetType getType()
+    {
+        return PetType.LAND;
+    }
+
+    public int getNumUnits()
+    {
+        return numUnits;
+    }
 }

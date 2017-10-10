@@ -28,21 +28,15 @@ public class PetPurchaseCommand implements PurchaseCommand{
 
     public void execute(User user)
     {
-        switch(pet.getSpecies()) {
-            case "dog":
-                user.addLandPetUnits(Dog.numUnits);
+        switch(pet.getType()) {
+            case LAND:
+                user.addLandPetUnits(pet.getNumUnits());
                 break;
-            case "cat":
-                user.addLandPetUnits(Cat.numUnits);
+            case BIRD:
+               user.addBirdUnits(pet.getNumUnits());
                 break;
-            case "rabbit":
-                user.addLandPetUnits(Rabbit.numUnits);
-                break;
-            case "bird":
-               user.addBirdUnits(Bird.numUnits);
-                break;
-            case "fish":
-                user.addFishUnits(Fish.numUnits);
+            case FISH:
+                user.addFishUnits(pet.getNumUnits());
                 break;
         }
 

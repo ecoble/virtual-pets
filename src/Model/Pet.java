@@ -1,5 +1,5 @@
 package Model;
-public class Pet
+public abstract class Pet
 {
     private String name;
     private String species;
@@ -24,5 +24,10 @@ public class Pet
     {
         this.name = name;
     }
+
+    public abstract PetType getType();
+
+    public abstract int getNumUnits();
+
 
 }
