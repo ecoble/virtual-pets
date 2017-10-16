@@ -4,6 +4,7 @@ import Commands.PetPurchaseCommand;
 import Model.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextInputDialog;
@@ -15,11 +16,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
-
 import java.util.Optional;
 
 public class Controller {
     private User user;
+    private String currPetName;
 
     @FXML
     private HBox landPetContainer;
@@ -44,6 +45,9 @@ public class Controller {
 
     @FXML
     private HBox storeBox;
+
+    @FXML
+    private HBox petNameBox;
 
     @FXML
     private Button dogButton;
@@ -148,7 +152,18 @@ public class Controller {
         PetPurchaseCommand command = new PetPurchaseCommand(view.getPet(), price);
         user.purchase(command);
 
+        Button nameButton = new Button(view.getPet().getName());
 
+        nameButton.setOnMouseClicked(event ->
+        {
+            hidePetNameBox();
+            showInteractBox();
+            Button b = (Button) event.getSource();
+            currPetName = b.getText();
+            userMessage.setText("What would you like to do with " + currPetName + "?");
+        });
+
+        petNameBox.getChildren().add(nameButton);
     }
 
     @FXML
@@ -157,13 +172,6 @@ public class Controller {
         hideHomeBox();
         showPetBox();
         userMessage.setText("You have $" + user.getMoney() + ".");
-    }
-
-    @FXML
-    protected void showInteract(MouseEvent event)
-    {
-        hideHomeBox();
-        showInteractBox();
     }
 
     @FXML
@@ -197,8 +205,16 @@ public class Controller {
         hideInteractBox();
         showHomeBox();
         Button b = (Button) event.getSource();
-        userMessage.setText(b.getUserData().toString() + " What would you like to do now?");
+        userMessage.setText(b.getUserData().toString() + currPetName + "! What would you like to do now?");
 
+    }
+
+    @FXML
+    protected void showPetNames(MouseEvent event)
+    {
+        hideHomeBox();
+        showPetNameBox();
+        userMessage.setText("Which pet would you like to interact with?");
     }
 
     //Welcome sequence
@@ -266,6 +282,18 @@ public class Controller {
         storeBox.setManaged(false);
     }
 
+    private void showPetNameBox()
+    {
+        petNameBox.setVisible(true);
+        petNameBox.setManaged(true);
+    }
+
+    private void hidePetNameBox()
+    {
+        petNameBox.setVisible(false);
+        petNameBox.setManaged(false);
+    }
+
     private void pauseForMessage(String message)
     {
         Timeline timeline = new Timeline(new KeyFrame(
@@ -319,15 +347,7 @@ public class Controller {
 
     private boolean checkIfSameName(String name)
     {
-        for(Pet pet : user.getPets())
-        {
-            if(name.equals(pet.getName()))
-            {
-                return true;
-            }
-        }
-
-        return false;
+        return user.getPets().stream().anyMatch(pet -> pet.getName().equals(name));
     }
 
 }

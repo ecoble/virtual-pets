@@ -47,7 +47,7 @@
         <HBox alignment="CENTER" prefHeight="100">
             <HBox fx:id="homeBox" visible="false" managed="false">
                 <Button fx:id="morePetsButton" onMouseClicked="#showMorePets" text="Buy more pets"/>
-                <Button fx:id="interactButton" onMouseClicked="#showInteract" text="Interact with pets"/>
+                <Button fx:id="interactButton" onMouseClicked="#showPetNames" text="Interact with pets"/>
                 <Button fx:id="storeButton" onMouseClicked="#showStore" text="Go to store"/>
             </HBox>
             <HBox fx:id="petBox" visible="false" managed="false">
@@ -58,14 +58,16 @@
                 <Button fx:id="rabbitButton" onMouseClicked="#buyRabbit" text="Buy Rabbit"/>
             </HBox>
             <HBox fx:id="interactBox" visible="false" managed="false">
-                <Button fx:id="foodButton" onMouseClicked="#interact" userData="You fed your pet!" text="Feed pet"/>
-                <Button fx:id="drinkButton" onMouseClicked="#interact" userData="You gave water to your pet!" text="Give water to pet"/>
-                <Button fx:id="walkButton" onMouseClicked="#interact" userData="You walked your pet!" text="Walk pet"/>
-                <Button fx:id="washButton" onMouseClicked="#interact" userData="You washed your pet!" text="Wash pet"/>
-                <Button fx:id="trainButton" onMouseClicked="#interact" userData="You trained your pet!" text="Train Pet"/>
+                <Button fx:id="foodButton" onMouseClicked="#interact" userData="You fed " text="Feed pet"/>
+                <Button fx:id="drinkButton" onMouseClicked="#interact" userData="You gave water to " text="Give water to pet"/>
+                <Button fx:id="walkButton" onMouseClicked="#interact" userData="You walked " text="Walk pet"/>
+                <Button fx:id="washButton" onMouseClicked="#interact" userData="You washed " text="Wash pet"/>
+                <Button fx:id="trainButton" onMouseClicked="#interact" userData="You trained " text="Train Pet"/>
             </HBox>
             <HBox fx:id="storeBox" visible="false" managed="false">
                 <Button fx:id="buyFoodButton" onMouseClicked="#buyFood" text="Buy food"/>
+            </HBox>
+            <HBox fx:id="petNameBox" visible="false" managed="false">
             </HBox>
         </HBox>
     </bottom>
