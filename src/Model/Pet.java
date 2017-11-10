@@ -1,4 +1,4 @@
-package Model;
+package model;
 public abstract class Pet
 {
     private String name;

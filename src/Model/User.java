@@ -1,7 +1,9 @@
-package Model;
+package model;
 
-import Commands.PurchaseCommand;
-import Model.Pet;
+import commands.PurchaseCommand;
+import javafx.beans.property.ReadOnlyListWrapper;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 
@@ -10,7 +12,7 @@ public class User{
     private String name;
     private int money;
     private int food;
-    private ArrayList<Pet> pets;
+    private ObservableList<Pet> pets;
     private int landPetUnits;
     private int birdUnits;
     private int fishUnits;
@@ -21,7 +23,7 @@ public class User{
     {
         this.name = name;
         this.money = 2000;
-        pets = new ArrayList<Pet>();
+        pets = FXCollections.observableArrayList();
     }
 
     public int getMoney()
@@ -54,9 +56,9 @@ public class User{
         return name;
     }
 
-    public ArrayList<Pet> getPets()
+    public ObservableList<Pet> getPets()
     {
-        return pets;
+        return new ReadOnlyListWrapper(pets);
     }
 
     public void addLandPetUnits(int units)
@@ -110,8 +112,6 @@ public class User{
         return true;
 
     }
-
-
 
     public void purchase(PurchaseCommand command)
     {

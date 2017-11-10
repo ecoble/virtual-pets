@@ -1,7 +1,6 @@
-package Commands;
+package commands;
 
-import Model.Pet;
-import Model.User;
+import model.User;
 
 /**
  * Created by M5sp on 9/22/17.

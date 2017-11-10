@@ -1,0 +1,7 @@
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Button?>
+<fx:root type="javafx.scene.layout.HBox" xmlns:fx="http://javafx.com/fxml/1" fx:id="homeBox" visible="false" managed="false">
+    <Button fx:id="buyPetsButton" onMouseClicked="#buyMorePets" text="Buy more pets"/>
+    <Button fx:id="interactButton" onMouseClicked="#showPetNames" text="Interact with pets"/>
+    <Button fx:id="storeButton" onMouseClicked="#showStore" text="Go to store"/>
+</fx:root>

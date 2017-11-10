@@ -1,0 +1,32 @@
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.Group?>
+<?import javafx.geometry.Insets?>
+
+<fx:root type="javafx.scene.layout.StackPane" fx:id="stackPane" xmlns:fx="http://javafx.com/fxml/1" prefHeight="300.0" prefWidth="500.0">
+    <ImageView fx:id="backgroundImage"  fitWidth="650" preserveRatio="true"> <!--fitHeight="300.0" fitWidth="500.0">-->
+        <image>
+            <Image url="@../../images/LivingRoom.jpg" />
+        </image>
+    </ImageView>
+    <HBox fx:id="birdContainer" StackPane.alignment="TOP_CENTER">
+    </HBox>
+    <Group StackPane.alignment="BOTTOM_CENTER">
+        <HBox fx:id="landPetContainer">
+        </HBox>
+    </Group>
+    <Group StackPane.alignment="BOTTOM_RIGHT">
+        <StackPane fx:id="fishContainer" >
+            <ImageView fitHeight="75" preserveRatio="true">
+                <image>
+                    <Image url="@../../images/fishTank.png"/>
+                </image>
+            </ImageView>
+        </StackPane>
+    </Group>
+    <padding>
+        <Insets bottom="20.0"/>
+    </padding>
+</fx:root>

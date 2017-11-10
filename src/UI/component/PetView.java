@@ -1,23 +1,27 @@
-package UI;
+package ui.component;
 
-import Model.Pet;
-import javafx.scene.layout.Pane;
+import model.Pet;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 /**
  * Created by M5sp on 9/27/17.
  */
-public class PetView {
+public class PetView extends ImageView
+{
     private Pet pet;
     private String imageUrl;
     private int imageSize;
-    private Pane container;
 
-    public PetView(Pet pet, String imageUrl, int imageSize, Pane container)
+    public PetView(Pet pet, String imageUrl, int imageSize)
     {
         this.pet = pet;
         this.imageUrl = imageUrl;
         this.imageSize = imageSize;
-        this.container = container;
+
+        this.setPreserveRatio(true);
+        this.setFitWidth(imageSize);
+        this.setImage(new Image(imageUrl));
     }
 
     public Pet getPet()
@@ -33,10 +37,5 @@ public class PetView {
     public int getImageSize()
     {
         return imageSize;
-    }
-
-    public Pane getContainer()
-    {
-        return container;
     }
 }

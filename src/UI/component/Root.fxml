@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Text?>
+
+<?import javafx.geometry.Insets?>
+<fx:root type="javafx.scene.layout.VBox" fx:id="pane" xmlns:fx="http://javafx.com/fxml/1">
+    <StackPane fx:id="display" alignment="TOP_CENTER">
+
+    </StackPane>
+
+    <StackPane>
+        <Text fx:id="userMessage"/>
+        <padding>
+            <Insets top="20.0" bottom="40.0"/>
+        </padding>
+    </StackPane>
+
+    <HBox fx:id="menus" alignment="CENTER">
+    </HBox>
+</fx:root>

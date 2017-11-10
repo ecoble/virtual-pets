@@ -1,6 +1,6 @@
-package Commands;
+package commands;
 
-import Model.*;
+import model.*;
 
 /**
  * Created by M5sp on 9/25/17.

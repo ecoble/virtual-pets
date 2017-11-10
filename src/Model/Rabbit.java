@@ -1,13 +1,11 @@
-package Model;
-
-import Model.Pet;
+package model;
 
 public class Rabbit extends Pet
 {
     public final static int price = 50;
     public final static int numUnits = 1;
 
-    public Rabbit(String name)
+    public Rabbit()
     {
         super("rabbit");
     }

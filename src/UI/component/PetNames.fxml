@@ -1,0 +1,3 @@
+<?import javafx.scene.layout.HBox?>
+<fx:root type="javafx.scene.layout.HBox" xmlns:fx="http://javafx.com/fxml/1" fx:id="petNameBox" visible="false" managed="false">
+</fx:root>
