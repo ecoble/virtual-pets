@@ -56,6 +56,35 @@ public class LivingRoom extends StackPane
 
         Component.load("LivingRoom.fxml", this);
     }
+
+    @FXML
+    protected void initialize()
+    {
+        for(Pet pet : user.getPets())
+        {
+            if(pet instanceof model.Dog)
+            {
+                addPet(new PetView(new Dog(), "images/golden-retriever.png", 250));
+            }
+            else if(pet instanceof model.Cat)
+            {
+                addPet(new PetView(new Cat(), "images/cat_image.png", 150));
+            }
+            else if(pet instanceof model.Bird)
+            {
+                addPet(new PetView(new Bird(), "images/bird.png", 150));
+            }
+            else if(pet instanceof model.Fish)
+            {
+                addPet(new PetView(new Fish(), "images/goldfish.png", 75));
+            }
+            else if(pet instanceof model.Rabbit)
+            {
+                addPet( new PetView(new Rabbit(), "images/rabbit.png", 50));
+            }
+        }
+    }
+
     public void addPet(PetView view)
     {
         switch(view.getPet().getType()) {

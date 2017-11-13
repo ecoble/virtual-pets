@@ -3,7 +3,7 @@
 <fx:root type="javafx.scene.layout.HBox" xmlns:fx="http://javafx.com/fxml/1" fx:id="interactBox" visible="false" managed="false">
     <Button fx:id="foodButton" onMouseClicked="#interact" userData="You fed " text="Feed pet"/>
     <Button fx:id="drinkButton" onMouseClicked="#interact" userData="You gave water to " text="Give water to pet"/>
-    <Button fx:id="walkButton" onMouseClicked="#interact" userData="You walked " text="Walk pet"/>
+    <Button fx:id="walkButton" onMouseClicked="#walk" userData="You walked " text="Walk pet"/>
     <Button fx:id="washButton" onMouseClicked="#interact" userData="You washed " text="Wash pet"/>
     <Button fx:id="trainButton" onMouseClicked="#interact" userData="You trained " text="Train Pet"/>
 </fx:root>

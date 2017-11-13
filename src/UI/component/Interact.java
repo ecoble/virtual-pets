@@ -24,6 +24,12 @@ public class Interact extends HBox
         root.transitionMenu(new Home(root));
         Button b = (Button) event.getSource();
         root.changeMessage(b.getUserData().toString() + root.currPetName + "! What would you like to do now?");
+    }
 
+    @FXML
+    protected void walk(MouseEvent event)
+    {
+        root.transitionDisplay(new WalkEnvironment(root));
+        root.transitionMenu(new Walk(root));
     }
 }

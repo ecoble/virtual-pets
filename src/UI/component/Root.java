@@ -76,6 +76,11 @@ public class Root extends VBox
         userMessage.setText(message);
     }
 
+    public void transitionDisplay(Node node)
+    {
+        displayCompositor.transitionTo(node);
+    }
+
     public void transitionMenu(Node node)
     {
         menuCompositor.transitionTo(node);
