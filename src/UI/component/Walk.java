@@ -26,7 +26,7 @@ public class Walk extends HBox
     @FXML
     protected void initialize()
     {
-        root.changeMessage("You're walking " + root.currPetName + " . What would you like to do?");
+        root.changeMessage("You're walking " + root.currPetName + ". What would you like to do?");
     }
 
     @FXML

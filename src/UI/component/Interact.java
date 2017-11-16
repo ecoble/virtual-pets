@@ -32,4 +32,11 @@ public class Interact extends HBox
         root.transitionDisplay(new WalkEnvironment(root));
         root.transitionMenu(new Walk(root));
     }
+
+    @FXML
+    protected void wash(MouseEvent event)
+    {
+        root.transitionDisplay(new WashEnvironment(root));
+        root.transitionMenu(new Wash(root));
+    }
 }
