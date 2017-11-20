@@ -1,10 +1,12 @@
-package ui.component;
+package ui.component.menus;
 
-import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import model.*;
+import ui.component.Component;
+import ui.component.Root;
+import ui.component.menus.Interact;
 
 /**
  * Created by M5sp on 10/24/17.

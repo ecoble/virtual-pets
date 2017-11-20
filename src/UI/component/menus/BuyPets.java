@@ -1,4 +1,4 @@
-package ui.component;
+package ui.component.menus;
 
 import commands.PetPurchaseCommand;
 import model.*;
@@ -7,6 +7,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import ui.component.Component;
+import ui.component.PetView;
+import ui.component.Root;
 
 import java.util.Optional;
 

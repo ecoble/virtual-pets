@@ -1,38 +1,41 @@
-package ui.component;
+package ui.component.menus;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
+import ui.component.Component;
+import ui.component.environments.LivingRoom;
+import ui.component.Root;
 
 /**
- * Created by M5sp on 11/13/17.
+ * Created by M5sp on 11/20/17.
  */
-public class Walk extends HBox
+public class Gym extends HBox
 {
     private Root root;
 
     @FXML
-    private Button continueWalk;
+    private Button continueTraining;
 
     @FXML
     private Button goHome;
 
-    public Walk (Root root)
+    public Gym (Root root)
     {
         this.root = root;
-        Component.load("Walk.fxml", this);
+        Component.load("Gym.fxml", this);
     }
 
     @FXML
     protected void initialize()
     {
-        root.changeMessage("You're walking " + root.currPetName + ". What would you like to do?");
+        root.changeMessage("You're training " + root.currPetName + ". What would you like to do?");
     }
 
     @FXML
-    protected void continueWalk()
+    protected void continueTraining()
     {
-        root.changeMessage("You and " + root.currPetName + " continue to walk. What would you like to do?" );
+        root.changeMessage("You and " + root.currPetName + " continue to train. What would you like to do?" );
     }
 
     @FXML

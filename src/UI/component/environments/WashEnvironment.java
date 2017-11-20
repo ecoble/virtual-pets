@@ -1,10 +1,13 @@
-package ui.component;
+package ui.component.environments;
 
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import model.Pet;
+import ui.component.Component;
+import ui.component.PetView;
+import ui.component.Root;
 
 import static model.PetType.BIRD;
 

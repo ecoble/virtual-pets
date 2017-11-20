@@ -1,8 +1,12 @@
-package ui.component;
+package ui.component.menus;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
+import ui.component.Component;
+import ui.component.Root;
+import ui.component.environments.LivingRoom;
+import ui.component.menus.Home;
 
 /**
  * Created by M5sp on 11/13/17.

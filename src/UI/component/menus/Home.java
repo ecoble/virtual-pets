@@ -1,8 +1,10 @@
-package ui.component;
+package ui.component.menus;
 
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import ui.component.Component;
+import ui.component.Root;
 
 /**
  * Created by M5sp on 10/18/17.

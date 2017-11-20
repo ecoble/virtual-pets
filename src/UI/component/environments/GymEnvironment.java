@@ -1,20 +1,20 @@
-package ui.component;
+package ui.component.environments;
 
 import javafx.fxml.FXML;
-import javafx.scene.Group;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import model.Pet;
-import model.User;
+import ui.component.Component;
+import ui.component.PetView;
+import ui.component.Root;
 
 import static model.PetType.BIRD;
-import static model.PetType.LAND;
 
 /**
- * Created by M5sp on 11/10/17.
+ * Created by M5sp on 11/20/17.
  */
-public class WalkEnvironment extends StackPane
+public class GymEnvironment extends StackPane
 {
     private Root root;
 
@@ -24,10 +24,10 @@ public class WalkEnvironment extends StackPane
     @FXML
     private HBox birdContainer;
 
-    public WalkEnvironment(Root root)
+    public GymEnvironment(Root root)
     {
         this.root = root;
-        Component.load("WalkEnvironment.fxml", this);
+        Component.load("GymEnvironment.fxml", this);
     }
 
     @FXML
@@ -74,3 +74,4 @@ public class WalkEnvironment extends StackPane
         }
     }
 }
+

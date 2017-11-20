@@ -8,7 +8,7 @@
 <fx:root type="javafx.scene.layout.StackPane" fx:id="stackPane" xmlns:fx="http://javafx.com/fxml/1" prefHeight="300.0" prefWidth="500.0">
     <ImageView fx:id="backgroundImage" fitWidth="650" preserveRatio="true">
         <image>
-            <Image url="@../../images/LivingRoom.jpg" />
+            <Image url="@../../../images/LivingRoom.jpg" />
         </image>
     </ImageView>
     <HBox fx:id="birdContainer" StackPane.alignment="TOP_CENTER">
@@ -21,7 +21,7 @@
         <StackPane fx:id="fishContainer" >
             <ImageView fitHeight="75" preserveRatio="true">
                 <image>
-                    <Image url="@../../images/fishTank.png"/>
+                    <Image url="@../../../images/fishTank.png"/>
                 </image>
             </ImageView>
         </StackPane>

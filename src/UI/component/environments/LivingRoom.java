@@ -1,4 +1,4 @@
-package ui.component;
+package ui.component.environments;
 
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
@@ -6,6 +6,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import model.*;
+import ui.component.Component;
+import ui.component.PetView;
 
 /**
  * Created by M5sp on 10/19/17.

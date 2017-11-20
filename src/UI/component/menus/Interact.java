@@ -1,9 +1,13 @@
-package ui.component;
+package ui.component.menus;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import ui.component.*;
+import ui.component.environments.GymEnvironment;
+import ui.component.environments.WalkEnvironment;
+import ui.component.environments.WashEnvironment;
 
 /**
  * Created by M5sp on 10/18/17.
@@ -38,5 +42,12 @@ public class Interact extends HBox
     {
         root.transitionDisplay(new WashEnvironment(root));
         root.transitionMenu(new Wash(root));
+    }
+
+    @FXML
+    protected void train(MouseEvent event)
+    {
+        root.transitionDisplay(new GymEnvironment(root));
+        root.transitionMenu(new Gym(root));
     }
 }

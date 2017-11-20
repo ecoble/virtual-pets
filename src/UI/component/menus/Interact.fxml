@@ -5,5 +5,5 @@
     <Button fx:id="drinkButton" onMouseClicked="#interact" userData="You gave water to " text="Give water to pet"/>
     <Button fx:id="walkButton" onMouseClicked="#walk" userData="You walked " text="Walk pet"/>
     <Button fx:id="washButton" onMouseClicked="#wash" userData="You washed " text="Wash pet"/>
-    <Button fx:id="trainButton" onMouseClicked="#interact" userData="You trained " text="Train Pet"/>
+    <Button fx:id="trainButton" onMouseClicked="#train" userData="You trained " text="Train Pet"/>
 </fx:root>

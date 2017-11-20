@@ -6,10 +6,14 @@
 <fx:root type="javafx.scene.layout.StackPane" fx:id="stackPane" xmlns:fx="http://javafx.com/fxml/1" prefHeight="300.0" prefWidth="500.0">
     <ImageView fx:id="backgroundImage" fitWidth="650" preserveRatio="true">
         <image>
-            <Image url="@../../images/shower.jpg"/>
+            <Image url="@../../../images/gym.jpg" />
         </image>
     </ImageView>
-    <Group StackPane.alignment="CENTER">
+    <Group>
+        <HBox fx:id="birdContainer" StackPane.alignment="TOP_CENTER">
+        </HBox>
+    </Group>
+    <Group StackPane.alignment="BOTTOM_CENTER">
         <HBox fx:id="petContainer">
         </HBox>
     </Group>

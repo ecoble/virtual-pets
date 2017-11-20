@@ -1,18 +1,19 @@
 package ui.component;
 import javafx.scene.Node;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import model.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 import ui.Compositor;
+import ui.component.environments.LivingRoom;
+import ui.component.menus.BuyPets;
+import ui.component.menus.Home;
 
 import java.io.IOException;
 import java.util.Optional;
