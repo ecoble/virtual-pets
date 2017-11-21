@@ -1,10 +1,16 @@
 package ui.component.environments;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
+import javafx.scene.Group;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.util.Duration;
 import model.*;
 import ui.component.Component;
 import ui.component.PetView;
@@ -24,6 +30,12 @@ public class LivingRoom extends StackPane
 
     @FXML
     private StackPane fishContainer;
+
+    @FXML
+    private ImageView foodContainer;
+
+    @FXML
+    private ImageView waterContainer;
 
     public LivingRoom(User user)
     {
@@ -102,5 +114,29 @@ public class LivingRoom extends StackPane
                 fishContainer.getChildren().add(view);
                 break;
         }
+    }
+
+    public void addFood()
+    {
+        foodContainer.setImage(new Image("images/food.png"));
+
+        Timeline timeline = new Timeline(new KeyFrame(
+                Duration.millis(5000),
+                ae -> foodContainer.setImage(null))
+        );
+
+        timeline.play();
+    }
+
+    public void addWater()
+    {
+        waterContainer.setImage(new Image("images/water.png"));
+
+        Timeline timeline = new Timeline(new KeyFrame(
+                Duration.millis(5000),
+                ae -> waterContainer.setImage(null))
+        );
+        
+        timeline.play();
     }
 }

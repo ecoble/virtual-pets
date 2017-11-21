@@ -23,14 +23,6 @@ public class Interact extends HBox
     }
 
     @FXML
-    protected void interact(MouseEvent event)
-    {
-        root.transitionMenu(new Home(root));
-        Button b = (Button) event.getSource();
-        root.changeMessage(b.getUserData().toString() + root.currPetName + "! What would you like to do now?");
-    }
-
-    @FXML
     protected void walk(MouseEvent event)
     {
         root.transitionDisplay(new WalkEnvironment(root));
@@ -49,5 +41,29 @@ public class Interact extends HBox
     {
         root.transitionDisplay(new GymEnvironment(root));
         root.transitionMenu(new Gym(root));
+    }
+
+    @FXML
+    protected void feed(MouseEvent event)
+    {
+        if(root.user.getFood() > 0){
+            root.livingRoom.addFood();
+            root.user.withdrawFood();
+            root.changeMessage("You fed " + root.currPetName + "! What would you like to do now?");
+        }
+        else
+        {
+            root.changeMessage("You can't feed " + root.currPetName + ", you don't have any food! What would you like to do now?");
+        }
+        root.transitionMenu(new Home(root));
+
+    }
+
+    @FXML
+    protected void giveWater(MouseEvent event)
+    {
+        root.livingRoom.addWater();
+        root.transitionMenu(new Home(root));
+        root.changeMessage("You gave water to " + root.currPetName + "! What would you like to do now?");
     }
 }

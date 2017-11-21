@@ -24,8 +24,12 @@ public class Root extends VBox
 
     public String currPetName;
 
+    public LivingRoom livingRoom;
+
     private Compositor displayCompositor;
+
     private Compositor menuCompositor;
+
 
     @FXML
     private Text userMessage;
@@ -48,8 +52,10 @@ public class Root extends VBox
     {
         user = new User(collectInput("Enter your name:", "Welcome to Virtual Pets!"));
 
+        livingRoom = new LivingRoom(user);
+
         displayCompositor = new Compositor(display);
-        displayCompositor.transitionTo(new LivingRoom(user));
+        displayCompositor.transitionTo(livingRoom);
 
         menuCompositor = new Compositor(menus);
         menuCompositor.transitionTo(new BuyPets(this));

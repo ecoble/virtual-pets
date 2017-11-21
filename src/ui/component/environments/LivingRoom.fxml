@@ -17,6 +17,14 @@
         <HBox fx:id="landPetContainer">
         </HBox>
     </Group>
+    <Group StackPane.alignment="BOTTOM_CENTER">
+        <HBox>
+            <ImageView fx:id="foodContainer" fitHeight="50" preserveRatio="true">
+            </ImageView>
+            <ImageView fx:id="waterContainer" fitHeight="50" preserveRatio="true">
+            </ImageView>
+        </HBox>
+    </Group>
     <Group StackPane.alignment="BOTTOM_RIGHT">
         <StackPane fx:id="fishContainer" >
             <ImageView fitHeight="75" preserveRatio="true">

@@ -41,6 +41,11 @@ public class User{
         food++;
     }
 
+    public void withdrawFood()
+    {
+        food--;
+    }
+
     public void withdrawMoney(int lostMoney)
     {
         money = money - lostMoney;
