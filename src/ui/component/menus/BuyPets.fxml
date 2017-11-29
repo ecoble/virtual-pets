@@ -1,11 +1,22 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.Button?>
 
-<fx:root type="javafx.scene.layout.HBox" xmlns:fx="http://javafx.com/fxml/1" fx:id="petBox" visible="false" managed="false">
-    <Button fx:id="dogButton" onMouseClicked="#buyDog"/>
-    <Button fx:id="catButton" onMouseClicked="#buyCat" text="Buy Cat"/>
-    <Button fx:id="fishButton" onMouseClicked="#buyFish" text="Buy Fish"/>
-    <Button fx:id="birdButton" onMouseClicked="#buyBird" text="Buy Bird"/>
-    <Button fx:id="rabbitButton" onMouseClicked="#buyRabbit" text="Buy Rabbit"/>
+<?import javafx.geometry.Insets?>
+<fx:root type="javafx.scene.layout.VBox" xmlns:fx="http://javafx.com/fxml/1" fx:id="petBox" visible="false" managed="false">
+
+    <HBox>
+        <Button fx:id="dogButton" onMouseClicked="#buyDog"/>
+        <Button fx:id="catButton" onMouseClicked="#buyCat" text="Buy Cat"/>
+        <Button fx:id="fishButton" onMouseClicked="#buyFish" text="Buy Fish"/>
+        <Button fx:id="birdButton" onMouseClicked="#buyBird" text="Buy Bird"/>
+        <Button fx:id="rabbitButton" onMouseClicked="#buyRabbit" text="Buy Rabbit"/>
+        <padding>
+            <Insets bottom="15.0"/>
+        </padding>
+    </HBox>
+
+    <HBox alignment="CENTER">
+        <Button fx:id="cancelButton" onMouseClicked="#cancel" text="Cancel"/>
+    </HBox>
 </fx:root>
 

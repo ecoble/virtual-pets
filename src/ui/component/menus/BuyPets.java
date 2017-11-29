@@ -1,6 +1,7 @@
 package ui.component.menus;
 
 import commands.PetPurchaseCommand;
+import javafx.scene.layout.VBox;
 import model.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -16,7 +17,7 @@ import java.util.Optional;
 /**
  * Created by M5sp on 10/18/17.
  */
-public class BuyPets extends HBox
+public class BuyPets extends VBox
 {
     private Root root;
 
@@ -87,6 +88,13 @@ public class BuyPets extends HBox
         PetView view = new PetView(new Rabbit(), "images/rabbit.png", 50);
         buyPet(view, Rabbit.price);
 
+    }
+
+    @FXML
+    protected void cancel(MouseEvent event)
+    {
+        root.transitionMenu(new Home(root));
+        root.changeMessage("What would you like to do now?");
     }
 
     private void buyPet(PetView view, int price) {

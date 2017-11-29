@@ -2,6 +2,7 @@ package ui.component.menus;
 
 import commands.FoodPurchaseCommand;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import model.Pet;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -13,7 +14,7 @@ import ui.component.menus.Home;
 /**
  * Created by M5sp on 10/18/17.
  */
-public class Shop extends HBox
+public class Shop extends VBox
 {
     private Root root;
 
@@ -30,6 +31,13 @@ public class Shop extends HBox
     protected void initialize()
     {
         buyFoodButton.setText("Buy Food: $" + Pet.foodPrice);
+    }
+
+    @FXML
+    protected void cancel(MouseEvent event)
+    {
+        root.transitionMenu(new Home(root));
+        root.changeMessage("What would you like to do now?");
     }
 
     @FXML

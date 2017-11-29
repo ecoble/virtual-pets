@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import ui.component.*;
 import ui.component.environments.GymEnvironment;
 import ui.component.environments.WalkEnvironment;
@@ -12,7 +13,7 @@ import ui.component.environments.WashEnvironment;
 /**
  * Created by M5sp on 10/18/17.
  */
-public class Interact extends HBox
+public class Interact extends VBox
 {
     private Root root;
 
@@ -65,5 +66,12 @@ public class Interact extends HBox
         root.livingRoom.addWater();
         root.transitionMenu(new Home(root));
         root.changeMessage("You gave water to " + root.currPetName + "! What would you like to do now?");
+    }
+
+    @FXML
+    protected void cancel(MouseEvent event)
+    {
+        root.transitionMenu(new Home(root));
+        root.changeMessage("What would you like to do now?");
     }
 }
