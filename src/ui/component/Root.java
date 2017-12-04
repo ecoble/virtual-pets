@@ -20,11 +20,6 @@ import java.util.Optional;
 
 public class Root extends VBox
 {
-    public User user;
-
-    public String currPetName;
-
-    public LivingRoom livingRoom;
 
     private Compositor displayCompositor;
 
@@ -50,15 +45,15 @@ public class Root extends VBox
     protected void initialize()
         throws IOException
     {
-        user = new User(collectInput("Enter your name:", "Welcome to Virtual Pets!"));
+        User user = new User(collectInput("Enter your name:", "Welcome to Virtual Pets!"));
 
-        livingRoom = new LivingRoom(user);
+        LivingRoom livingRoom = new LivingRoom(user);
 
         displayCompositor = new Compositor(display);
         displayCompositor.transitionTo(livingRoom);
 
         menuCompositor = new Compositor(menus);
-        menuCompositor.transitionTo(new BuyPets(this));
+        menuCompositor.transitionTo(new BuyPets(this, user));
 
         changeMessage("Hello " + user.getName() + "! You need to buy your first pet!");
     }
@@ -93,12 +88,12 @@ public class Root extends VBox
         menuCompositor.transitionTo(node);
     }
 
-    public boolean checkPrice(int price)
+    public boolean checkPrice(int price, User user)
     {
         if(!user.canAfford(price))
         {
             changeMessage("You don't have enough money for that!");
-            menuCompositor.transitionTo(new Home(this));
+            menuCompositor.transitionTo(new Home(this, user));
             pauseForMessage("What would you like to do now?");
             return false;
         }

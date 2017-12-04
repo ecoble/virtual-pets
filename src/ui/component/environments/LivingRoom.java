@@ -43,26 +43,27 @@ public class LivingRoom extends StackPane
         this.user.getPets().addListener((ListChangeListener)(change -> {
             while (change.next())
             {
-                change.getAddedSubList().forEach(pet -> {
+                change.getAddedSubList().forEach(item -> {
+                    Pet pet = (Pet)item;
                     if(pet instanceof model.Dog)
                     {
-                        addPet(new PetView(new Dog(), "images/golden-retriever.png", 250));
+                        addPet(new PetView(pet, "images/golden-retriever.png", 250));
                     }
                     else if(pet instanceof model.Cat)
                     {
-                        addPet(new PetView(new Cat(), "images/cat_image.png", 150));
+                        addPet(new PetView(pet, "images/cat_image.png", 150));
                     }
                     else if(pet instanceof model.Bird)
                     {
-                        addPet(new PetView(new Bird(), "images/bird.png", 150));
+                        addPet(new PetView(pet, "images/bird.png", 150));
                     }
                     else if(pet instanceof model.Fish)
                     {
-                        addPet(new PetView(new Fish(), "images/goldfish.png", 75));
+                        addPet(new PetView(pet, "images/goldfish.png", 75));
                     }
                     else if(pet instanceof model.Rabbit)
                     {
-                        addPet( new PetView(new Rabbit(), "images/rabbit.png", 50));
+                        addPet( new PetView(pet, "images/rabbit.png", 50));
                     }
                 });
             }
@@ -78,23 +79,23 @@ public class LivingRoom extends StackPane
         {
             if(pet instanceof model.Dog)
             {
-                addPet(new PetView(new Dog(), "images/golden-retriever.png", 250));
+                addPet(new PetView(pet, "images/golden-retriever.png", 250));
             }
             else if(pet instanceof model.Cat)
             {
-                addPet(new PetView(new Cat(), "images/cat_image.png", 150));
+                addPet(new PetView(pet, "images/cat_image.png", 150));
             }
             else if(pet instanceof model.Bird)
             {
-                addPet(new PetView(new Bird(), "images/bird.png", 150));
+                addPet(new PetView(pet, "images/bird.png", 150));
             }
             else if(pet instanceof model.Fish)
             {
-                addPet(new PetView(new Fish(), "images/goldfish.png", 75));
+                addPet(new PetView(pet, "images/goldfish.png", 75));
             }
             else if(pet instanceof model.Rabbit)
             {
-                addPet( new PetView(new Rabbit(), "images/rabbit.png", 50));
+                addPet( new PetView(pet, "images/rabbit.png", 50));
             }
         }
     }
@@ -114,29 +115,5 @@ public class LivingRoom extends StackPane
                 fishContainer.getChildren().add(view);
                 break;
         }
-    }
-
-    public void addFood()
-    {
-        foodContainer.setImage(new Image("images/food.png"));
-
-        Timeline timeline = new Timeline(new KeyFrame(
-                Duration.millis(5000),
-                ae -> foodContainer.setImage(null))
-        );
-
-        timeline.play();
-    }
-
-    public void addWater()
-    {
-        waterContainer.setImage(new Image("images/water.png"));
-
-        Timeline timeline = new Timeline(new KeyFrame(
-                Duration.millis(5000),
-                ae -> waterContainer.setImage(null))
-        );
-        
-        timeline.play();
     }
 }

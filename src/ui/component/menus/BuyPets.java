@@ -21,6 +21,8 @@ public class BuyPets extends VBox
 {
     private Root root;
 
+    private User user;
+
     @FXML
     private Button dogButton;
 
@@ -36,9 +38,10 @@ public class BuyPets extends VBox
     @FXML
     private Button rabbitButton;
 
-    public BuyPets(Root root)
+    public BuyPets(Root root, User user)
     {
         this.root = root;
+        this.user = user;
         Component.load("BuyPets.fxml", this);
     }
 
@@ -93,12 +96,12 @@ public class BuyPets extends VBox
     @FXML
     protected void cancel(MouseEvent event)
     {
-        root.transitionMenu(new Home(root));
+        root.transitionMenu(new Home(root, user));
         root.changeMessage("What would you like to do now?");
     }
 
     private void buyPet(PetView view, int price) {
-        if(!root.checkPrice(price))
+        if(!root.checkPrice(price, user))
         {
             return;
         }
@@ -110,7 +113,7 @@ public class BuyPets extends VBox
 
         root.changeMessage("You bought a " + view.getPet().getSpecies() + "! You need to name your " + view.getPet().getSpecies() + "!");
 
-        root.transitionMenu(new Home(root));
+        root.transitionMenu(new Home(root, user));
 
         String name = collectInput("Enter Pet Name", "Name your pet!");
         while(checkIfSameName(name))
@@ -122,7 +125,7 @@ public class BuyPets extends VBox
         view.getPet().setName(name);
 
         PetPurchaseCommand command = new PetPurchaseCommand(view.getPet(), price);
-        root.user.purchase(command);
+        user.purchase(command);
 
         root.changeMessage("What would you like to do now?");
     }
@@ -139,10 +142,10 @@ public class BuyPets extends VBox
 
     private boolean checkSpace(Pet pet)
     {
-        if(!root.user.hasSpace(pet))
+        if(!user.hasSpace(pet))
         {
             root.changeMessage("You don't have enough space for that!");
-            root.transitionMenu(new Home(root));
+            root.transitionMenu(new Home(root, user));
             root.pauseForMessage("What would you like to do now?");
             return false;
         }
@@ -152,7 +155,7 @@ public class BuyPets extends VBox
 
     private boolean checkIfSameName(String name)
     {
-        return root.user.getPets().stream().anyMatch(pet -> pet.getName().equals(name));
+        return user.getPets().stream().anyMatch(pet -> pet.getName().equals(name));
     }
 
 }

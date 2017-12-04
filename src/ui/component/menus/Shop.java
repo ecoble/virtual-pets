@@ -7,6 +7,7 @@ import model.Pet;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
+import model.User;
 import ui.component.Component;
 import ui.component.Root;
 import ui.component.menus.Home;
@@ -17,13 +18,15 @@ import ui.component.menus.Home;
 public class Shop extends VBox
 {
     private Root root;
+    private User user;
 
     @FXML
     private Button buyFoodButton;
 
-    public Shop(Root root)
+    public Shop(Root root, User user)
     {
         this.root = root;
+        this.user = user;
         Component.load("Shop.fxml", this);
     }
 
@@ -36,22 +39,22 @@ public class Shop extends VBox
     @FXML
     protected void cancel(MouseEvent event)
     {
-        root.transitionMenu(new Home(root));
+        root.transitionMenu(new Home(root, user));
         root.changeMessage("What would you like to do now?");
     }
 
     @FXML
     protected void buyFood(MouseEvent event)
     {
-        root.transitionMenu(new Home(root));
+        root.transitionMenu(new Home(root, user));
 
-        if(!root.checkPrice(Pet.foodPrice))
+        if(!root.checkPrice(Pet.foodPrice, user))
         {
             return;
         }
 
         FoodPurchaseCommand command = new FoodPurchaseCommand(Pet.foodPrice);
-        root.user.purchase(command);
+        user.purchase(command);
 
         root.changeMessage("You bought food! What would you like to do now?");
     }

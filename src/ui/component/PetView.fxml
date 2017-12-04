@@ -1,0 +1,9 @@
+<?import javafx.scene.image.ImageView?>
+
+<?import javafx.scene.Group?>
+<?import javafx.scene.layout.StackPane?>
+<fx:root type="javafx.scene.layout.StackPane" xmlns:fx="http://javafx.com/fxml/1">
+    <ImageView fx:id="petView" preserveRatio="true" />
+    <ImageView fx:id="foodView" fitHeight="50" preserveRatio="true" StackPane.alignment="BOTTOM_CENTER" />
+    <ImageView fx:id="waterView" fitHeight="50" preserveRatio="true" StackPane.alignment="BOTTOM_CENTER"/>
+</fx:root>

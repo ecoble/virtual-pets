@@ -17,14 +17,15 @@ public class PetNames extends VBox
 {
     private Root root;
     private User user;
+    private Pet pet;
 
     @FXML
     private HBox petNameBox;
 
-    public PetNames(Root root)
+    public PetNames(Root root, User user)
     {
         this.root = root;
-        this.user = root.user;
+        this.user = user;
 
         Component.load("PetNames.fxml", this);
     }
@@ -41,7 +42,7 @@ public class PetNames extends VBox
     @FXML
     protected void cancel(MouseEvent event)
     {
-        root.transitionMenu(new Home(root));
+        root.transitionMenu(new Home(root, user));
         root.changeMessage("What would you like to do now?");
     }
 
@@ -51,10 +52,16 @@ public class PetNames extends VBox
 
         nameButton.setOnMouseClicked(event ->
         {
-            root.transitionMenu(new Interact(root));
             Button b = (Button) event.getSource();
-            root.currPetName = b.getText();
-            root.changeMessage("What would you like to do with " + root.currPetName + "?");
+            for(Pet pet : user.getPets())
+            {
+                if(pet.getName().equals(b.getText()))
+                {
+                    this.pet = pet;
+                    root.transitionMenu(new Interact(root, user, this.pet));
+                }
+            }
+            root.changeMessage("What would you like to do with " + pet.getName() + "?");
         });
 
         petNameBox.getChildren().add(nameButton);
