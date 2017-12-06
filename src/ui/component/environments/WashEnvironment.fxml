@@ -3,8 +3,8 @@
 <?import javafx.scene.Group?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
-<fx:root type="javafx.scene.layout.StackPane" fx:id="stackPane" xmlns:fx="http://javafx.com/fxml/1" prefHeight="300.0" prefWidth="500.0">
-    <ImageView fx:id="backgroundImage" fitWidth="650" preserveRatio="true">
+<fx:root type="javafx.scene.layout.StackPane" fx:id="stackPane" xmlns:fx="http://javafx.com/fxml/1">
+    <ImageView fx:id="backgroundImage" fitWidth="650" fitHeight="425">
         <image>
             <Image url="@../../../images/shower.jpg"/>
         </image>
