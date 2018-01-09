@@ -36,7 +36,24 @@ public class Wash extends HBox
     @FXML
     protected void initialize()
     {
-        root.changeMessage("You're washing " + pet.getName() + ". What would you like to do?");
+        switch(pet.getSpecies())
+        {
+            case "dog":
+                root.changeMessage("You're walking " + pet.getName() + ". What would you like to do?");
+                break;
+            case "cat":
+                root.changeMessage("You're washing your cat, " + pet.getName() + ", but they're scratching you. What would you like to do?");
+                break;
+            case "rabbit":
+                root.changeMessage("You're washing " + pet.getName() + ", but it is not going well. What would you like to do?");
+                break;
+            case "fish":
+                root.changeMessage("You're washing your fish, " + pet.getName() + ". It is ineffective.");
+                break;
+            case "bird":
+                root.changeMessage("You're washing your bird, " + pet.getName() + ", but they're getting upset. What would you like to do?");
+                break;
+        }
     }
 
     @FXML
@@ -48,7 +65,22 @@ public class Wash extends HBox
     @FXML
     protected void finishWash()
     {
-        root.changeMessage("You finished washing " + pet.getName() + ". What would you like to do now?");
+        if(pet.getSpecies().equals("cat"))
+        {
+            if(user.getMoney() >= 50)
+            {
+                root.changeMessage("You finished washing " + pet.getName() + ", but you had to go to the doctor for your scratches. The bill was $50.");
+                user.withdrawMoney(50);
+            }
+            else
+            {
+                root.changeMessage("You finished washing " + pet.getName() + ", and didn't have enough money to see the doctor for you scratches.\nYour scratches cause you great suffering.");
+            }
+        }
+        else
+        {
+            root.changeMessage("You finished washing " + pet.getName() + ". What would you like to do now?");
+        }
         root.transitionDisplay(new LivingRoom(user));
         root.transitionMenu(new Home(root, user));
     }
