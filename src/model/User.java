@@ -133,4 +133,22 @@ public class User{
     {
         pets.add(pet);
     }
+
+    public void removePet(Pet pet)
+    {
+        pets.remove(pet);
+
+        if(pet.getType() == PetType.BIRD)
+        {
+            birdUnits -= pet.getNumUnits();
+        }
+        else if(pet.getType() == PetType.FISH)
+        {
+            fishUnits -= pet.getNumUnits();
+        }
+        else if(pet.getType() == PetType.LAND)
+        {
+            landPetUnits -= pet.getNumUnits();
+        }
+    }
 }

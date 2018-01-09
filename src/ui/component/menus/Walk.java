@@ -1,8 +1,11 @@
 package ui.component.menus;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
+import javafx.util.Duration;
 import model.Pet;
 import model.User;
 import ui.component.Component;
@@ -36,7 +39,26 @@ public class Walk extends HBox
     @FXML
     protected void initialize()
     {
-        root.changeMessage("You're walking " + pet.getName() + ". What would you like to do?");
+        switch(pet.getSpecies())
+        {
+            case "dog":
+                root.changeMessage("You're walking " + pet.getName() + ". What would you like to do?");
+                break;
+            case "cat":
+                root.changeMessage("You're walking " + pet.getName() + ", but they're getting upset. What would you like to do?");
+                break;
+            case "rabbit":
+                root.changeMessage("You're walking " + pet.getName() + ", but it is not going well. What would you like to do?");
+                break;
+            case "fish":
+                root.changeMessage("You're walking your fish, " + pet.getName() + ", but not for long.");
+                losePet();
+                break;
+            case "bird":
+                root.changeMessage("You tried to walk your bird, " + pet.getName() + ", but they're flying away! Oh no!");
+                losePet();
+                break;
+        }
     }
 
     @FXML
@@ -51,5 +73,52 @@ public class Walk extends HBox
         root.changeMessage("You and " + pet.getName() + " returned home. What would you like to do now?");
         root.transitionDisplay(new LivingRoom(user));
         root.transitionMenu(new Home(root, user));
+    }
+
+    private void losePet()
+    {
+        continueWalk.setVisible(false);
+        goHome.setVisible(false);
+
+        Timeline timeline = new Timeline(new KeyFrame(
+                Duration.millis(3000),
+                ae -> root.transitionMenu(new Home(root,user)))
+        );
+
+        Timeline timeline2 = new Timeline(new KeyFrame(
+                Duration.millis(3000),
+                ae -> root.transitionDisplay(new LivingRoom(user)))
+        );
+
+        if(pet.getSpecies().equals("fish"))
+        {
+            Timeline timeline3 = new Timeline(new KeyFrame(
+                    Duration.millis(3000),
+                    ae -> root.changeMessage(pet.getName() + " died due to lack of water."))
+            );
+
+            timeline3.play();
+        }
+        else
+        {
+            Timeline timeline4 = new Timeline(new KeyFrame(
+                    Duration.millis(3000),
+                    ae -> root.changeMessage(pet.getName() + " flew away into the great beyond."))
+            );
+
+            timeline4.play();
+        }
+
+        timeline.play();
+        timeline2.play();
+
+        for(Pet pet : user.getPets())
+        {
+            if(pet.getName().equals(this.pet.getName()))
+            {
+                user.removePet(pet);
+                break;
+            }
+        }
     }
 }
