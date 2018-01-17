@@ -35,7 +35,7 @@ public class Home extends HBox
     protected void showStore(MouseEvent event)
     {
         root.transitionMenu(new Shop(root, user));
-        root.changeMessage("You have $" + user.getMoney() + ".");
+        root.changeMessage("You have $" + user.getMoney() + ". \n Food Count: " + user.getFood());
     }
 
     @FXML
