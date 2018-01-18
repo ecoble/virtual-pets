@@ -78,33 +78,19 @@ public class Gym extends HBox
         continueTraining.setVisible(false);
         goHome.setVisible(false);
 
-        Timeline timeline = new Timeline(new KeyFrame(
+        new Timeline(new KeyFrame(
                 Duration.millis(3000),
-                ae -> root.transitionMenu(new Home(root,user)))
-        );
+                ae -> {
+                    root.transitionMenu(new Home(root,user));
+                    root.transitionDisplay(new LivingRoom(user));
+                    if(pet.getSpecies().equals("fish"))
+                    {
+                        root.changeMessage(pet.getName() + " died due to lack of water.");
+                    }
+                })
+        ).play();
 
-        Timeline timeline2 = new Timeline(new KeyFrame(
-                Duration.millis(3000),
-                ae -> root.transitionDisplay(new LivingRoom(user)))
-        );
+        user.removePet(pet);
 
-
-        Timeline timeline3 = new Timeline(new KeyFrame(
-                Duration.millis(3000),
-                ae -> root.changeMessage(pet.getName() + " died due to lack of water."))
-        );
-        timeline3.play();
-        
-        timeline.play();
-        timeline2.play();
-
-        for(Pet pet : user.getPets())
-        {
-            if(pet.getName().equals(this.pet.getName()))
-            {
-                user.removePet(pet);
-                break;
-            }
-        }
     }
 }

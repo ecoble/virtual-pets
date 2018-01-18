@@ -6,6 +6,9 @@ public abstract class Pet
 {
     private String name;
     private String species;
+    private int hungerStat;
+    private int thirstStat;
+    private int hygieneStat;
     private List<Runnable> feedCallbacks;
     private List<Runnable> waterCallbacks;
     final static public int foodPrice = 5;
@@ -15,6 +18,9 @@ public abstract class Pet
         this.species = species;
         this.feedCallbacks = new ArrayList<Runnable>();
         this.waterCallbacks = new ArrayList<Runnable>();
+        this.hungerStat = 100;
+        this.thirstStat = 100;
+        this.hygieneStat = 100;
     }
 
     public String getName()
@@ -62,7 +68,19 @@ public abstract class Pet
         waterCallbacks.add(callback);
     }
 
+    public int getHungerStat()
+    {
+        return hungerStat;
+    }
 
+    public int getThirstStat()
+    {
+        return thirstStat;
+    }
 
+    public int getHygieneStat()
+    {
+        return hygieneStat;
+    }
 
 }
