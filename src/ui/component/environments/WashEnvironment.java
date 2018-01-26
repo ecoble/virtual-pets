@@ -36,27 +36,21 @@ public class WashEnvironment extends StackPane
          switch (pet.getSpecies())
          {
              case "dog":
-                 addPet(new PetView(pet, "images/golden-retriever.png", 250));
+                 petContainer.getChildren().add(new PetView(pet, "images/golden-retriever.png", 250));
                  break;
              case "cat":
-                 addPet(new PetView(pet, "images/cat_image.png", 150));
+                 petContainer.getChildren().add(new PetView(pet, "images/cat_image.png", 150));
                  break;
              case "rabbit":
-                 addPet(new PetView(pet, "images/rabbit.png", 50));
+                 petContainer.getChildren().add(new PetView(pet, "images/rabbit.png", 50));
                  break;
              case "bird":
-                 addPet(new PetView(pet, "images/bird.png", 150));
+                 petContainer.getChildren().add(new PetView(pet, "images/bird.png", 150));
                  break;
              case "fish":
-                 addPet(new PetView(pet, "images/goldfish.png", 75));
+                 petContainer.getChildren().add(new PetView(pet, "images/goldfish.png", 75));
                  break;
          }
     }
 
-    public void addPet(PetView view)
-    {
-        AnchorPane anchor = new AnchorPane(view);
-        anchor.setBottomAnchor(view, 0.0);
-        petContainer.getChildren().add(anchor);
-    }
 }

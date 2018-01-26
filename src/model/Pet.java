@@ -18,9 +18,9 @@ public abstract class Pet
         this.species = species;
         this.feedCallbacks = new ArrayList<Runnable>();
         this.waterCallbacks = new ArrayList<Runnable>();
-        this.hungerStat = 100;
-        this.thirstStat = 100;
-        this.hygieneStat = 100;
+        this.hungerStat = 56;
+        this.thirstStat = 70;
+        this.hygieneStat = 43;
     }
 
     public String getName()

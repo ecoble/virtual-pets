@@ -1,9 +1,17 @@
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.canvas.Canvas?>
 
 <?import javafx.scene.Group?>
-<?import javafx.scene.layout.StackPane?>
-<fx:root type="javafx.scene.layout.StackPane" xmlns:fx="http://javafx.com/fxml/1">
-    <ImageView fx:id="petView" preserveRatio="true" />
-    <ImageView fx:id="foodView" fitHeight="50" preserveRatio="true" StackPane.alignment="BOTTOM_CENTER" />
-    <ImageView fx:id="waterView" fitHeight="50" preserveRatio="true" StackPane.alignment="BOTTOM_CENTER"/>
+<?import javafx.geometry.Insets?>
+<fx:root fx:id="root" type="javafx.scene.layout.VBox" xmlns:fx="http://javafx.com/fxml/1" alignment="BOTTOM_CENTER">
+    <Canvas fx:id="canvas" height="40" width="100"/>
+    <StackPane alignment="BOTTOM_CENTER">
+        <ImageView fx:id="petView" preserveRatio="true" />
+        <ImageView fx:id="foodView" fitHeight="50" preserveRatio="true"/>
+        <ImageView fx:id="waterView" fitHeight="50" preserveRatio="true"/>
+    </StackPane>
+    <padding>
+        <Insets fx:id="fishPadding"/>
+    </padding>
 </fx:root>

@@ -4,6 +4,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -45,26 +46,7 @@ public class LivingRoom extends StackPane
             {
                 change.getAddedSubList().forEach(item -> {
                     Pet pet = (Pet)item;
-                    if(pet instanceof model.Dog)
-                    {
-                        addPet(new PetView(pet, "images/golden-retriever.png", 250));
-                    }
-                    else if(pet instanceof model.Cat)
-                    {
-                        addPet(new PetView(pet, "images/cat_image.png", 150));
-                    }
-                    else if(pet instanceof model.Bird)
-                    {
-                        addPet(new PetView(pet, "images/bird.png", 150));
-                    }
-                    else if(pet instanceof model.Fish)
-                    {
-                        addPet(new PetView(pet, "images/goldfish.png", 75));
-                    }
-                    else if(pet instanceof model.Rabbit)
-                    {
-                        addPet( new PetView(pet, "images/rabbit.png", 50));
-                    }
+                    createPets(pet);
                 });
             }
         }));
@@ -77,43 +59,31 @@ public class LivingRoom extends StackPane
     {
         for(Pet pet : user.getPets())
         {
-            if(pet instanceof model.Dog)
-            {
-                addPet(new PetView(pet, "images/golden-retriever.png", 250));
-            }
-            else if(pet instanceof model.Cat)
-            {
-                addPet(new PetView(pet, "images/cat_image.png", 150));
-            }
-            else if(pet instanceof model.Bird)
-            {
-                addPet(new PetView(pet, "images/bird.png", 150));
-            }
-            else if(pet instanceof model.Fish)
-            {
-                addPet(new PetView(pet, "images/goldfish.png", 75));
-            }
-            else if(pet instanceof model.Rabbit)
-            {
-                addPet( new PetView(pet, "images/rabbit.png", 50));
-            }
+            createPets(pet);
         }
     }
 
-    public void addPet(PetView view)
+    private void createPets(Pet pet)
     {
-        switch(view.getPet().getType()) {
-            case LAND:
-                AnchorPane anchor = new AnchorPane(view);
-                anchor.setBottomAnchor(view, 0.0);
-                landPetContainer.getChildren().add(anchor);
-                break;
-            case BIRD:
-                birdContainer.getChildren().add(view);
-                break;
-            case FISH:
-                fishContainer.getChildren().add(view);
-                break;
+        if(pet instanceof model.Dog)
+        {
+            landPetContainer.getChildren().add((new PetView(pet, "images/golden-retriever.png", 250)));
+        }
+        else if(pet instanceof model.Cat)
+        {
+            landPetContainer.getChildren().add((new PetView(pet, "images/cat_image.png", 150)));
+        }
+        else if(pet instanceof model.Bird)
+        {
+            birdContainer.getChildren().add((new PetView(pet, "images/bird.png", 150)));
+        }
+        else if(pet instanceof model.Fish)
+        {
+            fishContainer.getChildren().add((new PetView(pet, "images/goldfish.png", 75)));
+        }
+        else if(pet instanceof model.Rabbit)
+        {
+            landPetContainer.getChildren().add((new PetView(pet, "images/rabbit.png", 50)));
         }
     }
 }

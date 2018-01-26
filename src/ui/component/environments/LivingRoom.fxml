@@ -11,29 +11,23 @@
             <Image url="@../../../images/LivingRoom.jpg" />
         </image>
     </ImageView>
-    <HBox fx:id="birdContainer" StackPane.alignment="TOP_CENTER">
-    </HBox>
+
+    <HBox fx:id="birdContainer" StackPane.alignment="TOP_CENTER" maxHeight="130"></HBox>
+
     <Group StackPane.alignment="BOTTOM_CENTER">
-        <HBox fx:id="landPetContainer">
-        </HBox>
+        <HBox fx:id="landPetContainer" alignment="BOTTOM_CENTER"></HBox>
     </Group>
-    <Group StackPane.alignment="BOTTOM_CENTER">
-        <HBox>
-            <ImageView fx:id="foodContainer" fitHeight="50" preserveRatio="true">
-            </ImageView>
-            <ImageView fx:id="waterContainer" fitHeight="50" preserveRatio="true">
-            </ImageView>
-        </HBox>
-    </Group>
+
     <Group StackPane.alignment="BOTTOM_RIGHT">
-        <StackPane fx:id="fishContainer" >
-            <ImageView fitHeight="75" preserveRatio="true">
+        <StackPane fx:id="fishContainer" prefHeight="125">
+            <ImageView fitHeight="75" preserveRatio="true" StackPane.alignment="BOTTOM_CENTER">
                 <image>
                     <Image url="@../../../images/fishTank.png"/>
                 </image>
             </ImageView>
         </StackPane>
     </Group>
+
     <padding>
         <Insets bottom="20.0"/>
     </padding>
