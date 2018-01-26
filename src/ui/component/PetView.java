@@ -7,6 +7,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -105,6 +106,19 @@ public class PetView extends VBox
         });
 
 
+    }
+
+    @FXML
+    protected void toggleStats(MouseEvent event)
+    {
+        if(canvas.isVisible())
+        {
+            canvas.setVisible(false);
+        }
+        else if(!canvas.isVisible())
+        {
+            canvas.setVisible(true);
+        }
     }
 
     public Pet getPet()

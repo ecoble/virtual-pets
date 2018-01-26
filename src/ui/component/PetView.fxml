@@ -5,9 +5,9 @@
 <?import javafx.scene.Group?>
 <?import javafx.geometry.Insets?>
 <fx:root fx:id="root" type="javafx.scene.layout.VBox" xmlns:fx="http://javafx.com/fxml/1" alignment="BOTTOM_CENTER">
-    <Canvas fx:id="canvas" height="40" width="100"/>
-    <StackPane alignment="BOTTOM_CENTER">
-        <ImageView fx:id="petView" preserveRatio="true" />
+    <Canvas fx:id="canvas" height="40" width="100" visible="false"/>
+    <StackPane alignment="BOTTOM_CENTER" >
+        <ImageView fx:id="petView" preserveRatio="true" onMouseClicked="#toggleStats"/>
         <ImageView fx:id="foodView" fitHeight="50" preserveRatio="true"/>
         <ImageView fx:id="waterView" fitHeight="50" preserveRatio="true"/>
     </StackPane>
