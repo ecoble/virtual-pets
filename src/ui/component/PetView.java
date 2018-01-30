@@ -1,5 +1,6 @@
 package ui.component;
 
+import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
@@ -58,20 +59,16 @@ public class PetView extends VBox
     protected void initialize()
     {
         GraphicsContext gc = canvas.getGraphicsContext2D();
-        gc.setStroke(Color.BLACK);
-        gc.setLineWidth(1);
 
-        gc.setFill(Color.GREEN);
-        gc.fillRect(0,0, pet.getHungerStat(), 7);
-        gc.strokeRect(0,0, 100, 7);
+        Timeline statTimeline = new Timeline();
 
-        gc.setFill(Color.BLUE);
-        gc.fillRect(0,15, pet.getThirstStat(), 7);
-        gc.strokeRect(0,15, 100,  7);
+        KeyFrame hungerKeyFrame = new KeyFrame(Duration.millis(1), ae -> drawStatMeter(gc, 0, pet.getHungerStat(), Color.GREEN));
+        KeyFrame thirstKeyFrame = new KeyFrame(Duration.millis(1), ae -> drawStatMeter(gc, 15, pet.getThirstStat(), Color.BLUE));
+        KeyFrame hygieneKeyFrame = new KeyFrame(Duration.millis(1), ae -> drawStatMeter(gc, 30, pet.getHygieneStat(), Color.SADDLEBROWN));
 
-        gc.setFill(Color.SADDLEBROWN);
-        gc.fillRect(0,30, pet.getHygieneStat(), 7);
-        gc.strokeRect(0,30, 100, 7);
+        statTimeline.getKeyFrames().addAll(hungerKeyFrame, thirstKeyFrame, hygieneKeyFrame);
+        statTimeline.setCycleCount(Animation.INDEFINITE);
+        statTimeline.play();
 
         petView.setFitWidth(imageSize);
         petView.setImage(new Image(imageUrl));
@@ -119,6 +116,17 @@ public class PetView extends VBox
         {
             canvas.setVisible(true);
         }
+    }
+
+    private void drawStatMeter(GraphicsContext gc, int y, int stat, Color color)
+    {
+        gc.setStroke(Color.BLACK);
+        gc.setLineWidth(1);
+        gc.strokeRect(0,y, 102, 9);
+
+        gc.clearRect(1,y + 1, 101, 7);
+        gc.setFill(color);
+        gc.fillRect(1,y + 1, stat, 7);
     }
 
     public Pet getPet()

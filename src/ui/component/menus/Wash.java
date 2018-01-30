@@ -65,6 +65,8 @@ public class Wash extends HBox
     @FXML
     protected void finishWash()
     {
+        pet.wash();
+
         if(pet.getSpecies().equals("cat"))
         {
             if(user.getMoney() >= 50)

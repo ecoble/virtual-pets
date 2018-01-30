@@ -1,5 +1,10 @@
 package model;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.util.Duration;
+
 import java.util.*;
 
 public abstract class Pet
@@ -18,9 +23,33 @@ public abstract class Pet
         this.species = species;
         this.feedCallbacks = new ArrayList<Runnable>();
         this.waterCallbacks = new ArrayList<Runnable>();
-        this.hungerStat = 56;
-        this.thirstStat = 70;
-        this.hygieneStat = 43;
+        this.hungerStat = 100;
+        this.thirstStat = 100;
+        this.hygieneStat = 100;
+
+        Timeline hungerTimeline = new Timeline(new KeyFrame(
+                Duration.millis(1000),
+                ae -> hungerStat --)
+        );
+
+        hungerTimeline.setCycleCount(Animation.INDEFINITE);
+        hungerTimeline.play();
+
+        Timeline thirstTimeline = new Timeline(new KeyFrame(
+                Duration.millis(1000),
+                ae -> thirstStat--)
+        );
+
+        thirstTimeline.setCycleCount(Animation.INDEFINITE);
+        thirstTimeline.play();
+
+        Timeline hygieneTimeline = new Timeline(new KeyFrame(
+                Duration.millis(1000),
+                ae -> hygieneStat--)
+        );
+
+        hygieneTimeline.setCycleCount(Animation.INDEFINITE);
+        hygieneTimeline.play();
     }
 
     public String getName()
@@ -48,6 +77,8 @@ public abstract class Pet
         {
             callback.run();
         }
+
+        hungerStat = 100;
     }
 
     public void onFeed(Runnable callback)
@@ -61,11 +92,18 @@ public abstract class Pet
         {
             callback.run();
         }
+
+        thirstStat = 100;
     }
 
     public void onGiveWater(Runnable callback)
     {
         waterCallbacks.add(callback);
+    }
+
+    public void wash()
+    {
+        hygieneStat = 100;
     }
 
     public int getHungerStat()
