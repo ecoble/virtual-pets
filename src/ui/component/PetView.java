@@ -3,6 +3,7 @@ package ui.component;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
@@ -60,15 +61,17 @@ public class PetView extends VBox
     {
         GraphicsContext gc = canvas.getGraphicsContext2D();
 
-        Timeline statTimeline = new Timeline();
+        pet.hungerStatProperty().addListener((change -> {
+            drawStatMeter(gc, 0, (int) pet.getHungerStat(), Color.GREEN);
+        }));
 
-        KeyFrame hungerKeyFrame = new KeyFrame(Duration.millis(1), ae -> drawStatMeter(gc, 0, pet.getHungerStat(), Color.GREEN));
-        KeyFrame thirstKeyFrame = new KeyFrame(Duration.millis(1), ae -> drawStatMeter(gc, 15, pet.getThirstStat(), Color.BLUE));
-        KeyFrame hygieneKeyFrame = new KeyFrame(Duration.millis(1), ae -> drawStatMeter(gc, 30, pet.getHygieneStat(), Color.SADDLEBROWN));
+        pet.thirstStatProperty().addListener((change -> {
+            drawStatMeter(gc, 15, (int) pet.getThirstStat(), Color.BLUE);
+        }));
 
-        statTimeline.getKeyFrames().addAll(hungerKeyFrame, thirstKeyFrame, hygieneKeyFrame);
-        statTimeline.setCycleCount(Animation.INDEFINITE);
-        statTimeline.play();
+        pet.hygieneStatProperty().addListener((change -> {
+            drawStatMeter(gc, 30, (int) pet.getHygieneStat(), Color.SADDLEBROWN);
+        }));
 
         petView.setFitWidth(imageSize);
         petView.setImage(new Image(imageUrl));

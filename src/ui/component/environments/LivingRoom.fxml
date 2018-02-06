@@ -19,12 +19,14 @@
     </Group>
 
     <Group StackPane.alignment="BOTTOM_RIGHT">
-        <StackPane fx:id="fishContainer" prefHeight="125">
+        <StackPane>
             <ImageView fitHeight="75" preserveRatio="true" StackPane.alignment="BOTTOM_CENTER">
                 <image>
                     <Image url="@../../../images/fishTank.png"/>
                 </image>
             </ImageView>
+            <StackPane fx:id="fishContainer" prefHeight="125">
+            </StackPane>
         </StackPane>
     </Group>
 

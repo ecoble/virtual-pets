@@ -1,5 +1,7 @@
 package ui.component;
+import javafx.collections.ListChangeListener;
 import javafx.scene.Node;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import model.*;
 import javafx.animation.KeyFrame;
@@ -10,6 +12,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import ui.Compositor;
 import ui.component.environments.LivingRoom;
 import ui.component.menus.BuyPets;
@@ -47,6 +50,42 @@ public class Root extends VBox
     {
         User user = new User(collectInput("Enter your name:", "Welcome to Virtual Pets!"));
 
+        user.getPets().addListener((ListChangeListener)(change -> {
+            while(change.next())
+            {
+                for (Object obj : change.getAddedSubList())
+                {
+                    Pet pet = (Pet) obj;
+
+                    pet.hungerStatProperty().addListener((changeStat ->
+                    {
+                        if (pet.getHungerStat() <= 0)
+                        {
+                            changeMessage(pet.getName() + " died from hunger!");
+                            pauseForMessage("What would you like to do now?");
+                        }
+                    }));
+
+                    pet.thirstStatProperty().addListener((changeStat ->
+                    {
+                        if (pet.getThirstStat() <= 0)
+                        {
+                            changeMessage(pet.getName() + " died from thirst!");
+                            pauseForMessage("What would you like to do now?");
+                        }
+                    }));
+
+                    pet.hygieneStatProperty().addListener((changeStat ->
+                    {
+                        if (pet.getHygieneStat() == 0)
+                        {
+                            changeMessage(pet.getName() + " is very dirty! You should give them a bath!");
+                        }
+                    }));
+                }
+            }
+        }));
+
         LivingRoom livingRoom = new LivingRoom(user);
 
         displayCompositor = new Compositor(display);
@@ -57,6 +96,7 @@ public class Root extends VBox
 
         changeMessage("Hello " + user.getName() + "! You need to buy your first pet!");
     }
+
 
     private String collectInput(String message, String header)
     {

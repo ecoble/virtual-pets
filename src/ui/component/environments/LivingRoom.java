@@ -10,11 +10,15 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 import model.*;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import ui.component.Component;
 import ui.component.PetView;
+
+import java.util.stream.Collectors;
 
 /**
  * Created by M5sp on 10/19/17.
@@ -42,16 +46,45 @@ public class LivingRoom extends StackPane
     {
         this.user = user;
         this.user.getPets().addListener((ListChangeListener)(change -> {
-            while (change.next())
+            while(change.next())
             {
-                change.getAddedSubList().forEach(item -> {
-                    Pet pet = (Pet)item;
-                    createPets(pet);
-                });
+                for (Object obj : change.getRemoved())
+                {
+                    Pet pet = (Pet) obj;
+                    Pane container = null;
+                    switch (pet.getType())
+                    {
+                        case LAND:
+                            container = landPetContainer;
+                            break;
+                        case BIRD:
+                            container = birdContainer;
+                            break;
+                        case FISH:
+                            container = fishContainer;
+                            break;
+                        default:
+                            throw new NotImplementedException();
+                    }
+
+                    PetView view = container.getChildren().stream()
+                            .filter(n -> n instanceof PetView)
+                            .map(n -> (PetView) n)
+                            .filter(v -> v.getPet() == pet)
+                            .findFirst()
+                            .get();
+
+                    container.getChildren().remove(view);
+                }
+
+                for (Object obj : change.getAddedSubList())
+                {
+                    createPets((Pet) obj);
+                }
             }
         }));
 
-        Component.load("LivingRoom.fxml", this);
+        Component.load("LivingRoom.fxml",this);
     }
 
     @FXML

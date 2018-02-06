@@ -1,9 +1,14 @@
 package model;
 
 import commands.PurchaseCommand;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.beans.property.ReadOnlyListWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.paint.Color;
+import javafx.util.Duration;
 
 import java.util.ArrayList;
 
@@ -24,6 +29,14 @@ public class User{
         this.name = name;
         this.money = 2000;
         pets = FXCollections.observableArrayList();
+
+        Timeline time = new Timeline(new KeyFrame(
+                Duration.millis(100),
+                ae -> depletePetStats()
+        ));
+
+        time.setCycleCount(Animation.INDEFINITE);
+        time.play();
     }
 
     public int getMoney()
@@ -149,6 +162,28 @@ public class User{
         else if(pet.getType() == PetType.LAND)
         {
             landPetUnits -= pet.getNumUnits();
+        }
+    }
+
+    private void depletePetStats()
+    {
+        for(int i = 0; i < pets.size(); i++)
+        {
+            Pet pet = pets.get(i);
+            pet.depleteHunger(1.5);
+            pet.depleteThirst(1);
+            pet.depleteHygiene(0.5);
+
+            if(pet.getHungerStat() <= 0)
+            {
+                removePet(pet);
+                i--;
+            }
+            else if(pet.getThirstStat() <= 0)
+            {
+                removePet(pet);
+                i--;
+            }
         }
     }
 }
