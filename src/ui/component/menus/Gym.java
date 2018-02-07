@@ -57,6 +57,33 @@ public class Gym extends HBox
                 root.changeMessage("You're training your bird, " + pet.getName() + ". They are learning a lot! What would you like to do?");
                 break;
         }
+
+        pet.hungerStatProperty().addListener((change ->
+        {
+            if (pet.getHungerStat() <= 0)
+            {
+                user.removePet(pet);
+                root.transitionDisplay(new LivingRoom(user));
+                root.transitionMenu(new Home(root, user));
+            }
+        }));
+
+        pet.thirstStatProperty().addListener((change -> {
+            if(pet.getThirstStat() <= 0)
+            {
+                user.removePet(pet);
+                root.transitionDisplay(new LivingRoom(user));
+                root.transitionMenu(new Home(root, user));
+            }
+        }));
+
+        pet.hygieneStatProperty().addListener((changeStat ->
+        {
+            if (pet.getHygieneStat() == 0)
+            {
+                root.changeMessage(pet.getName() + " is very dirty! You should give them a bath!");
+            }
+        }));
     }
 
     @FXML

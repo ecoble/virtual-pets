@@ -143,7 +143,7 @@ public class Root extends VBox
     public void pauseForMessage(String message)
     {
         Timeline timeline = new Timeline(new KeyFrame(
-                Duration.millis(1500),
+                Duration.millis(2000),
                 ae -> changeMessage(message))
         );
 

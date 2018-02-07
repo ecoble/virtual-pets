@@ -14,7 +14,6 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         VBox root = new VBox();
-        //root.setAlignment(Pos.CENTER);
 
         Compositor compositor = new Compositor(root);
         Root rootMenu = new Root();

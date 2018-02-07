@@ -39,7 +39,7 @@ public class Wash extends HBox
         switch(pet.getSpecies())
         {
             case "dog":
-                root.changeMessage("You're walking " + pet.getName() + ". What would you like to do?");
+                root.changeMessage("You're washing " + pet.getName() + ". What would you like to do?");
                 break;
             case "cat":
                 root.changeMessage("You're washing your cat, " + pet.getName() + ", but they're scratching you. What would you like to do?");
@@ -54,7 +54,27 @@ public class Wash extends HBox
                 root.changeMessage("You're washing your bird, " + pet.getName() + ", but they're getting upset. What would you like to do?");
                 break;
         }
+
+        pet.hungerStatProperty().addListener((change ->
+        {
+            if (pet.getHungerStat() <= 0)
+            {
+                user.removePet(pet);
+                root.transitionDisplay(new LivingRoom(user));
+                root.transitionMenu(new Home(root, user));
+            }
+        }));
+
+        pet.thirstStatProperty().addListener((change -> {
+            if(pet.getThirstStat() <= 0)
+            {
+                user.removePet(pet);
+                root.transitionDisplay(new LivingRoom(user));
+                root.transitionMenu(new Home(root, user));
+            }
+        }));
     }
+
 
     @FXML
     protected void continueWash()
