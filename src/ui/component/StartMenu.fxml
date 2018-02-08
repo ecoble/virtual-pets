@@ -1,0 +1,9 @@
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Button?>
+<fx:root type="javafx.scene.layout.VBox" xmlns:fx="http://javafx.com/fxml/1">
+
+    <HBox alignment="CENTER">
+        <Button fx:id="start" onMouseClicked="#start" text="Start Virtual Pets"/>
+        <Button fx:id="cancel" onMouseClicked="#quit" text="Quit Virtual Pets"/>
+    </HBox>
+</fx:root>

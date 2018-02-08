@@ -171,9 +171,9 @@ public class User{
         {
             Pet pet = pets.get(i);
             pet.depleteHunger(1);
-            pet.depleteThirst(1.5);
+            pet.depleteThirst(0.01);
             //hygiene depletion must be a divisor of 100
-            pet.depleteHygiene(0.5);
+            pet.depleteHygiene(0.0001);
 
             if(pet.getHungerStat() <= 0)
             {

@@ -63,6 +63,7 @@ public class Root extends VBox
                         {
                             changeMessage(pet.getName() + " died from hunger!");
                             pauseForMessage("What would you like to do now?");
+                            menuCompositor.transitionTo(new Home(this, user));
                         }
                     }));
 
@@ -72,6 +73,7 @@ public class Root extends VBox
                         {
                             changeMessage(pet.getName() + " died from thirst!");
                             pauseForMessage("What would you like to do now?");
+                            menuCompositor.transitionTo(new Home(this, user));
                         }
                     }));
 

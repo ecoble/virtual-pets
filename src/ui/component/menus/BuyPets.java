@@ -1,6 +1,7 @@
 package ui.component.menus;
 
 import commands.PetPurchaseCommand;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.VBox;
 import model.*;
 import javafx.fxml.FXML;
