@@ -123,6 +123,12 @@ public class BuyPets extends VBox
             name = collectInput("Enter Pet Name", "Name your pet!");
         }
 
+        while(checkNameLength(name))
+        {
+            root.changeMessage("That name is too long!");
+            name = collectInput("Enter Pet Name", "Name your pet!");
+        }
+
         view.getPet().setName(name);
 
         PetPurchaseCommand command = new PetPurchaseCommand(view.getPet(), price);
@@ -134,6 +140,7 @@ public class BuyPets extends VBox
     private String collectInput(String message, String header)
     {
         TextInputDialog input = new TextInputDialog();
+        input.getDialogPane().lookupButton(ButtonType.CANCEL).setVisible(false);
         input.setTitle("Virtual Pets");
         input.setHeaderText(header);
         input.setContentText(message);
@@ -157,6 +164,11 @@ public class BuyPets extends VBox
     private boolean checkIfSameName(String name)
     {
         return user.getPets().stream().anyMatch(pet -> pet.getName().equals(name));
+    }
+
+    private boolean checkNameLength(String name)
+    {
+        return name.length() > 30;
     }
 
 }

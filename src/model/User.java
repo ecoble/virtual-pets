@@ -170,7 +170,7 @@ public class User{
         for(int i = 0; i < pets.size(); i++)
         {
             Pet pet = pets.get(i);
-            pet.depleteHunger(1);
+            pet.depleteHunger(0.001);
             pet.depleteThirst(0.01);
             //hygiene depletion must be a divisor of 100
             pet.depleteHygiene(0.0001);

@@ -1,6 +1,7 @@
 package ui.component;
 import javafx.collections.ListChangeListener;
 import javafx.scene.Node;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import model.*;
@@ -48,7 +49,12 @@ public class Root extends VBox
     protected void initialize()
         throws IOException
     {
-        User user = new User(collectInput("Enter your name:", "Welcome to Virtual Pets!"));
+        String name = collectInput("Enter your name (30 char limit):", "Welcome to Virtual Pets!");
+        while(checkNameLength(name))
+        {
+            name = collectInput("Your name was too long!\nEnter your name (30 char limit):", "Welcome to Virtual Pets!");
+        }
+        User user = new User(name);
 
         user.getPets().addListener((ListChangeListener)(change -> {
             while(change.next())
@@ -103,6 +109,7 @@ public class Root extends VBox
     private String collectInput(String message, String header)
     {
         TextInputDialog input = new TextInputDialog();
+        input.getDialogPane().lookupButton(ButtonType.CANCEL).setVisible(false);
         input.setTitle("Virtual Pets");
         input.setHeaderText(header);
         input.setContentText(message);
@@ -150,5 +157,10 @@ public class Root extends VBox
         );
 
         timeline.play();
+    }
+
+    private boolean checkNameLength(String name)
+    {
+        return name.length() > 30;
     }
 }
