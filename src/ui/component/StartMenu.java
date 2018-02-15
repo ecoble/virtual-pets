@@ -30,7 +30,7 @@ public class StartMenu extends VBox
     {
         Stage stage = (Stage) start.getScene().getWindow();
         stage.close();
-        
+
         Stage primaryStage = new Stage();
         VBox root = new VBox();
 

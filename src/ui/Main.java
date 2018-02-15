@@ -1,14 +1,22 @@
 package ui;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.typeadapters.RuntimeTypeAdapterFactory;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
-import javafx.scene.Parent;
+import javafx.beans.property.DoubleProperty;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import ui.component.Root;
+import model.Dog;
+import model.Pet;
+import model.DoublePropertyAdapter;
 import ui.component.StartMenu;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main extends Application {
 
@@ -23,17 +31,6 @@ public class Main extends Application {
         primaryStage.setTitle("Start Virtual Pets");
         primaryStage.setScene(new Scene(startMenu, 300, 200));
         primaryStage.show();
-        //VBox root = new VBox();
-//
-        //Compositor compositor = new Compositor(root);
-        //Root rootMenu = new Root();
-//
-        //compositor.transitionTo(rootMenu);
-//
-        //primaryStage.setTitle("Virtual Pets");
-        //primaryStage.setScene(new Scene(root, 650, 650));
-        //primaryStage.show();
-        //primaryStage.setResizable(false);
     }
 
 

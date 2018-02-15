@@ -17,8 +17,8 @@ public abstract class Pet
     private DoubleProperty hungerStat;
     private DoubleProperty thirstStat;
     private DoubleProperty hygieneStat;
-    private List<Runnable> feedCallbacks;
-    private List<Runnable> waterCallbacks;
+    private transient List<Runnable> feedCallbacks;
+    private transient List<Runnable> waterCallbacks;
     final static public int foodPrice = 5;
 
     public Pet(String species)

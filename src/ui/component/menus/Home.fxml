@@ -1,7 +1,16 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.Button?>
-<fx:root type="javafx.scene.layout.HBox" xmlns:fx="http://javafx.com/fxml/1" fx:id="homeBox" visible="false" managed="false">
-    <Button fx:id="buyPetsButton" onMouseClicked="#buyMorePets" text="Buy more pets"/>
-    <Button fx:id="interactButton" onMouseClicked="#showPetNames" text="Interact with pets"/>
-    <Button fx:id="storeButton" onMouseClicked="#showStore" text="Go to store"/>
+<?import javafx.geometry.Insets?>
+<fx:root type="javafx.scene.layout.VBox" xmlns:fx="http://javafx.com/fxml/1" fx:id="homeBox" visible="false" managed="false">
+    <HBox>
+        <Button fx:id="buyPetsButton" onMouseClicked="#buyMorePets" text="Buy more pets"/>
+        <Button fx:id="interactButton" onMouseClicked="#showPetNames" text="Interact with pets"/>
+        <Button fx:id="storeButton" onMouseClicked="#showStore" text="Go to store"/>
+        <padding>
+            <Insets bottom="15.0"/>
+        </padding>
+    </HBox>
+    <HBox alignment="CENTER">
+        <Button fx:id="quitButton" onMouseClicked="#quit" text="Save and quit" />
+    </HBox>
 </fx:root>

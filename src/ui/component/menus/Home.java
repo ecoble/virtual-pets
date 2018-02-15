@@ -1,19 +1,27 @@
 package ui.component.menus;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import model.Json;
 import model.User;
 import ui.component.Component;
 import ui.component.Root;
 
+import java.io.FileWriter;
+
 /**
  * Created by M5sp on 10/18/17.
  */
-public class Home extends HBox
+public class Home extends VBox
 {
     private Root root;
     private User user;
+
+    @FXML
+    private Button quitButton;
 
 
     public Home(Root root, User user)
@@ -43,6 +51,26 @@ public class Home extends HBox
     {
         root.transitionMenu(new PetNames(root, user));
         root.changeMessage("Which pet would you like to interact with?");
+    }
+
+    @FXML
+    protected void quit()
+    {
+        Stage stage = (Stage) quitButton.getScene().getWindow();
+        stage.close();
+
+        try
+        {
+            FileWriter fileWriter = new FileWriter("./save.json");
+            fileWriter.write(Json.to(user));
+            fileWriter.flush();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+
+
     }
 
 }
