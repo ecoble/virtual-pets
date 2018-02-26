@@ -1,9 +1,17 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.StackPane?>
-<fx:root type="javafx.scene.layout.VBox" xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER" prefHeight="200">
-    <HBox alignment="CENTER">
-        <Button fx:id="start" onMouseClicked="#start" text="Start Virtual Pets"/>
-        <Button fx:id="quit" onMouseClicked="#quit" text="Quit Virtual Pets"/>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.text.Font?>
+<fx:root type="javafx.scene.layout.VBox" xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER" prefHeight="200" spacing="30">
+    <Label text="Virtual Pets">
+        <font>
+            <Font size="20"/>
+        </font>
+    </Label>
+    <HBox alignment="CENTER" spacing="20">
+        <Button fx:id="start" onMouseClicked="#start" text="Start"/>
+        <Button fx:id="quit" onMouseClicked="#quit" text="Quit"/>
     </HBox>
 </fx:root>

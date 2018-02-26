@@ -28,7 +28,7 @@ public class Main extends Application {
         StartMenu start = new StartMenu();
         compositor.transitionTo(start);
 
-        primaryStage.setTitle("Start Virtual Pets");
+        primaryStage.setTitle("Virtual Pets");
         primaryStage.setScene(new Scene(startMenu, 300, 200));
         primaryStage.show();
     }

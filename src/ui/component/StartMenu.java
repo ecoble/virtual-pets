@@ -1,5 +1,6 @@
 package ui.component;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -48,7 +49,6 @@ public class StartMenu extends VBox
     @FXML
     protected void quit()
     {
-        Stage stage = (Stage) quit.getScene().getWindow();
-        stage.close();
+        Platform.exit();
     }
 }
