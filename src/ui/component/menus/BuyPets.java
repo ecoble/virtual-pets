@@ -116,17 +116,34 @@ public class BuyPets extends VBox
 
         root.transitionMenu(new Home(root, user));
 
-        String name = collectInput("Enter Pet Name", "Name your pet!");
-        while(checkIfSameName(name))
+        Optional<String> opName = collectInput("Enter Pet Name", "Name your pet!");
+
+        if(checkIfNull(opName))
         {
-            root.changeMessage("You already have a pet with that name!");
-            name = collectInput("Enter Pet Name", "Name your pet!");
+            return;
         }
 
-        while(checkNameLength(name))
+        String name = opName.get();
+
+        while(checkNameLength(name) || checkIfSameName(name))
         {
-            root.changeMessage("That name is too long!");
-            name = collectInput("Enter Pet Name", "Name your pet!");
+            if(checkNameLength(name))
+            {
+                root.changeMessage("That name is too long!");
+            }
+            else if(checkIfSameName(name))
+            {
+                root.changeMessage("You already have a pet with that name!");
+            }
+
+            opName = collectInput("Enter Pet Name", "Name your pet!");
+
+            if(checkIfNull(opName))
+            {
+                return;
+            }
+
+            name = opName.get();
         }
 
         view.getPet().setName(name);
@@ -137,15 +154,13 @@ public class BuyPets extends VBox
         root.changeMessage("What would you like to do now?");
     }
 
-    private String collectInput(String message, String header)
+    private Optional<String> collectInput(String message, String header)
     {
         TextInputDialog input = new TextInputDialog();
-        input.getDialogPane().lookupButton(ButtonType.CANCEL).setVisible(false);
         input.setTitle("Virtual Pets");
         input.setHeaderText(header);
         input.setContentText(message);
-        Optional<String> name = input.showAndWait();
-        return name.orElse("");
+        return input.showAndWait();
     }
 
     private boolean checkSpace(Pet pet)
@@ -169,6 +184,17 @@ public class BuyPets extends VBox
     private boolean checkNameLength(String name)
     {
         return name.length() > 30;
+    }
+
+    private boolean checkIfNull(Optional<String> name)
+    {
+        if(!name.isPresent())
+        {
+            root.transitionMenu(new Home(root, user));
+            root.changeMessage("What would you like to do now?");
+        }
+
+        return !name.isPresent();
     }
 
 }
