@@ -29,6 +29,10 @@ public class Root extends VBox
 
     private Compositor menuCompositor;
 
+    private User user;
+
+    private boolean isNew;
+
 
     @FXML
     private Text userMessage;
@@ -41,6 +45,14 @@ public class Root extends VBox
 
     public Root()
     {
+        isNew = true;
+        Component.load("Root.fxml", this);
+    }
+
+    public Root(User user)
+    {
+        this.user = user;
+        isNew = false;
         Component.load("Root.fxml", this);
     }
 
@@ -49,12 +61,15 @@ public class Root extends VBox
     protected void initialize()
         throws IOException
     {
-        String name = collectInput("Enter your name (30 char limit):", "Welcome to Virtual Pets!");
-        while(checkNameLength(name))
+        if(isNew)
         {
-            name = collectInput("Your name was too long!\nEnter your name (30 char limit):", "Welcome to Virtual Pets!");
+            String name = collectInput("Enter your name (30 char limit):", "Welcome to Virtual Pets!");
+            while (checkNameLength(name))
+            {
+                name = collectInput("Your name was too long!\nEnter your name (30 char limit):", "Welcome to Virtual Pets!");
+            }
+            user = new User(name);
         }
-        User user = new User(name);
 
         user.getPets().addListener((ListChangeListener)(change -> {
             while(change.next())
@@ -98,11 +113,18 @@ public class Root extends VBox
 
         displayCompositor = new Compositor(display);
         displayCompositor.transitionTo(livingRoom);
-
         menuCompositor = new Compositor(menus);
-        menuCompositor.transitionTo(new BuyPets(this, user));
 
-        changeMessage("Hello " + user.getName() + "! You need to buy your first pet!");
+        if(isNew)
+        {
+            menuCompositor.transitionTo(new BuyPets(this, user));
+            changeMessage("Hello " + user.getName() + "! You need to buy your first pet!");
+        }
+        else
+        {
+            menuCompositor.transitionTo(new Home(this, user));
+            changeMessage("Welcome back " + user.getName() + "! What would you like to do?");
+        }
     }
 
 

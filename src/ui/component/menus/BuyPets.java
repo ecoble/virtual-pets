@@ -116,17 +116,21 @@ public class BuyPets extends VBox
 
         root.transitionMenu(new Home(root, user));
 
-        Optional<String> opName = collectInput("Enter Pet Name", "Name your pet!");
+        String name = "";
 
-        if(checkIfNull(opName))
+        while(true)
         {
-            return;
-        }
+            Optional<String> opName = collectInput("Enter Pet Name", "Name your pet!");
 
-        String name = opName.get();
+            if(!opName.isPresent())
+            {
+                root.transitionMenu(new Home(root, user));
+                root.changeMessage("What would you like to do now?");
+                return;
+            }
 
-        while(checkNameLength(name) || checkIfSameName(name))
-        {
+            name = opName.get();
+
             if(checkNameLength(name))
             {
                 root.changeMessage("That name is too long!");
@@ -135,15 +139,10 @@ public class BuyPets extends VBox
             {
                 root.changeMessage("You already have a pet with that name!");
             }
-
-            opName = collectInput("Enter Pet Name", "Name your pet!");
-
-            if(checkIfNull(opName))
+            else
             {
-                return;
+                break;
             }
-
-            name = opName.get();
         }
 
         view.getPet().setName(name);
@@ -184,17 +183,6 @@ public class BuyPets extends VBox
     private boolean checkNameLength(String name)
     {
         return name.length() > 30;
-    }
-
-    private boolean checkIfNull(Optional<String> name)
-    {
-        if(!name.isPresent())
-        {
-            root.transitionMenu(new Home(root, user));
-            root.changeMessage("What would you like to do now?");
-        }
-
-        return !name.isPresent();
     }
 
 }
