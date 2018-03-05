@@ -95,6 +95,21 @@ public class Gym extends HBox
     @FXML
     protected void goHome()
     {
+        switch(pet.getSpecies())
+        {
+            case "dog":
+                pet.addSkillPoints(5);
+                break;
+            case "cat":
+                pet.addSkillPoints(1);
+                break;
+            case "rabbit":
+                pet.addSkillPoints(2);
+                break;
+            case "bird":
+                pet.addSkillPoints(4);
+                break;
+        }
         root.changeMessage("You and " + pet.getName() + " returned home. What would you like to do now?");
         root.transitionDisplay(new LivingRoom(user));
         root.transitionMenu(new Home(root, user));

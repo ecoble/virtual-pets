@@ -14,6 +14,7 @@ public abstract class Pet
 {
     private String name;
     private String species;
+    private int skillPoints;
     private DoubleProperty hungerStat;
     private DoubleProperty thirstStat;
     private DoubleProperty hygieneStat;
@@ -24,6 +25,7 @@ public abstract class Pet
     public Pet(String species)
     {
         this.species = species;
+        this.skillPoints = 0;
         this.feedCallbacks = new ArrayList<Runnable>();
         this.waterCallbacks = new ArrayList<Runnable>();
         this.hungerStat = new SimpleDoubleProperty(100.0);
@@ -44,6 +46,16 @@ public abstract class Pet
     public void setName(String name)
     {
         this.name = name;
+    }
+
+    public int getSkillPoints()
+    {
+        return skillPoints;
+    }
+
+    public void addSkillPoints(int points)
+    {
+        skillPoints += points;
     }
 
     public abstract PetType getType();
