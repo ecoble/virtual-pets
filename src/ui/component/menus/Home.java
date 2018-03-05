@@ -58,16 +58,27 @@ public class Home extends VBox
     @FXML
     protected void quit()
     {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setInitialFileName(user.getName());
-        File file = fileChooser.showSaveDialog(quitButton.getScene().getWindow());
+        String fileName = null;
 
-        Stage stage = (Stage) quitButton.getScene().getWindow();
-        stage.close();
+        if(!root.getIsNew())
+        {
+            fileName = root.getFileName();
+            Stage stage = (Stage) quitButton.getScene().getWindow();
+            stage.close();
+        }
+        else
+        {
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setInitialFileName(user.getName());
+            fileName = fileChooser.showSaveDialog(quitButton.getScene().getWindow()).getName();
+
+            Stage stage = (Stage) quitButton.getScene().getWindow();
+            stage.close();
+        }
 
         try
         {
-            FileWriter fileWriter = new FileWriter(file.getName());
+            FileWriter fileWriter = new FileWriter(fileName);
             fileWriter.write(Json.to(user));
             fileWriter.flush();
         }

@@ -75,7 +75,7 @@ public class StartMenu extends VBox
             VBox root = new VBox();
 
             Compositor compositor = new Compositor(root);
-            Root rootMenu = new Root(user);
+            Root rootMenu = new Root(user, file.getName());
 
             compositor.transitionTo(rootMenu);
 

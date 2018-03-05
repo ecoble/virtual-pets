@@ -31,6 +31,8 @@ public class Root extends VBox
 
     private User user;
 
+    private String fileName;
+
     private boolean isNew;
 
 
@@ -49,9 +51,10 @@ public class Root extends VBox
         Component.load("Root.fxml", this);
     }
 
-    public Root(User user)
+    public Root(User user, String fileName)
     {
         this.user = user;
+        this.fileName = fileName;
         isNew = false;
         Component.load("Root.fxml", this);
     }
@@ -184,5 +187,15 @@ public class Root extends VBox
     private boolean checkNameLength(String name)
     {
         return name.length() > 30;
+    }
+
+    public boolean getIsNew()
+    {
+        return isNew;
+    }
+
+    public String getFileName()
+    {
+        return fileName;
     }
 }
