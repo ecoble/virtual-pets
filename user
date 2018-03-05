@@ -1,0 +1,1 @@
+{"name":"user","money":1850,"food":0,"pets":[{"type":"Dog","name":"dog","species":"dog","hungerStat":98.7849999999942,"thirstStat":87.84999999999378,"hygieneStat":99.87849999999597},{"type":"Cat","name":"cat","species":"cat","hungerStat":98.81499999999434,"thirstStat":88.14999999999394,"hygieneStat":99.88149999999607}],"landPetUnits":6,"birdUnits":0,"fishUnits":0}

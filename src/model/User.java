@@ -23,6 +23,10 @@ public class User{
     private int fishUnits;
     public final static int maxUnits = 8;
 
+    private User()
+    {
+        this("");
+    }
 
     public User(String name)
     {

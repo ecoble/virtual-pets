@@ -4,12 +4,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.Json;
 import model.User;
 import ui.component.Component;
 import ui.component.Root;
 
+import java.io.File;
 import java.io.FileWriter;
 
 /**
@@ -56,12 +58,16 @@ public class Home extends VBox
     @FXML
     protected void quit()
     {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setInitialFileName(user.getName());
+        File file = fileChooser.showSaveDialog(quitButton.getScene().getWindow());
+
         Stage stage = (Stage) quitButton.getScene().getWindow();
         stage.close();
 
         try
         {
-            FileWriter fileWriter = new FileWriter("./save.json");
+            FileWriter fileWriter = new FileWriter(file.getName());
             fileWriter.write(Json.to(user));
             fileWriter.flush();
         }

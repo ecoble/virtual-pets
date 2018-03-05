@@ -6,11 +6,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.Json;
 import model.User;
 import ui.Compositor;
 
+import java.io.File;
 import java.io.FileReader;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -56,14 +58,18 @@ public class StartMenu extends VBox
     @FXML
     protected void load()
     {
+        Stage stage = (Stage) start.getScene().getWindow();
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Pick your game file");
+        File file = fileChooser.showOpenDialog(stage);
+
+        stage.close();
+
         try
         {
-            byte[] encoded = Files.readAllBytes(Paths.get("./save.json"));
+            byte[] encoded = Files.readAllBytes(Paths.get(file.getName()));
             String json = new String(encoded, Charset.defaultCharset());
             User user = Json.from(json, User.class);
-
-            Stage stage = (Stage) start.getScene().getWindow();
-            stage.close();
 
             Stage primaryStage = new Stage();
             VBox root = new VBox();
