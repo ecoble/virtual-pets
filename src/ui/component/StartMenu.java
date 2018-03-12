@@ -61,6 +61,12 @@ public class StartMenu extends VBox
         Stage stage = (Stage) start.getScene().getWindow();
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Pick your game file");
+
+        if(fileChooser.showOpenDialog(stage) == null)
+        {
+            return;
+        }
+        
         File file = fileChooser.showOpenDialog(stage);
 
         stage.close();

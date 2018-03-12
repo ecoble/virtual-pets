@@ -60,6 +60,7 @@ public class Home extends VBox
     {
         String fileName = null;
 
+
         if(!root.getIsNew())
         {
             fileName = root.getFileName();
@@ -70,7 +71,14 @@ public class Home extends VBox
         {
             FileChooser fileChooser = new FileChooser();
             fileChooser.setInitialFileName(user.getName());
+
+            if(fileChooser.showSaveDialog(quitButton.getScene().getWindow()) == null)
+            {
+                return;
+            }
+
             fileName = fileChooser.showSaveDialog(quitButton.getScene().getWindow()).getName();
+
 
             Stage stage = (Stage) quitButton.getScene().getWindow();
             stage.close();
