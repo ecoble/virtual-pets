@@ -71,14 +71,14 @@ public class Home extends VBox
         {
             FileChooser fileChooser = new FileChooser();
             fileChooser.setInitialFileName(user.getName());
+            File file= fileChooser.showSaveDialog(quitButton.getScene().getWindow());
 
-            if(fileChooser.showSaveDialog(quitButton.getScene().getWindow()) == null)
+            if(file == null)
             {
                 return;
             }
 
-            fileName = fileChooser.showSaveDialog(quitButton.getScene().getWindow()).getName();
-
+            fileName = file.getName();
 
             Stage stage = (Stage) quitButton.getScene().getWindow();
             stage.close();

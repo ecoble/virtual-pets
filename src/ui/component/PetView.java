@@ -61,6 +61,10 @@ public class PetView extends VBox
     {
         GraphicsContext gc = canvas.getGraphicsContext2D();
 
+        drawStatMeter(gc, 0, (int) pet.getHungerStat(), Color.GREEN);
+        drawStatMeter(gc, 15, (int) pet.getThirstStat(), Color.BLUE);
+        drawStatMeter(gc, 30, (int) pet.getHygieneStat(), Color.SADDLEBROWN);
+
         gc.setFill(Color.CRIMSON);
         gc.fillText("Skill points: " + pet.getSkillPoints(), 0, 55);
 
