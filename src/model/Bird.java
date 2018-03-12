@@ -19,4 +19,9 @@ public class Bird extends Pet
     {
         return numUnits;
     }
+
+    public void train()
+    {
+        addSkillPoints(4);
+    }
 }

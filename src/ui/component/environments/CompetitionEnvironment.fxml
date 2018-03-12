@@ -1,0 +1,16 @@
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<fx:root type="javafx.scene.layout.StackPane" fx:id="stackPane" xmlns:fx="http://javafx.com/fxml/1">
+    <ImageView fx:id="backgroundImage" fitWidth="650" fitHeight="425">
+        <image>
+            <Image url="@../../../images/competition.jpg"/>
+        </image>
+    </ImageView>
+    <Group StackPane.alignment="BOTTOM_CENTER">
+        <HBox fx:id="petContainer">
+        </HBox>
+    </Group>
+</fx:root>

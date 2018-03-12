@@ -58,6 +58,8 @@ public abstract class Pet
         skillPoints += points;
     }
 
+    public abstract void train();
+
     public abstract PetType getType();
 
     public abstract int getNumUnits();
@@ -144,5 +146,7 @@ public abstract class Pet
     {
         return hygieneStat;
     }
+
+
 
 }

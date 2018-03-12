@@ -19,4 +19,9 @@ public class Cat extends Pet
     {
         return numUnits;
     }
+
+    public void train()
+    {
+        addSkillPoints(1);
+    }
 }

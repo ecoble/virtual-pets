@@ -8,6 +8,7 @@ import javafx.scene.layout.VBox;
 import model.Pet;
 import model.User;
 import ui.component.*;
+import ui.component.environments.CompetitionEnvironment;
 import ui.component.environments.GymEnvironment;
 import ui.component.environments.WalkEnvironment;
 import ui.component.environments.WashEnvironment;
@@ -81,4 +82,11 @@ public class Interact extends VBox
         root.transitionMenu(new Home(root, user));
         root.changeMessage("What would you like to do now?");
     }
+
+    @FXML
+    protected void compete(MouseEvent event)
+    {
+        root.transitionDisplay(new CompetitionEnvironment(root, pet));
+        root.transitionMenu(new Competition(root, user, pet));
+}
 }

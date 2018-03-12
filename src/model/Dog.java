@@ -19,4 +19,9 @@ public class Dog extends Pet
     {
         return numUnits;
     }
+
+    public void train()
+    {
+        addSkillPoints(5);
+    }
 }

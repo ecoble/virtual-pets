@@ -19,4 +19,6 @@ public class Fish extends Pet
     {
         return numUnits;
     }
+
+    public void train(){}
 }

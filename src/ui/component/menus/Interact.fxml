@@ -8,6 +8,7 @@
         <Button fx:id="walkButton" onMouseClicked="#walk" userData="You walked " text="Walk"/>
         <Button fx:id="washButton" onMouseClicked="#wash" userData="You washed " text="Wash"/>
         <Button fx:id="trainButton" onMouseClicked="#train" userData="You trained " text="Train"/>
+        <Button fx:id="competitionButton" onMouseClicked="#compete" userData="You entered a competition with " text="Go to competition"/>
         <padding>
             <Insets bottom="15.0"/>
         </padding>

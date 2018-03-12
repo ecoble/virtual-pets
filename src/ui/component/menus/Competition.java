@@ -9,54 +9,43 @@ import javafx.util.Duration;
 import model.Pet;
 import model.User;
 import ui.component.Component;
-import ui.component.environments.LivingRoom;
 import ui.component.Root;
+import ui.component.environments.LivingRoom;
 
-/**
- * Created by M5sp on 11/20/17.
- */
-public class Gym extends HBox
+public class Competition extends HBox
 {
     private Root root;
     private User user;
     private Pet pet;
 
     @FXML
-    private Button continueTraining;
+    private Button continueCompeting;
 
     @FXML
     private Button goHome;
 
-    public Gym (Root root, User user, Pet pet)
+    public Competition (Root root, User user, Pet pet)
     {
         this.root = root;
         this.user = user;
         this.pet = pet;
-        Component.load("Gym.fxml", this);
+        Component.load("Competition.fxml", this);
     }
 
     @FXML
     protected void initialize()
     {
-        switch(pet.getSpecies())
+
+        if(pet.getSpecies().equals("fish"))
         {
-            case "dog":
-                root.changeMessage("You're training " + pet.getName() + ". They are learning a lot! What would you like to do?");
-                break;
-            case "cat":
-                root.changeMessage("You're training " + pet.getName() + ", but they don't seem interested. What would you like to do?");
-                break;
-            case "rabbit":
-                root.changeMessage("You're training " + pet.getName() + ". What would you like to do?");
-                break;
-            case "fish":
-                root.changeMessage("You're training your fish, " + pet.getName() + ", but not for long!");
-                losePet();
-                break;
-            case "bird":
-                root.changeMessage("You're training your bird, " + pet.getName() + ". They are learning a lot! What would you like to do?");
-                break;
+            root.changeMessage("Your fish, " + pet.getName() + ", is competing, but not for long!");
+            losePet();
         }
+        else
+        {
+            root.changeMessage(pet.getName() + " is competing in a " + pet.getSpecies() + " competition!. What would you like to do?");
+        }
+
 
         pet.hungerStatProperty().addListener((change ->
         {
@@ -87,23 +76,36 @@ public class Gym extends HBox
     }
 
     @FXML
-    protected void continueTraining()
+    protected void continueCompeting()
     {
-        root.changeMessage("You and " + pet.getName() + " continue to train. What would you like to do?" );
+        root.changeMessage("You and " + pet.getName() + " continue to compete. What would you like to do?" );
     }
 
     @FXML
     protected void goHome()
     {
-        pet.train();
-        root.changeMessage("You and " + pet.getName() + " returned home. What would you like to do now?");
+        if(pet.getSkillPoints() > 100)
+        {
+            root.changeMessage("You and " + pet.getName() + " returned home. You won $250! What would you like to do now?");
+            user.addMoney(250);
+        }
+        else if (pet.getSkillPoints() >= 50 && pet.getSkillPoints() <= 100)
+        {
+            root.changeMessage("You and " + pet.getName() + " returned home. You won $100! What would you like to do now?");
+            user.addMoney(100);
+        }
+        else
+        {
+            root.changeMessage("You and " + pet.getName() + " returned home. You didn't win any money :( What would you like to do now?");
+        }
+
         root.transitionDisplay(new LivingRoom(user));
         root.transitionMenu(new Home(root, user));
     }
 
     private void losePet()
     {
-        continueTraining.setVisible(false);
+        continueCompeting.setVisible(false);
         goHome.setVisible(false);
 
         new Timeline(new KeyFrame(

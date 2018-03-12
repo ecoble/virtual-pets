@@ -1,0 +1,5 @@
+<?import javafx.scene.control.Button?>
+<fx:root type="javafx.scene.layout.HBox" xmlns:fx="http://javafx.com/fxml/1" fx:id="competeBox" visible="false" managed="false">
+    <Button fx:id="continueCompeting" onMouseClicked="#continueCompeting" text="Continue Competing"></Button>
+    <Button fx:id="goHome" onMouseClicked="#goHome" text="Go Home"></Button>
+</fx:root>

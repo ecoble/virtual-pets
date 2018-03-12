@@ -19,4 +19,9 @@ public class Rabbit extends Pet
     {
         return numUnits;
     }
+
+    public void train()
+    {
+        addSkillPoints(2);
+    }
 }
