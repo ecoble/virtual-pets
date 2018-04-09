@@ -31,7 +31,7 @@ public class LivingRoom extends StackPane
     private HBox landPetContainer;
 
     @FXML
-    private HBox birdContainer;
+    private StackPane birdContainer;
 
     @FXML
     private StackPane fishContainer;

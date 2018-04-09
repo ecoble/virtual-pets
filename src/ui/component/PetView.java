@@ -89,7 +89,25 @@ public class PetView extends VBox
         }
 
         pet.onFeed(() -> {
-            foodView.setImage(new Image("images/food.png"));
+
+            switch(pet.getSpecies())
+            {
+                case "dog":
+                    foodView.setImage(new Image("images/food.png"));
+                    break;
+                case "cat":
+                    foodView.setImage(new Image("images/catfood.png"));
+                    break;
+                case "rabbit":
+                    foodView.setImage(new Image("images/rabbitfood.png"));
+                    break;
+                case "fish":
+                    foodView.setImage(new Image("images/fishfood.png"));
+                    break;
+                case "bird":
+                    foodView.setImage(new Image("images/birdfood.png"));
+                    break;
+            }
 
             Timeline timeline = new Timeline(new KeyFrame(
                     Duration.millis(5000),
@@ -101,7 +119,15 @@ public class PetView extends VBox
         });
 
         pet.onGiveWater(() -> {
-            waterView.setImage(new Image("images/water.png"));
+
+            if(pet.getSpecies().equals("fish"))
+            {
+                waterView.setImage(new Image("images/splash.png"));
+            }
+            else
+            {
+                waterView.setImage(new Image("images/water.png"));
+            }
 
             Timeline timeline = new Timeline(new KeyFrame(
                     Duration.millis(5000),

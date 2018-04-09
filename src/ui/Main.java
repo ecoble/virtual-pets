@@ -22,14 +22,11 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        VBox startMenu = new VBox();
 
-        Compositor compositor = new Compositor(startMenu);
         StartMenu start = new StartMenu();
-        compositor.transitionTo(start);
 
         primaryStage.setTitle("Virtual Pets");
-        primaryStage.setScene(new Scene(startMenu, 300, 200));
+        primaryStage.setScene(new Scene(start, 300, 200));
         primaryStage.show();
     }
 

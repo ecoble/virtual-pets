@@ -5,7 +5,7 @@ import model.User;
 /**
  * Created by M5sp on 9/26/17.
  */
-public class FoodPurchaseCommand implements PurchaseCommand {
+public abstract class FoodPurchaseCommand implements PurchaseCommand {
     private int price;
 
     public FoodPurchaseCommand(int price)
@@ -18,8 +18,5 @@ public class FoodPurchaseCommand implements PurchaseCommand {
         return price;
     }
 
-    public void execute(User user)
-    {
-        user.addFood();
-    }
+    public abstract void execute(User user);
 }

@@ -1,9 +1,12 @@
 package model;
 
+import commands.FoodType;
+
 public class Bird extends Pet
 {
     public final static int price = 200;
-    public final static int numUnits = 2;
+    public final static int numUnits = 8;
+    public final static int foodPrice = 3;
 
     public Bird()
     {
@@ -13,6 +16,11 @@ public class Bird extends Pet
     public PetType getType()
     {
         return PetType.BIRD;
+    }
+
+    public FoodType getFoodType()
+    {
+        return FoodType.BIRD;
     }
 
     public int getNumUnits()

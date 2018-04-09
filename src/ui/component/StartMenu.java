@@ -39,20 +39,11 @@ public class StartMenu extends VBox
     protected void start()
     {
         Stage stage = (Stage) start.getScene().getWindow();
-        stage.close();
 
-        Stage primaryStage = new Stage();
-        VBox root = new VBox();
+        Root root = new Root();
 
-        Compositor compositor = new Compositor(root);
-        Root rootMenu = new Root();
-
-        compositor.transitionTo(rootMenu);
-
-        primaryStage.setTitle("Virtual Pets");
-        primaryStage.setScene(new Scene(root, 650, 650));
-        primaryStage.show();
-        primaryStage.setResizable(false);
+        stage.setScene(new Scene(root, 650, 650));
+        stage.setResizable(false);
     }
 
     @FXML

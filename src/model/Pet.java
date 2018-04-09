@@ -1,5 +1,6 @@
 package model;
 
+import commands.FoodType;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -20,7 +21,6 @@ public abstract class Pet
     private DoubleProperty hygieneStat;
     private transient List<Runnable> feedCallbacks;
     private transient List<Runnable> waterCallbacks;
-    final static public int foodPrice = 5;
 
     public Pet(String species)
     {
@@ -61,6 +61,8 @@ public abstract class Pet
     public abstract void train();
 
     public abstract PetType getType();
+
+    public abstract FoodType getFoodType();
 
     public abstract int getNumUnits();
 

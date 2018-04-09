@@ -1,5 +1,6 @@
 package ui.component.menus;
 
+import commands.FoodType;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
@@ -45,7 +46,12 @@ public class Home extends VBox
     protected void showStore(MouseEvent event)
     {
         root.transitionMenu(new Shop(root, user));
-        root.changeMessage("You have $" + user.getMoney() + ". \n Food Count: " + user.getFood());
+        root.changeMessage("You have $" + user.getMoney() + ". \nFood Inventory: \n"
+                + "Dog: " + user.getFood(FoodType.DOG) + " "
+                + "Cat: " + user.getFood(FoodType.CAT) + " "
+                + "Bird: " + user.getFood(FoodType.BIRD) + " "
+                + "Fish: " + user.getFood(FoodType.FISH) + " "
+                + "Rabbit: " + user.getFood(FoodType.RABBIT) + " ");
     }
 
     @FXML

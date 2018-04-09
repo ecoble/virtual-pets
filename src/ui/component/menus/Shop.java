@@ -1,13 +1,12 @@
 package ui.component.menus;
 
-import commands.FoodPurchaseCommand;
+import commands.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import model.Pet;
+import model.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
-import model.User;
 import ui.component.Component;
 import ui.component.Root;
 import ui.component.menus.Home;
@@ -21,7 +20,19 @@ public class Shop extends VBox
     private User user;
 
     @FXML
-    private Button buyFoodButton;
+    private Button dogFoodButton;
+
+    @FXML
+    private Button catFoodButton;
+
+    @FXML
+    private Button birdFoodButton;
+
+    @FXML
+    private Button fishFoodButton;
+
+    @FXML
+    private Button rabbitFoodButton;
 
     public Shop(Root root, User user)
     {
@@ -33,7 +44,11 @@ public class Shop extends VBox
     @FXML
     protected void initialize()
     {
-        buyFoodButton.setText("Buy Food: $" + Pet.foodPrice);
+        dogFoodButton.setText("Dog Food: $" + Dog.foodPrice);
+        catFoodButton.setText("Cat Food: $" + Cat.foodPrice);
+        birdFoodButton.setText("Bird Food: $" + Bird.foodPrice);
+        fishFoodButton.setText("Fish Food: $" + Fish.foodPrice);
+        rabbitFoodButton.setText("Rabbit Food: $" + Rabbit.foodPrice);
     }
 
     @FXML
@@ -44,18 +59,87 @@ public class Shop extends VBox
     }
 
     @FXML
-    protected void buyFood(MouseEvent event)
+    protected void buyDogFood()
     {
         root.transitionMenu(new Home(root, user));
 
-        if(!root.checkPrice(Pet.foodPrice, user))
+        if(!root.checkPrice(Dog.foodPrice, user))
         {
             return;
         }
 
-        FoodPurchaseCommand command = new FoodPurchaseCommand(Pet.foodPrice);
+        FoodPurchaseCommand command = new DogFoodPurchaseCommand();
         user.purchase(command);
 
-        root.changeMessage("You bought food! What would you like to do now?");
+
+        root.changeMessage("You bought dog food! What would you like to do now?");
+    }
+
+    @FXML
+    protected void buyCatFood()
+    {
+        root.transitionMenu(new Home(root, user));
+
+        if(!root.checkPrice(Cat.foodPrice, user))
+        {
+            return;
+        }
+
+        FoodPurchaseCommand command = new CatFoodPurchaseCommand();
+        user.purchase(command);
+
+
+        root.changeMessage("You bought cat food! What would you like to do now?");
+    }
+
+    @FXML
+    protected void buyBirdFood()
+    {
+        root.transitionMenu(new Home(root, user));
+
+        if(!root.checkPrice(Bird.foodPrice, user))
+        {
+            return;
+        }
+
+        FoodPurchaseCommand command = new BirdFoodPurchaseCommand();
+        user.purchase(command);
+
+
+        root.changeMessage("You bought bird food! What would you like to do now?");
+    }
+
+    @FXML
+    protected void buyFishFood()
+    {
+        root.transitionMenu(new Home(root, user));
+
+        if(!root.checkPrice(Fish.foodPrice, user))
+        {
+            return;
+        }
+
+        FoodPurchaseCommand command = new FishFoodPurchaseCommand();
+        user.purchase(command);
+
+
+        root.changeMessage("You bought fish food! What would you like to do now?");
+    }
+
+    @FXML
+    protected void buyRabbitFood()
+    {
+        root.transitionMenu(new Home(root, user));
+
+        if(!root.checkPrice(Rabbit.foodPrice, user))
+        {
+            return;
+        }
+
+        FoodPurchaseCommand command = new RabbitFoodPurchaseCommand();
+        user.purchase(command);
+
+
+        root.changeMessage("You bought rabbit food! What would you like to do now?");
     }
 }

@@ -12,7 +12,17 @@
         </image>
     </ImageView>
 
-    <HBox fx:id="birdContainer" StackPane.alignment="TOP_CENTER" maxHeight="130"></HBox>
+    <Group StackPane.alignment="TOP_LEFT">
+        <StackPane>
+            <StackPane fx:id="birdContainer" maxHeight="90">
+            </StackPane>
+            <ImageView fitHeight="160" preserveRatio="true">
+                <image>
+                    <Image url="@../../../images/birdcage.png"/>
+                </image>
+            </ImageView>
+        </StackPane>
+    </Group>
 
     <Group StackPane.alignment="BOTTOM_CENTER">
         <HBox fx:id="landPetContainer" alignment="BOTTOM_CENTER"></HBox>

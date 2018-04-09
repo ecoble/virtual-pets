@@ -55,9 +55,9 @@ public class Interact extends VBox
     @FXML
     protected void feed(MouseEvent event)
     {
-        if(user.getFood() > 0){
+        if(user.getFood(pet.getFoodType()) > 0){
             pet.feed();
-            user.withdrawFood();
+            user.withdrawFood(pet.getFoodType());
             root.changeMessage("You fed " + pet.getName() + "! What would you like to do now?");
         }
         else

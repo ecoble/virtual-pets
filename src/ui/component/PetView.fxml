@@ -6,7 +6,7 @@
 <?import javafx.geometry.Insets?>
 <fx:root fx:id="root" type="javafx.scene.layout.VBox" xmlns:fx="http://javafx.com/fxml/1" alignment="BOTTOM_CENTER">
     <Canvas fx:id="canvas" height="60" width="103" visible="false"/>
-    <StackPane alignment="BOTTOM_CENTER" >
+    <StackPane alignment="BOTTOM_CENTER">
         <ImageView fx:id="petView" preserveRatio="true" onMouseClicked="#toggleStats"/>
         <ImageView fx:id="foodView" fitHeight="50" preserveRatio="true"/>
         <ImageView fx:id="waterView" fitHeight="50" preserveRatio="true"/>

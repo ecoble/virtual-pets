@@ -1,5 +1,6 @@
 package model;
 
+import commands.FoodType;
 import commands.PurchaseCommand;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -16,7 +17,11 @@ public class User{
 
     private String name;
     private int money;
-    private int food;
+    private int dogFood;
+    private int catFood;
+    private int birdFood;
+    private int fishFood;
+    private int rabbitFood;
     private ObservableList<Pet> pets;
     private int landPetUnits;
     private int birdUnits;
@@ -48,19 +53,67 @@ public class User{
         return money;
     }
 
-    public int getFood()
+    public int getFood(FoodType food)
     {
-        return food;
+        switch(food)
+        {
+            case DOG:
+                return dogFood;
+            case CAT:
+                return catFood;
+            case BIRD:
+                return birdFood;
+            case FISH:
+                return fishFood;
+            case RABBIT:
+                return rabbitFood;
+        }
+
+        return -1;
     }
 
-    public void addFood()
+    public void addFood(FoodType food)
     {
-        food++;
+        switch(food)
+        {
+            case DOG:
+                dogFood++;
+                break;
+            case CAT:
+                catFood++;
+                break;
+            case BIRD:
+                birdFood++;
+                break;
+            case FISH:
+                fishFood++;
+                break;
+            case RABBIT:
+                rabbitFood++;
+                break;
+        }
     }
 
-    public void withdrawFood()
+    public void withdrawFood(FoodType food)
     {
-        food--;
+        switch(food)
+        {
+            case DOG:
+                dogFood--;
+                break;
+            case CAT:
+                catFood--;
+                break;
+            case BIRD:
+                birdFood--;
+                break;
+            case FISH:
+                fishFood--;
+                break;
+            case RABBIT:
+                rabbitFood--;
+                break;
+        }
     }
 
     public void withdrawMoney(int lostMoney)
@@ -178,7 +231,7 @@ public class User{
 
             if(!pet.getSpecies().equals("fish"))
             {
-                pet.depleteThirst(0.01);
+                pet.depleteThirst(0.0015);
                 //hygiene depletion must be a divisor of 100
                 pet.depleteHygiene(0.0001);
             }

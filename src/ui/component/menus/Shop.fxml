@@ -4,7 +4,11 @@
 <?import javafx.geometry.Insets?>
 <fx:root type="javafx.scene.layout.VBox" xmlns:fx="http://javafx.com/fxml/1" fx:id="shopBox" visible="false" managed="false">
     <HBox>
-        <Button fx:id="buyFoodButton" onMouseClicked="#buyFood" text="Buy food"/>
+        <Button fx:id="dogFoodButton" onMouseClicked="#buyDogFood"/>
+        <Button fx:id="catFoodButton" onMouseClicked="#buyCatFood" text="Cat Food"/>
+        <Button fx:id="birdFoodButton" onMouseClicked="#buyBirdFood" text="Bird Food"/>
+        <Button fx:id="fishFoodButton" onMouseClicked="#buyFishFood" text="Fish Food"/>
+        <Button fx:id="rabbitFoodButton" onMouseClicked="#buyRabbitFood" text="Rabbit Food"/>
         <padding>
             <Insets bottom="15.0"/>
         </padding>
