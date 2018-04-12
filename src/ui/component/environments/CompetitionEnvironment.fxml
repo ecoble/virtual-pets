@@ -9,6 +9,11 @@
             <Image url="@../../../images/competition.jpg"/>
         </image>
     </ImageView>
+    <ImageView fx:id="frisbeeBox" StackPane.alignment="CENTER_RIGHT" fitHeight="50" fitWidth="60">
+        <image>
+            <Image url="@../../../images/frisbee.png"/>
+        </image>
+    </ImageView>
     <Group StackPane.alignment="BOTTOM_CENTER">
         <HBox fx:id="petContainer">
         </HBox>

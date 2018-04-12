@@ -12,16 +12,14 @@ import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class User{
 
     private String name;
     private int money;
-    private int dogFood;
-    private int catFood;
-    private int birdFood;
-    private int fishFood;
-    private int rabbitFood;
+    private Map<FoodType, Integer> foodInventory = new HashMap<FoodType, Integer>();
     private ObservableList<Pet> pets;
     private int landPetUnits;
     private int birdUnits;
@@ -55,65 +53,36 @@ public class User{
 
     public int getFood(FoodType food)
     {
-        switch(food)
+        if(foodInventory.containsKey(food))
         {
-            case DOG:
-                return dogFood;
-            case CAT:
-                return catFood;
-            case BIRD:
-                return birdFood;
-            case FISH:
-                return fishFood;
-            case RABBIT:
-                return rabbitFood;
+            return foodInventory.get(food);
         }
-
-        return -1;
+        else
+        {
+            return 0;
+        }
     }
 
     public void addFood(FoodType food)
     {
-        switch(food)
+        if(foodInventory.containsKey(food))
         {
-            case DOG:
-                dogFood++;
-                break;
-            case CAT:
-                catFood++;
-                break;
-            case BIRD:
-                birdFood++;
-                break;
-            case FISH:
-                fishFood++;
-                break;
-            case RABBIT:
-                rabbitFood++;
-                break;
+            foodInventory.put(food, foodInventory.get(food) + 1);
+        }
+        else
+        {
+            foodInventory.put(food, 1);
         }
     }
 
     public void withdrawFood(FoodType food)
     {
-        switch(food)
+        if(foodInventory.getOrDefault(food, 0) <= 0)
         {
-            case DOG:
-                dogFood--;
-                break;
-            case CAT:
-                catFood--;
-                break;
-            case BIRD:
-                birdFood--;
-                break;
-            case FISH:
-                fishFood--;
-                break;
-            case RABBIT:
-                rabbitFood--;
-                break;
+            throw new IllegalStateException();
         }
+
+        foodInventory.put(food, foodInventory.get(food) - 1);
     }
 
     public void withdrawMoney(int lostMoney)
