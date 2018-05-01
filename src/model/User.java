@@ -53,26 +53,12 @@ public class User{
 
     public int getFood(FoodType food)
     {
-        if(foodInventory.containsKey(food))
-        {
-            return foodInventory.get(food);
-        }
-        else
-        {
-            return 0;
-        }
+        return foodInventory.getOrDefault(food, 0);
     }
 
     public void addFood(FoodType food)
     {
-        if(foodInventory.containsKey(food))
-        {
-            foodInventory.put(food, foodInventory.get(food) + 1);
-        }
-        else
-        {
-            foodInventory.put(food, 1);
-        }
+        foodInventory.put(food, foodInventory.getOrDefault(food, 0) + 1);
     }
 
     public void withdrawFood(FoodType food)

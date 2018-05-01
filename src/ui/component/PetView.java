@@ -28,6 +28,7 @@ public class PetView extends VBox
     private Pet pet;
     private String imageUrl;
     private int imageSize;
+    private boolean doNotToggle;
 
     @FXML
     private ImageView petView;
@@ -47,11 +48,14 @@ public class PetView extends VBox
     @FXML
     private VBox root;
 
+
+
     public PetView(Pet pet, String imageUrl, int imageSize)
     {
         this.pet = pet;
         this.imageUrl = imageUrl;
         this.imageSize = imageSize;
+        doNotToggle = false;
 
         Component.load("PetView.fxml", this);
     }
@@ -141,9 +145,19 @@ public class PetView extends VBox
 
     }
 
+    public void setDoNotToggle(boolean bool)
+    {
+        doNotToggle = bool;
+    }
+
     @FXML
     protected void toggleStats(MouseEvent event)
     {
+        if(doNotToggle)
+        {
+            return;
+        }
+
         if(canvas.isVisible())
         {
             canvas.setVisible(false);
@@ -179,4 +193,21 @@ public class PetView extends VBox
     {
         return imageSize;
     }
+
+    public double getCanvasHeight()
+    {
+        return canvas.getHeight();
+    }
+
+    public ImageView getPetView()
+    {
+        return petView;
+    }
+
+    public double getRatio()
+    {
+        return imageSize / petView.getImage().getWidth();
+    }
+
+
 }

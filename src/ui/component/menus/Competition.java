@@ -1,6 +1,7 @@
 package ui.component.menus;
 
 import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,6 +11,7 @@ import model.Pet;
 import model.User;
 import ui.component.Component;
 import ui.component.Root;
+import ui.component.environments.CompetitionEnvironment;
 import ui.component.environments.LivingRoom;
 
 public class Competition extends HBox
@@ -17,18 +19,26 @@ public class Competition extends HBox
     private Root root;
     private User user;
     private Pet pet;
+    private CompetitionEnvironment ce;
+    private int count;
+    private boolean isFrisbeeMoving;
 
     @FXML
-    private Button continueCompeting;
+    private Button start;
 
     @FXML
     private Button goHome;
 
-    public Competition (Root root, User user, Pet pet)
+    @FXML
+    private Button throwFrisbee;
+
+    public Competition (Root root, User user, Pet pet, CompetitionEnvironment ce)
     {
         this.root = root;
         this.user = user;
         this.pet = pet;
+        this.ce = ce;
+        isFrisbeeMoving = false;
         Component.load("Competition.fxml", this);
     }
 
@@ -43,7 +53,7 @@ public class Competition extends HBox
         }
         else
         {
-            root.changeMessage(pet.getName() + " is competing in a " + pet.getSpecies() + " competition!. What would you like to do?");
+            root.changeMessage("Click on " + pet.getName() + " to jump and catch the frisbee. Don't click too early or too late! You have 10 tries. ");
         }
 
 
@@ -73,23 +83,28 @@ public class Competition extends HBox
                 root.changeMessage(pet.getName() + " is very dirty! You should give them a bath!");
             }
         }));
-    }
 
-    @FXML
-    protected void continueCompeting()
-    {
-        root.changeMessage("You and " + pet.getName() + " continue to compete. What would you like to do?" );
+        ce.isFrisbeeMoving().addListener((change -> {
+            if(ce.getIsFrisbeeMoving())
+            {
+                throwFrisbee.setDisable(true);
+            }
+            else
+            {
+                throwFrisbee.setDisable(false);
+            }
+        }));
     }
 
     @FXML
     protected void goHome()
     {
-        if(pet.getSkillPoints() > 100)
+        if(ce.getNumCaught() > 7)
         {
             root.changeMessage("You and " + pet.getName() + " returned home. You won $250! What would you like to do now?");
             user.addMoney(250);
         }
-        else if (pet.getSkillPoints() >= 50 && pet.getSkillPoints() <= 100)
+        else if (ce.getNumCaught() >= 4 && ce.getNumCaught() <= 7)
         {
             root.changeMessage("You and " + pet.getName() + " returned home. You won $100! What would you like to do now?");
             user.addMoney(100);
@@ -105,7 +120,6 @@ public class Competition extends HBox
 
     private void losePet()
     {
-        continueCompeting.setVisible(false);
         goHome.setVisible(false);
 
         new Timeline(new KeyFrame(
@@ -123,4 +137,39 @@ public class Competition extends HBox
         user.removePet(pet);
 
     }
+
+    @FXML
+    protected void start()
+    {
+        ce.throwFrisbee();
+        count++;
+
+        start.setVisible(false);
+        start.setManaged(false);
+
+        throwFrisbee.setVisible(true);
+        throwFrisbee.setManaged(true);
+    }
+
+    @FXML
+    protected void throwFrisbee()
+    {
+
+        ce.throwFrisbee();
+        count++;
+
+        if(count == 10)
+        {
+            throwFrisbee.setVisible(false);
+            throwFrisbee.setManaged(false);
+            Timeline timeline = new Timeline(new KeyFrame(Duration.millis(2500),
+                    ae -> root.changeMessage("The competition is over! " + pet.getName() + " caught " + ce.getNumCaught() + " frisbees!")));
+
+            timeline.play();
+        }
+
+
+
+    }
+
 }
