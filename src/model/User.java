@@ -24,7 +24,7 @@ public class User{
     private int landPetUnits;
     private int birdUnits;
     private int fishUnits;
-    public final static int maxUnits = 8;
+    public final static int maxUnits = 7;
 
     private User()
     {

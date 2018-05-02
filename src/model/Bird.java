@@ -5,7 +5,7 @@ import commands.FoodType;
 public class Bird extends Pet
 {
     public final static int price = 200;
-    public final static int numUnits = 8;
+    public final static int numUnits = 7;
     public final static int foodPrice = 3;
 
     public Bird()

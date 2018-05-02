@@ -116,7 +116,7 @@ public class CompetitionEnvironment extends StackPane
                     view.getPetView().setImage(new Image("images/dogMissFrisbee.png"));
                     view.getPetView().setFitWidth(175);
                 }
-                
+
                 frisbeeBox.setVisible(false);
             }
             else if(frisbeeBox.getLayoutX() < -60)
