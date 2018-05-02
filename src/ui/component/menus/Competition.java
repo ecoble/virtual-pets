@@ -85,14 +85,7 @@ public class Competition extends HBox
         }));
 
         ce.isFrisbeeMoving().addListener((change -> {
-            if(ce.getIsFrisbeeMoving())
-            {
-                throwFrisbee.setDisable(true);
-            }
-            else
-            {
-                throwFrisbee.setDisable(false);
-            }
+            throwFrisbee.setDisable(ce.getIsFrisbeeMoving());
         }));
     }
 

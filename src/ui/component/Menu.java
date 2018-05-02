@@ -16,9 +16,9 @@ public class Menu extends VBox
     @FXML protected Button backButton;
 
     private MenuItem backItem;
-    private List<MenuItem> items;
+    private List<Button> items;
 
-    public Menu(MenuItem backItem, MenuItem... items)
+    public Menu(MenuItem backItem, Button... items)
     {
         this.backItem = backItem;
         this.items = Arrays.asList(items);
@@ -29,12 +29,7 @@ public class Menu extends VBox
     @FXML
     protected void initialize()
     {
-        buttonRow.getChildren().addAll(items.stream().map(item -> {
-            Button button = new Button(item.label());
-            button.setOnAction(item.onActionHandler());
-
-            return button;
-        }).collect(Collectors.toList()));
+        buttonRow.getChildren().addAll(items);
 
         backButton.setText(backItem.label());
         backButton.setOnAction(backItem.onActionHandler());

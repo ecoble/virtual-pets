@@ -158,14 +158,7 @@ public class PetView extends VBox
             return;
         }
 
-        if(canvas.isVisible())
-        {
-            canvas.setVisible(false);
-        }
-        else if(!canvas.isVisible())
-        {
-            canvas.setVisible(true);
-        }
+        canvas.setVisible(!canvas.isVisible());
     }
 
     private void drawStatMeter(GraphicsContext gc, int y, int stat, Color color)

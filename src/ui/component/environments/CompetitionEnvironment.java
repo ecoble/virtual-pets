@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.util.Duration;
@@ -41,15 +42,16 @@ public class CompetitionEnvironment extends VBox
     @FXML
     private AnchorPane box;
 
+    private Button start;
+    private Button throwFrisbee;
+
     public CompetitionEnvironment(Root root, Pet pet)
     {
         this.root = root;
         this.pet = pet;
-        menu.getChildren().add(new Menu(
-                new MenuItem("Go Home", e -> { goHome(); }),
-                new MenuItem("Start Competition", e -> { start(); }),
-                new MenuItem("Throw Frisbee Again", e -> { throwFrisbee(); })
-        ));
+        start = new Button("Start Competition");
+        throwFrisbee = new Button("Throw Frisbee Again");
+
         isFrisbeeMoving = new SimpleBooleanProperty(false);
         Component.load("CompetitionEnvironment.fxml", this);
     }
@@ -93,6 +95,12 @@ public class CompetitionEnvironment extends VBox
 
         petContainer.getChildren().add(view);
         view.setDoNotToggle(true);
+
+        menu.getChildren().add(new Menu(
+                new MenuItem("Go Home", e -> { goHome(); }), start, throwFrisbee));
+
+        start.setOnAction(e -> start());
+        throwFrisbee.setOnAction(e -> throwFrisbee());
     }
 
     protected void start()
@@ -100,13 +108,13 @@ public class CompetitionEnvironment extends VBox
         throwFrisbee();
         count++;
 
-        //menu.lookup("start");
-//
-        //start.setVisible(false);
-        //start.setManaged(false);
-//
-        //throwFrisbee.setVisible(true);
-        //throwFrisbee.setManaged(true);
+        menu.lookup("start");
+
+        start.setVisible(false);
+        start.setManaged(false);
+
+        throwFrisbee.setVisible(true);
+        throwFrisbee.setManaged(true);
     }
 
     protected void goHome()
