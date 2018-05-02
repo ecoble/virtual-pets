@@ -9,26 +9,28 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.*;
 import javafx.util.Duration;
 import model.Pet;
-import ui.component.Component;
-import ui.component.PetView;
-import ui.component.Root;
+import model.User;
+import ui.component.*;
+import ui.component.menus.Home;
 
 import javax.swing.text.html.ImageView;
 import java.util.Random;
 
-public class CompetitionEnvironment extends StackPane
+public class CompetitionEnvironment extends VBox
 {
     private Root root;
     private Pet pet;
+    private User user;
     private BooleanProperty isFrisbeeMoving;
     private PetView view;
+    private int count;
     private int numCaught;
+
+    @FXML
+    private Pane menu;
 
     @FXML
     private HBox petContainer;
@@ -43,6 +45,11 @@ public class CompetitionEnvironment extends StackPane
     {
         this.root = root;
         this.pet = pet;
+        menu.getChildren().add(new Menu(
+                new MenuItem("Go Home", e -> { goHome(); }),
+                new MenuItem("Start Competition", e -> { start(); }),
+                new MenuItem("Throw Frisbee Again", e -> { throwFrisbee(); })
+        ));
         isFrisbeeMoving = new SimpleBooleanProperty(false);
         Component.load("CompetitionEnvironment.fxml", this);
     }
@@ -86,6 +93,41 @@ public class CompetitionEnvironment extends StackPane
 
         petContainer.getChildren().add(view);
         view.setDoNotToggle(true);
+    }
+
+    protected void start()
+    {
+        throwFrisbee();
+        count++;
+
+        //menu.lookup("start");
+//
+        //start.setVisible(false);
+        //start.setManaged(false);
+//
+        //throwFrisbee.setVisible(true);
+        //throwFrisbee.setManaged(true);
+    }
+
+    protected void goHome()
+    {
+        if(getNumCaught() > 7)
+        {
+            root.changeMessage("You and " + pet.getName() + " returned home. You won $250! What would you like to do now?");
+            user.addMoney(250);
+        }
+        else if (getNumCaught() >= 4 && getNumCaught() <= 7)
+        {
+            root.changeMessage("You and " + pet.getName() + " returned home. You won $100! What would you like to do now?");
+            user.addMoney(100);
+        }
+        else
+        {
+            root.changeMessage("You and " + pet.getName() + " returned home. You didn't win any money :( What would you like to do now?");
+        }
+
+        root.transitionDisplay(new LivingRoom(user));
+        root.transitionMenu(new Home(root, user));
     }
 
     public void throwFrisbee()

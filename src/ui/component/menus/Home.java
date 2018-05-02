@@ -4,12 +4,14 @@ import commands.FoodType;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.Json;
 import model.User;
 import ui.component.Component;
+import ui.component.Menu;
 import ui.component.Root;
 
 import java.io.File;
@@ -100,8 +102,6 @@ public class Home extends VBox
         {
             e.printStackTrace();
         }
-
-
     }
 
 }

@@ -4,21 +4,31 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.AnchorPane?>
-<fx:root type="javafx.scene.layout.StackPane" fx:id="stackPane" xmlns:fx="http://javafx.com/fxml/1">
-    <ImageView fx:id="backgroundImage" fitWidth="650" fitHeight="425">
-        <image>
-            <Image url="@../../../images/competition.jpg"/>
-        </image>
-    </ImageView>
-    <AnchorPane fx:id="frisbeeBox" managed="false" layoutX="590.0" layoutY="170.0">
-        <ImageView fitHeight="50" fitWidth="60">
+<fx:root type="javafx.scene.layout.VBox" fx:id="stackPane" xmlns:fx="http://javafx.com/fxml/1">
+    <StackPane>
+
+        <ImageView fx:id="backgroundImage" fitWidth="650" fitHeight="425">
             <image>
-                <Image url="@../../../images/frisbee.png"/>
+                <Image url="@../../../images/competition.jpg"/>
             </image>
         </ImageView>
-    </AnchorPane>
-    <AnchorPane fx:id="box" managed="false" layoutY="230.0" layoutX="0.0" onMouseClicked="#jump">
-        <HBox fx:id="petContainer">
-        </HBox>
-    </AnchorPane>
+
+        <AnchorPane fx:id="frisbeeBox" managed="false" layoutX="590.0" layoutY="170.0">
+            <ImageView fitHeight="50" fitWidth="60">
+                <image>
+                    <Image url="@../../../images/frisbee.png"/>
+                </image>
+            </ImageView>
+        </AnchorPane>
+
+        <AnchorPane fx:id="box" managed="false" layoutY="230.0" layoutX="0.0" onMouseClicked="#jump">
+            <HBox fx:id="petContainer">
+            </HBox>
+        </AnchorPane>
+
+    </StackPane>
+
+    <HBox fx:id="menu">
+    </HBox>
+
 </fx:root>
