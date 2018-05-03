@@ -3,18 +3,36 @@
 <?import javafx.scene.Group?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
-<fx:root type="javafx.scene.layout.StackPane" fx:id="stackPane" xmlns:fx="http://javafx.com/fxml/1">
-    <ImageView fx:id="backgroundImage" fitWidth="650" fitHeight="425">
-        <image >
-            <Image url="@../../../images/gym.jpg" />
-        </image>
-    </ImageView>
-    <Group>
-        <HBox fx:id="birdContainer" StackPane.alignment="TOP_CENTER">
-        </HBox>
-    </Group>
-    <Group StackPane.alignment="BOTTOM_CENTER">
-        <HBox fx:id="petContainer">
-        </HBox>
-    </Group>
+<?import javafx.scene.text.Text?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<fx:root type="javafx.scene.layout.VBox" fx:id="stackPane" xmlns:fx="http://javafx.com/fxml/1">
+    <StackPane>
+        <ImageView fx:id="backgroundImage" fitWidth="650" fitHeight="425">
+            <image >
+                <Image url="@../../../images/gym.jpg" />
+            </image>
+        </ImageView>
+        <Group>
+            <HBox fx:id="birdContainer" StackPane.alignment="TOP_CENTER">
+            </HBox>
+        </Group>
+        <Group StackPane.alignment="BOTTOM_CENTER">
+            <HBox fx:id="petContainer">
+            </HBox>
+        </Group>
+    </StackPane>
+
+    <StackPane>
+        <Text fx:id="userMessage"/>
+        <padding>
+            <Insets top="20.0" bottom="40.0"/>
+        </padding>
+    </StackPane>
+
+    <HBox fx:id="menu" alignment="center">
+        <Button fx:id="continueTraining" onMouseClicked="#continueTraining" text="Continue Training"></Button>
+        <Button fx:id="goHome" onMouseClicked="#goHome" text="Go Home"></Button>
+    </HBox>
+
 </fx:root>

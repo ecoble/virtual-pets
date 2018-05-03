@@ -4,9 +4,11 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <fx:root type="javafx.scene.layout.VBox" fx:id="stackPane" xmlns:fx="http://javafx.com/fxml/1">
     <StackPane>
-
         <ImageView fx:id="backgroundImage" fitWidth="650" fitHeight="425">
             <image>
                 <Image url="@../../../images/competition.jpg"/>
@@ -25,10 +27,19 @@
             <HBox fx:id="petContainer">
             </HBox>
         </AnchorPane>
+    </StackPane>
 
+    <StackPane>
+        <Text fx:id="userMessage"/>
+        <padding>
+            <Insets top="20.0" bottom="40.0"/>
+        </padding>
     </StackPane>
 
     <HBox fx:id="menu" alignment="center">
+        <Button fx:id="start" onMouseClicked="#start" text="Start Competition"></Button>
+        <Button fx:id="throwFrisbee" onMouseClicked="#throwFrisbee" text="Throw Frisbee Again" visible="false" managed="false"></Button>
+        <Button fx:id="goHome" onMouseClicked="#goHome" text="Go Home"></Button>
     </HBox>
 
 </fx:root>

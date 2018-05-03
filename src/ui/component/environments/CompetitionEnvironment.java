@@ -11,6 +11,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 import model.Pet;
 import model.User;
@@ -27,11 +28,11 @@ public class CompetitionEnvironment extends VBox
     private User user;
     private BooleanProperty isFrisbeeMoving;
     private PetView view;
-    private int count;
+    private int count = 0;
     private int numCaught;
 
     @FXML
-    private Pane menu;
+    private HBox menu;
 
     @FXML
     private HBox petContainer;
@@ -42,16 +43,23 @@ public class CompetitionEnvironment extends VBox
     @FXML
     private AnchorPane box;
 
+    @FXML
     private Button start;
+
+    @FXML
     private Button throwFrisbee;
+
+    @FXML
+    private Button goHome;
+
+    @FXML
+    private Text userMessage;
 
     public CompetitionEnvironment(Root root, User user, Pet pet)
     {
         this.root = root;
         this.user = user;
         this.pet = pet;
-        start = new Button("Start Competition");
-        throwFrisbee = new Button("Throw Frisbee Again");
 
         isFrisbeeMoving = new SimpleBooleanProperty(false);
         Component.load("CompetitionEnvironment.fxml", this);
@@ -77,12 +85,12 @@ public class CompetitionEnvironment extends VBox
     {
         if(pet.getSpecies().equals("fish"))
         {
-            root.changeMessage("Your fish, " + pet.getName() + ", is competing, but not for long!");
+            userMessage.setText("Your fish, " + pet.getName() + ", is competing, but not for long!");
             losePet();
         }
         else
         {
-            root.changeMessage("Click on " + pet.getName() + " to jump and catch the frisbee. Don't click too early or too late! You have 10 tries. ");
+            userMessage.setText("Click on " + pet.getName() + " to jump and catch the frisbee. Don't click too early or too late! You have 10 tries. ");
         }
 
 
@@ -109,7 +117,7 @@ public class CompetitionEnvironment extends VBox
         {
             if (pet.getHygieneStat() == 0)
             {
-                root.changeMessage(pet.getName() + " is very dirty! You should give them a bath!");
+                userMessage.setText(pet.getName() + " is very dirty! You should give them a bath!");
             }
         }));
 
@@ -134,18 +142,12 @@ public class CompetitionEnvironment extends VBox
 
         petContainer.getChildren().add(view);
         view.setDoNotToggle(true);
-
-        menu.getChildren().add(new Menu(
-                new MenuItem("Go Home", e -> { goHome(); }), start, throwFrisbee));
-
-        start.setOnAction(e -> start());
-        throwFrisbee.setOnAction(e -> throwFrisbee());
     }
 
+    @FXML
     protected void start()
     {
         throwFrisbee();
-        count++;
 
         menu.lookup("start");
 
@@ -158,7 +160,7 @@ public class CompetitionEnvironment extends VBox
 
     private void losePet()
     {
-        //goHome.setVisible(false);
+        goHome.setVisible(false);
 
         new Timeline(new KeyFrame(
                 Duration.millis(3000),
@@ -176,6 +178,7 @@ public class CompetitionEnvironment extends VBox
 
     }
 
+    @FXML
     protected void goHome()
     {
         if(getNumCaught() > 7)
@@ -197,6 +200,7 @@ public class CompetitionEnvironment extends VBox
         root.transitionMenu(new Home(root, user));
     }
 
+    @FXML
     public void throwFrisbee()
     {
         count++;
@@ -229,11 +233,19 @@ public class CompetitionEnvironment extends VBox
                 }
 
                 frisbeeBox.setVisible(false);
+                if(count == 10)
+                {
+                    userMessage.setText("The competition is over! " + pet.getName() + " caught " + numCaught + " frisbees!");
+                }
             }
             else if(frisbeeBox.getLayoutX() < -60)
             {
                 throwFrisbee.setDisable(false);
                 throwF.stop();
+                if(count == 10)
+                {
+                    userMessage.setText("The competition is over! " + pet.getName() + " caught " + numCaught + " frisbees!");
+                }
             }
         }));
 
@@ -244,7 +256,6 @@ public class CompetitionEnvironment extends VBox
         {
             throwFrisbee.setVisible(false);
             throwFrisbee.setManaged(false);
-            root.changeMessage("The competition is over! " + pet.getName() + " caught " + numCaught + " frisbees!");
         }
     }
 

@@ -48,8 +48,9 @@ public class Interact extends VBox
     @FXML
     protected void train(MouseEvent event)
     {
-        root.transitionDisplay(new GymEnvironment(root, pet));
-        root.transitionMenu(new Gym(root, user, pet));
+        root.clearMenu();
+        root.transitionDisplay(new GymEnvironment(root, user, pet));
+        //root.transitionMenu(new Gym(root, user, pet));
     }
 
     @FXML
