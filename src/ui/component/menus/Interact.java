@@ -86,8 +86,10 @@ public class Interact extends VBox
     @FXML
     protected void compete(MouseEvent event)
     {
-        CompetitionEnvironment ce = new CompetitionEnvironment(root, pet);
+        root.clearMenu();
+        CompetitionEnvironment ce = new CompetitionEnvironment(root, user, pet);
         root.transitionDisplay(ce);
-        root.transitionMenu(new Competition(root, user, pet, ce));
+        //root.transitionMenu(new Competition(root, user, pet, ce));
+
 }
 }

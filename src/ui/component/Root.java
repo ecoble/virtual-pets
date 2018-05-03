@@ -198,4 +198,9 @@ public class Root extends VBox
     {
         return fileName;
     }
+
+    public void clearMenu()
+    {
+        menus.getChildren().clear();
+    }
 }

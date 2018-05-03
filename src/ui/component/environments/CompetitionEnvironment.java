@@ -45,9 +45,10 @@ public class CompetitionEnvironment extends VBox
     private Button start;
     private Button throwFrisbee;
 
-    public CompetitionEnvironment(Root root, Pet pet)
+    public CompetitionEnvironment(Root root, User user, Pet pet)
     {
         this.root = root;
+        this.user = user;
         this.pet = pet;
         start = new Button("Start Competition");
         throwFrisbee = new Button("Throw Frisbee Again");
@@ -74,6 +75,44 @@ public class CompetitionEnvironment extends VBox
     @FXML
     protected void initialize()
     {
+        if(pet.getSpecies().equals("fish"))
+        {
+            root.changeMessage("Your fish, " + pet.getName() + ", is competing, but not for long!");
+            losePet();
+        }
+        else
+        {
+            root.changeMessage("Click on " + pet.getName() + " to jump and catch the frisbee. Don't click too early or too late! You have 10 tries. ");
+        }
+
+
+        pet.hungerStatProperty().addListener((change ->
+        {
+            if (pet.getHungerStat() <= 0)
+            {
+                user.removePet(pet);
+                root.transitionDisplay(new LivingRoom(user));
+                root.transitionMenu(new Home(root, user));
+            }
+        }));
+
+        pet.thirstStatProperty().addListener((change -> {
+            if(pet.getThirstStat() <= 0)
+            {
+                user.removePet(pet);
+                root.transitionDisplay(new LivingRoom(user));
+                root.transitionMenu(new Home(root, user));
+            }
+        }));
+
+        pet.hygieneStatProperty().addListener((changeStat ->
+        {
+            if (pet.getHygieneStat() == 0)
+            {
+                root.changeMessage(pet.getName() + " is very dirty! You should give them a bath!");
+            }
+        }));
+
         switch (pet.getSpecies())
         {
             case "dog":
@@ -117,6 +156,26 @@ public class CompetitionEnvironment extends VBox
         throwFrisbee.setManaged(true);
     }
 
+    private void losePet()
+    {
+        //goHome.setVisible(false);
+
+        new Timeline(new KeyFrame(
+                Duration.millis(3000),
+                ae -> {
+                    root.transitionMenu(new Home(root,user));
+                    root.transitionDisplay(new LivingRoom(user));
+                    if(pet.getSpecies().equals("fish"))
+                    {
+                        root.changeMessage(pet.getName() + " died due to lack of water.");
+                    }
+                })
+        ).play();
+
+        user.removePet(pet);
+
+    }
+
     protected void goHome()
     {
         if(getNumCaught() > 7)
@@ -140,20 +199,22 @@ public class CompetitionEnvironment extends VBox
 
     public void throwFrisbee()
     {
+        count++;
         frisbeeBox.setVisible(true);
-        isFrisbeeMoving.setValue(true);
+        throwFrisbee.setDisable(true);
 
         frisbeeBox.setLayoutX(590.0);
 
-        Timeline throwFrisbee = new Timeline();
-        throwFrisbee.getKeyFrames().add(new KeyFrame(Duration.millis(3), ae ->
+        Timeline throwF = new Timeline();
+        throwF.getKeyFrames().add(new KeyFrame(Duration.millis(3), ae ->
         {
+
             frisbeeBox.setLayoutX(frisbeeBox.getLayoutX() - 1);
 
             if(isColliding())
             {
-                isFrisbeeMoving.setValue(false);
-                throwFrisbee.stop();
+                throwFrisbee.setDisable(false);
+                throwF.stop();
                 boolean didCatch = didCatch();
                 if(didCatch)
                 {
@@ -171,13 +232,20 @@ public class CompetitionEnvironment extends VBox
             }
             else if(frisbeeBox.getLayoutX() < -60)
             {
-                isFrisbeeMoving.setValue(false);
-                throwFrisbee.stop();
+                throwFrisbee.setDisable(false);
+                throwF.stop();
             }
         }));
 
-        throwFrisbee.setCycleCount(Animation.INDEFINITE);
-        throwFrisbee.play();
+        throwF.setCycleCount(Animation.INDEFINITE);
+        throwF.play();
+
+        if(count == 10)
+        {
+            throwFrisbee.setVisible(false);
+            throwFrisbee.setManaged(false);
+            root.changeMessage("The competition is over! " + pet.getName() + " caught " + numCaught + " frisbees!");
+        }
     }
 
     @FXML

@@ -28,7 +28,7 @@
 
     </StackPane>
 
-    <HBox fx:id="menu">
+    <HBox fx:id="menu" alignment="center">
     </HBox>
 
 </fx:root>
