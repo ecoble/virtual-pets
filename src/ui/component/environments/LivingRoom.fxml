@@ -5,42 +5,92 @@
 <?import javafx.scene.Group?>
 <?import javafx.geometry.Insets?>
 
-<fx:root type="javafx.scene.layout.StackPane" fx:id="stackPane" xmlns:fx="http://javafx.com/fxml/1">
-    <ImageView fx:id="backgroundImage" fitWidth="650" fitHeight="425">
-        <image>
-            <Image url="@../../../images/LivingRoom.jpg" />
-        </image>
-    </ImageView>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+<fx:root type="javafx.scene.layout.VBox" fx:id="stackPane" xmlns:fx="http://javafx.com/fxml/1">
+    <StackPane>
+        <ImageView fx:id="backgroundImage" fitWidth="650" fitHeight="425">
+            <image>
+                <Image url="@../../../images/LivingRoom.jpg" />
+            </image>
+        </ImageView>
 
-    <Group StackPane.alignment="TOP_LEFT">
-        <StackPane>
-            <StackPane fx:id="birdContainer" maxHeight="90">
+        <Group StackPane.alignment="TOP_LEFT">
+            <StackPane>
+                <StackPane fx:id="birdContainer" maxHeight="90">
+                </StackPane>
+                <ImageView fitHeight="160" preserveRatio="true">
+                    <image>
+                        <Image url="@../../../images/birdcage.png"/>
+                    </image>
+                </ImageView>
             </StackPane>
-            <ImageView fitHeight="160" preserveRatio="true">
-                <image>
-                    <Image url="@../../../images/birdcage.png"/>
-                </image>
-            </ImageView>
-        </StackPane>
-    </Group>
+        </Group>
 
-    <Group StackPane.alignment="BOTTOM_CENTER">
-        <HBox fx:id="landPetContainer" alignment="BOTTOM_CENTER"></HBox>
-    </Group>
+        <Group StackPane.alignment="BOTTOM_CENTER">
+            <HBox fx:id="landPetContainer" alignment="BOTTOM_CENTER"></HBox>
+        </Group>
 
-    <Group StackPane.alignment="BOTTOM_RIGHT">
-        <StackPane>
-            <ImageView fitHeight="75" preserveRatio="true" StackPane.alignment="BOTTOM_CENTER">
-                <image>
-                    <Image url="@../../../images/fishTank.png"/>
-                </image>
-            </ImageView>
-            <StackPane fx:id="fishContainer" prefHeight="125">
+        <Group StackPane.alignment="BOTTOM_RIGHT">
+            <StackPane>
+                <ImageView fitHeight="75" preserveRatio="true" StackPane.alignment="BOTTOM_CENTER">
+                    <image>
+                        <Image url="@../../../images/fishTank.png"/>
+                    </image>
+                </ImageView>
+                <StackPane fx:id="fishContainer" prefHeight="125">
+                </StackPane>
             </StackPane>
-        </StackPane>
-    </Group>
+        </Group>
 
-    <padding>
-        <Insets bottom="20.0"/>
-    </padding>
+        <padding>
+            <Insets bottom="20.0"/>
+        </padding>
+    </StackPane>
+
+    <HBox fx:id="homeBox" alignment="CENTER">
+        <Button fx:id="buyPetsButton" onMouseClicked="#buyMorePets" text="Buy more pets"/>
+        <Button fx:id="interactButton" onMouseClicked="#showPetNames" text="Interact with pets"/>
+        <Button fx:id="storeButton" onMouseClicked="#showStore" text="Go to store"/>
+        <padding>
+            <Insets bottom="15.0"/>
+        </padding>
+    </HBox>
+
+    <HBox fx:id="buyPetsBox" alignment="CENTER">
+        <Button fx:id="dogButton" onMouseClicked="#buyDog"/>
+        <Button fx:id="catButton" onMouseClicked="#buyCat" text="Buy Cat"/>
+        <Button fx:id="fishButton" onMouseClicked="#buyFish" text="Buy Fish"/>
+        <Button fx:id="birdButton" onMouseClicked="#buyBird" text="Buy Bird"/>
+        <Button fx:id="rabbitButton" onMouseClicked="#buyRabbit" text="Buy Rabbit"/>
+        <padding>
+            <Insets bottom="15.0"/>
+        </padding>
+    </HBox>
+
+    <HBox fx:id="shopBox" alignment="CENTER">
+        <Button fx:id="dogFoodButton" onMouseClicked="#buyDogFood"/>
+        <Button fx:id="catFoodButton" onMouseClicked="#buyCatFood" text="Cat Food"/>
+        <Button fx:id="birdFoodButton" onMouseClicked="#buyBirdFood" text="Bird Food"/>
+        <Button fx:id="fishFoodButton" onMouseClicked="#buyFishFood" text="Fish Food"/>
+        <Button fx:id="rabbitFoodButton" onMouseClicked="#buyRabbitFood" text="Rabbit Food"/>
+        <padding>
+            <Insets bottom="15.0"/>
+        </padding>
+    </HBox>
+
+    <HBox fx:id="petNameBox" alignment="CENTER">
+        <padding>
+            <Insets bottom="15.0"/>
+        </padding>
+    </HBox>
+
+    <HBox alignment="CENTER">
+        <Button fx:id="quitButton" onMouseClicked="#quit" text="Save and quit" />
+    </HBox>
+
+    <HBox alignment="CENTER">
+        <Button fx:id="cancelButton" onMouseClicked="#cancel" text="Cancel"/>
+    </HBox>
+
 </fx:root>

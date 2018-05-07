@@ -112,7 +112,7 @@ public class Root extends VBox
             }
         }));
 
-        LivingRoom livingRoom = new LivingRoom(user);
+        LivingRoom livingRoom = new LivingRoom(user, this);
 
         displayCompositor = new Compositor(display);
         displayCompositor.transitionTo(livingRoom);

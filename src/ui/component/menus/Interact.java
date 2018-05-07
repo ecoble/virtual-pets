@@ -34,15 +34,17 @@ public class Interact extends VBox
     @FXML
     protected void walk(MouseEvent event)
     {
-        root.transitionDisplay(new WalkEnvironment(root, pet));
-        root.transitionMenu(new Walk(root, user, pet));
+        root.clearMenu();
+        root.transitionDisplay(new WalkEnvironment(root,user, pet));
+        //root.transitionMenu(new Walk(root, user, pet));
     }
 
     @FXML
     protected void wash(MouseEvent event)
     {
-        root.transitionDisplay(new WashEnvironment(root, pet));
-        root.transitionMenu(new Wash(root, user, pet));
+        root.clearMenu();
+        root.transitionDisplay(new WashEnvironment(root, user, pet));
+        //root.transitionMenu(new Wash(root, user, pet));
     }
 
     @FXML

@@ -75,6 +75,7 @@ public class GymEnvironment extends VBox
             case "fish":
                 petContainer.getChildren().add(new PetView(pet, "images/goldfish.png", 75));
                 userMessage.setText("You're training your fish, " + pet.getName() + ", but not for long!");
+                losePet();
                 break;
         }
 
@@ -83,7 +84,7 @@ public class GymEnvironment extends VBox
             if (pet.getHungerStat() <= 0)
             {
                 user.removePet(pet);
-                root.transitionDisplay(new LivingRoom(user));
+                root.transitionDisplay(new LivingRoom(user, root));
                 root.transitionMenu(new Home(root, user));
             }
         }));
@@ -92,7 +93,7 @@ public class GymEnvironment extends VBox
             if(pet.getThirstStat() <= 0)
             {
                 user.removePet(pet);
-                root.transitionDisplay(new LivingRoom(user));
+                root.transitionDisplay(new LivingRoom(user, root));
                 root.transitionMenu(new Home(root, user));
             }
         }));
@@ -117,7 +118,7 @@ public class GymEnvironment extends VBox
     {
         pet.train();
         root.changeMessage("You and " + pet.getName() + " returned home. What would you like to do now?");
-        root.transitionDisplay(new LivingRoom(user));
+        root.transitionDisplay(new LivingRoom(user, root));
         root.transitionMenu(new Home(root, user));
     }
 
@@ -130,7 +131,7 @@ public class GymEnvironment extends VBox
                 Duration.millis(3000),
                 ae -> {
                     root.transitionMenu(new Home(root,user));
-                    root.transitionDisplay(new LivingRoom(user));
+                    root.transitionDisplay(new LivingRoom(user, root));
                     if(pet.getSpecies().equals("fish"))
                     {
                         root.changeMessage(pet.getName() + " died due to lack of water.");
