@@ -94,5 +94,5 @@ public class Interact extends VBox
         root.transitionDisplay(ce);
         //root.transitionMenu(new Competition(root, user, pet, ce));
 
-}
+    }
 }

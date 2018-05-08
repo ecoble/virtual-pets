@@ -7,6 +7,7 @@
 
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.text.Text?>
 <fx:root type="javafx.scene.layout.VBox" fx:id="stackPane" xmlns:fx="http://javafx.com/fxml/1">
     <StackPane>
         <ImageView fx:id="backgroundImage" fitWidth="650" fitHeight="425">
@@ -48,6 +49,13 @@
         </padding>
     </StackPane>
 
+    <StackPane>
+        <Text fx:id="userMessage"/>
+        <padding>
+            <Insets top="20.0" bottom="40.0"/>
+        </padding>
+    </StackPane>
+
     <HBox fx:id="homeBox" alignment="CENTER">
         <Button fx:id="buyPetsButton" onMouseClicked="#buyMorePets" text="Buy more pets"/>
         <Button fx:id="interactButton" onMouseClicked="#showPetNames" text="Interact with pets"/>
@@ -57,7 +65,7 @@
         </padding>
     </HBox>
 
-    <HBox fx:id="buyPetsBox" alignment="CENTER">
+    <HBox fx:id="buyPetsBox" alignment="CENTER" visible="false" managed="false">
         <Button fx:id="dogButton" onMouseClicked="#buyDog"/>
         <Button fx:id="catButton" onMouseClicked="#buyCat" text="Buy Cat"/>
         <Button fx:id="fishButton" onMouseClicked="#buyFish" text="Buy Fish"/>
@@ -68,7 +76,7 @@
         </padding>
     </HBox>
 
-    <HBox fx:id="shopBox" alignment="CENTER">
+    <HBox fx:id="shopBox" alignment="CENTER" visible="false" managed="false">
         <Button fx:id="dogFoodButton" onMouseClicked="#buyDogFood"/>
         <Button fx:id="catFoodButton" onMouseClicked="#buyCatFood" text="Cat Food"/>
         <Button fx:id="birdFoodButton" onMouseClicked="#buyBirdFood" text="Bird Food"/>
@@ -79,7 +87,19 @@
         </padding>
     </HBox>
 
-    <HBox fx:id="petNameBox" alignment="CENTER">
+    <HBox fx:id="interactBox" alignment="CENTER" visible="false" managed="false">
+        <Button fx:id="foodButton" onMouseClicked="#feed" userData="You fed " text="Feed"/>
+        <Button fx:id="drinkButton" onMouseClicked="#giveWater" userData="You gave water to " text="Give water"/>
+        <Button fx:id="walkButton" onMouseClicked="#walk" userData="You walked " text="Walk"/>
+        <Button fx:id="washButton" onMouseClicked="#wash" userData="You washed " text="Wash"/>
+        <Button fx:id="trainButton" onMouseClicked="#train" userData="You trained " text="Train"/>
+        <Button fx:id="competitionButton" onMouseClicked="#compete" userData="You entered a competition with " text="Go to competition"/>
+        <padding>
+            <Insets bottom="15.0"/>
+        </padding>
+    </HBox>
+
+    <HBox fx:id="petNameBox" alignment="CENTER" visible="false" managed="false">
         <padding>
             <Insets bottom="15.0"/>
         </padding>

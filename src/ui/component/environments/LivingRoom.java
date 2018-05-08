@@ -7,12 +7,14 @@ import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -21,10 +23,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import ui.component.Component;
 import ui.component.PetView;
 import ui.component.Root;
-import ui.component.menus.BuyPets;
-import ui.component.menus.Home;
-import ui.component.menus.PetNames;
-import ui.component.menus.Shop;
+import ui.component.menus.*;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -38,6 +37,22 @@ public class LivingRoom extends VBox
 {
     private User user;
     private Root root;
+    private Pet selectedPet;
+
+    @FXML
+    private HBox homeBox;
+
+    @FXML
+    private HBox buyPetsBox;
+
+    @FXML
+    private HBox shopBox;
+
+    @FXML
+    private HBox interactBox;
+
+    @FXML
+    private HBox petNameBox;
 
     @FXML
     private HBox landPetContainer;
@@ -88,7 +103,7 @@ public class LivingRoom extends VBox
     private Button rabbitFoodButton;
 
     @FXML
-    private HBox petNameBox;
+    private Text userMessage;
 
     public LivingRoom(User user, Root root)
     {
@@ -185,15 +200,17 @@ public class LivingRoom extends VBox
     @FXML
     protected void buyMorePets(MouseEvent event)
     {
-        root.transitionMenu(new BuyPets(root, user));
-        root.changeMessage("You have $" + user.getMoney() + ".");
+        //root.transitionMenu(new BuyPets(root, user));
+        changeBoxes(homeBox, buyPetsBox);
+        userMessage.setText("You have $" + user.getMoney() + ".");
     }
 
     @FXML
     protected void showStore(MouseEvent event)
     {
-        root.transitionMenu(new Shop(root, user));
-        root.changeMessage("You have $" + user.getMoney() + ". \nFood Inventory: \n"
+        //root.transitionMenu(new Shop(root, user));
+        changeBoxes(homeBox, shopBox);
+        userMessage.setText("You have $" + user.getMoney() + ". \nFood Inventory: \n"
                 + "Dog: " + user.getFood(FoodType.DOG) + " "
                 + "Cat: " + user.getFood(FoodType.CAT) + " "
                 + "Bird: " + user.getFood(FoodType.BIRD) + " "
@@ -204,8 +221,14 @@ public class LivingRoom extends VBox
     @FXML
     protected void showPetNames(MouseEvent event)
     {
-        root.transitionMenu(new PetNames(root, user));
-        root.changeMessage("Which pet would you like to interact with?");
+        //root.transitionMenu(new PetNames(root, user));
+        changeBoxes(homeBox, petNameBox);
+        petNameBox.getChildren().clear();
+        for(Pet pet : user.getPets())
+        {
+            createButton(pet.getName());
+        }
+        userMessage.setText("Which pet would you like to interact with?");
     }
 
     @FXML
@@ -291,8 +314,21 @@ public class LivingRoom extends VBox
     @FXML
     protected void cancel(MouseEvent event)
     {
-        root.transitionMenu(new Home(root, user));
-        root.changeMessage("What would you like to do now?");
+        //root.transitionMenu(new Home(root, user));
+        buyPetsBox.setVisible(false);
+        shopBox.setVisible(false);
+        interactBox.setVisible(false);
+        petNameBox.setVisible(false);
+
+        buyPetsBox.setManaged(false);
+        shopBox.setManaged(false);
+        interactBox.setManaged(false);
+        petNameBox.setManaged(false);
+
+        homeBox.setVisible(true);
+        homeBox.setManaged(true);
+
+        userMessage.setText("What would you like to do now?");
     }
 
     private void buyPet(PetView view, int price) {
@@ -306,9 +342,10 @@ public class LivingRoom extends VBox
             return;
         }
 
-        root.changeMessage("You bought a " + view.getPet().getSpecies() + "! You need to name your " + view.getPet().getSpecies() + "!");
+        userMessage.setText("You bought a " + view.getPet().getSpecies() + "! You need to name your " + view.getPet().getSpecies() + "!");
 
-        root.transitionMenu(new Home(root, user));
+        //root.transitionMenu(new Home(root, user));
+        changeBoxes(buyPetsBox, homeBox);
 
         String name = "";
 
@@ -318,8 +355,9 @@ public class LivingRoom extends VBox
 
             if(!opName.isPresent())
             {
-                root.transitionMenu(new Home(root, user));
-                root.changeMessage("What would you like to do now?");
+                //root.transitionMenu(new Home(root, user));
+                changeBoxes(buyPetsBox, homeBox);
+                userMessage.setText("What would you like to do now?");
                 return;
             }
 
@@ -327,11 +365,11 @@ public class LivingRoom extends VBox
 
             if(checkNameLength(name))
             {
-                root.changeMessage("That name is too long!");
+                userMessage.setText("That name is too long!");
             }
             else if(checkIfSameName(name))
             {
-                root.changeMessage("You already have a pet with that name!");
+                userMessage.setText("You already have a pet with that name!");
             }
             else
             {
@@ -344,7 +382,7 @@ public class LivingRoom extends VBox
         PetPurchaseCommand command = new PetPurchaseCommand(view.getPet(), price);
         user.purchase(command);
 
-        root.changeMessage("What would you like to do now?");
+        userMessage.setText("What would you like to do now?");
     }
 
     private Optional<String> collectInput(String message, String header)
@@ -360,8 +398,9 @@ public class LivingRoom extends VBox
     {
         if(!user.hasSpace(pet))
         {
-            root.changeMessage("You don't have enough space for that!");
-            root.transitionMenu(new Home(root, user));
+            userMessage.setText("You don't have enough space for that!");
+            //root.transitionMenu(new Home(root, user));
+            changeBoxes(buyPetsBox, homeBox);
             root.pauseForMessage("What would you like to do now?");
             return false;
         }
@@ -383,7 +422,8 @@ public class LivingRoom extends VBox
     @FXML
     protected void buyDogFood()
     {
-        root.transitionMenu(new Home(root, user));
+        //root.transitionMenu(new Home(root, user));
+        changeBoxes(shopBox, homeBox);
 
         if(!root.checkPrice(Dog.foodPrice, user))
         {
@@ -394,13 +434,14 @@ public class LivingRoom extends VBox
         user.purchase(command);
 
 
-        root.changeMessage("You bought dog food! What would you like to do now?");
+        userMessage.setText("You bought dog food! What would you like to do now?");
     }
 
     @FXML
     protected void buyCatFood()
     {
-        root.transitionMenu(new Home(root, user));
+        //root.transitionMenu(new Home(root, user));
+        changeBoxes(shopBox, homeBox);
 
         if(!root.checkPrice(Cat.foodPrice, user))
         {
@@ -411,13 +452,14 @@ public class LivingRoom extends VBox
         user.purchase(command);
 
 
-        root.changeMessage("You bought cat food! What would you like to do now?");
+        userMessage.setText("You bought cat food! What would you like to do now?");
     }
 
     @FXML
     protected void buyBirdFood()
     {
-        root.transitionMenu(new Home(root, user));
+        //root.transitionMenu(new Home(root, user));
+        changeBoxes(shopBox, homeBox);
 
         if(!root.checkPrice(Bird.foodPrice, user))
         {
@@ -428,13 +470,14 @@ public class LivingRoom extends VBox
         user.purchase(command);
 
 
-        root.changeMessage("You bought bird food! What would you like to do now?");
+        userMessage.setText("You bought bird food! What would you like to do now?");
     }
 
     @FXML
     protected void buyFishFood()
     {
-        root.transitionMenu(new Home(root, user));
+        //root.transitionMenu(new Home(root, user));
+        changeBoxes(shopBox, homeBox);
 
         if(!root.checkPrice(Fish.foodPrice, user))
         {
@@ -445,13 +488,14 @@ public class LivingRoom extends VBox
         user.purchase(command);
 
 
-        root.changeMessage("You bought fish food! What would you like to do now?");
+        userMessage.setText("You bought fish food! What would you like to do now?");
     }
 
     @FXML
     protected void buyRabbitFood()
     {
-        root.transitionMenu(new Home(root, user));
+        //root.transitionMenu(new Home(root, user));
+        changeBoxes(shopBox, homeBox);
 
         if(!root.checkPrice(Rabbit.foodPrice, user))
         {
@@ -462,6 +506,98 @@ public class LivingRoom extends VBox
         user.purchase(command);
 
 
-        root.changeMessage("You bought rabbit food! What would you like to do now?");
+        userMessage.setText("You bought rabbit food! What would you like to do now?");
+    }
+
+    //Interact menu
+    @FXML
+    protected void walk(MouseEvent event)
+    {
+        root.clearMenu();
+        root.transitionDisplay(new WalkEnvironment(root, user, selectedPet));
+        //root.transitionMenu(new Walk(root, user, pet));
+    }
+
+    @FXML
+    protected void wash(MouseEvent event)
+    {
+        root.clearMenu();
+        root.transitionDisplay(new WashEnvironment(root, user, selectedPet));
+        //root.transitionMenu(new Wash(root, user, pet));
+    }
+
+    @FXML
+    protected void train(MouseEvent event)
+    {
+        root.clearMenu();
+        root.transitionDisplay(new GymEnvironment(root, user, selectedPet));
+        //root.transitionMenu(new Gym(root, user, pet));
+    }
+
+    @FXML
+    protected void feed(MouseEvent event)
+    {
+        if(user.getFood(selectedPet.getFoodType()) > 0){
+            selectedPet.feed();
+            user.withdrawFood(selectedPet.getFoodType());
+            userMessage.setText("You fed " + selectedPet.getName() + "! What would you like to do now?");
+        }
+        else
+        {
+            userMessage.setText("You can't feed " + selectedPet.getName() + ", you don't have any food! What would you like to do now?");
+        }
+        //root.transitionMenu(new Home(root, user));
+        changeBoxes(interactBox, homeBox);
+
+    }
+
+    @FXML
+    protected void giveWater(MouseEvent event)
+    {
+        selectedPet.giveWater();
+        //root.transitionMenu(new Home(root, user));
+        changeBoxes(interactBox, homeBox);
+        userMessage.setText("You gave water to " + selectedPet.getName() + "! What would you like to do now?");
+    }
+
+    @FXML
+    protected void compete(MouseEvent event)
+    {
+        root.clearMenu();
+        CompetitionEnvironment ce = new CompetitionEnvironment(root, user, selectedPet);
+        root.transitionDisplay(ce);
+        //root.transitionMenu(new Competition(root, user, pet, ce));
+
+    }
+
+    //helper methods
+    private void changeBoxes(Node first, Node second)
+    {
+        first.setVisible(false);
+        first.setManaged(false);
+        second.setVisible(true);
+        second.setManaged(true);
+    }
+
+    public void createButton(String name)
+    {
+        Button nameButton = new Button(name);
+
+        nameButton.setOnMouseClicked(event ->
+        {
+            Button b = (Button) event.getSource();
+            for(Pet pet : user.getPets())
+            {
+                if(pet.getName().equals(b.getText()))
+                {
+                    this.selectedPet = pet;
+                    //root.transitionMenu(new Interact(root, user, this.pet));
+                    changeBoxes(petNameBox, interactBox);
+                }
+            }
+            userMessage.setText("What would you like to do with " + selectedPet.getName() + "?");
+        });
+
+        petNameBox.getChildren().add(nameButton);
     }
 }
