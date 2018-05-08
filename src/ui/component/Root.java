@@ -112,22 +112,26 @@ public class Root extends VBox
             }
         }));
 
-        LivingRoom livingRoom = new LivingRoom(user, this);
+        LivingRoom livingRoom = new LivingRoom(user, this, "");
 
-        displayCompositor = new Compositor(display);
-        displayCompositor.transitionTo(livingRoom);
-        menuCompositor = new Compositor(menus);
+
+        //menuCompositor = new Compositor(menus);
 
         if(isNew)
         {
-            menuCompositor.transitionTo(new BuyPets(this, user));
-            changeMessage("Hello " + user.getName() + "! You need to buy your first pet!");
+            livingRoom = new LivingRoom(user, this, "Hello " + user.getName() + "! You need to buy your first pet!");
+            //menuCompositor.transitionTo(new BuyPets(this, user));
+            //changeMessage("Hello " + user.getName() + "! You need to buy your first pet!");
         }
         else
         {
-            menuCompositor.transitionTo(new Home(this, user));
-            changeMessage("Welcome back " + user.getName() + "! What would you like to do?");
+            livingRoom = new LivingRoom(user, this, "Welcome back " + user.getName() + "! What would you like to do?");
+            //menuCompositor.transitionTo(new Home(this, user));
+            //changeMessage("Welcome back " + user.getName() + "! What would you like to do?");
         }
+
+        displayCompositor = new Compositor(display);
+        displayCompositor.transitionTo(livingRoom);
     }
 
 

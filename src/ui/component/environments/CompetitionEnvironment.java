@@ -99,8 +99,8 @@ public class CompetitionEnvironment extends VBox
             if (pet.getHungerStat() <= 0)
             {
                 user.removePet(pet);
-                root.transitionDisplay(new LivingRoom(user, root));
-                root.transitionMenu(new Home(root, user));
+                root.transitionDisplay(new LivingRoom(user, root, pet.getName() + " died from hunger!"));
+                //root.transitionMenu(new Home(root, user));
             }
         }));
 
@@ -108,8 +108,8 @@ public class CompetitionEnvironment extends VBox
             if(pet.getThirstStat() <= 0)
             {
                 user.removePet(pet);
-                root.transitionDisplay(new LivingRoom(user, root));
-                root.transitionMenu(new Home(root, user));
+                root.transitionDisplay(new LivingRoom(user, root, pet.getName() + " died from thirst!"));
+                //root.transitionMenu(new Home(root, user));
             }
         }));
 
@@ -165,11 +165,11 @@ public class CompetitionEnvironment extends VBox
         new Timeline(new KeyFrame(
                 Duration.millis(3000),
                 ae -> {
-                    root.transitionMenu(new Home(root,user));
-                    root.transitionDisplay(new LivingRoom(user, root));
+                    //root.transitionMenu(new Home(root,user));
                     if(pet.getSpecies().equals("fish"))
                     {
-                        root.changeMessage(pet.getName() + " died due to lack of water.");
+                        //root.changeMessage(pet.getName() + " died due to lack of water.");
+                        root.transitionDisplay(new LivingRoom(user, root,pet.getName() + " died due to lack of water."));
                     }
                 })
         ).play();
@@ -183,21 +183,24 @@ public class CompetitionEnvironment extends VBox
     {
         if(getNumCaught() > 7)
         {
-            root.changeMessage("You and " + pet.getName() + " returned home. You won $250! What would you like to do now?");
+            //root.changeMessage("You and " + pet.getName() + " returned home. You won $250! What would you like to do now?");
+            root.transitionDisplay(new LivingRoom(user, root,"You and " + pet.getName() + " returned home. You won $250! What would you like to do now?" ));
             user.addMoney(250);
         }
         else if (getNumCaught() >= 4 && getNumCaught() <= 7)
         {
-            root.changeMessage("You and " + pet.getName() + " returned home. You won $100! What would you like to do now?");
+            //root.changeMessage("You and " + pet.getName() + " returned home. You won $100! What would you like to do now?");
+            root.transitionDisplay(new LivingRoom(user, root, "You and " + pet.getName() + " returned home. You won $100! What would you like to do now?"));
             user.addMoney(100);
         }
         else
         {
-            root.changeMessage("You and " + pet.getName() + " returned home. You didn't win any money :( What would you like to do now?");
+            //root.changeMessage("You and " + pet.getName() + " returned home. You didn't win any money :( What would you like to do now?");
+            root.transitionDisplay(new LivingRoom(user, root, "You and " + pet.getName() + " returned home. You won $100! What would you like to do now?"));
         }
 
-        root.transitionDisplay(new LivingRoom(user, root));
-        root.transitionMenu(new Home(root, user));
+        //root.transitionDisplay(new LivingRoom(user, root));
+        //root.transitionMenu(new Home(root, user));
     }
 
     @FXML

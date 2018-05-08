@@ -88,8 +88,8 @@ public class WalkEnvironment extends VBox
             if (pet.getHungerStat() <= 0)
             {
                 user.removePet(pet);
-                root.transitionDisplay(new LivingRoom(user, root));
-                root.transitionMenu(new Home(root, user));
+                root.transitionDisplay(new LivingRoom(user, root, pet.getName() + " died from hunger!"));
+                //root.transitionMenu(new Home(root, user));
             }
         }));
 
@@ -97,8 +97,8 @@ public class WalkEnvironment extends VBox
             if(pet.getThirstStat() <= 0)
             {
                 user.removePet(pet);
-                root.transitionDisplay(new LivingRoom(user, root));
-                root.transitionMenu(new Home(root, user));
+                root.transitionDisplay(new LivingRoom(user, root, pet.getName() + " died from thirst!"));
+                //root.transitionMenu(new Home(root, user));
             }
         }));
 
@@ -120,9 +120,9 @@ public class WalkEnvironment extends VBox
     @FXML
     protected void goHome()
     {
-        root.changeMessage("You and " + pet.getName() + " returned home. What would you like to do now?");
-        root.transitionDisplay(new LivingRoom(user, root));
-        root.transitionMenu(new Home(root, user));
+        //root.changeMessage("You and " + pet.getName() + " returned home. What would you like to do now?");
+        root.transitionDisplay(new LivingRoom(user, root, "You and " + pet.getName() + " returned home. What would you like to do now?"));
+        //root.transitionMenu(new Home(root, user));
     }
 
     private void losePet()
@@ -133,16 +133,17 @@ public class WalkEnvironment extends VBox
         new Timeline(new KeyFrame(
                 Duration.millis(3000),
                 ae -> {
-                    root.transitionMenu(new Home(root,user));
-                    root.transitionDisplay(new LivingRoom(user, root));
+                    //root.transitionMenu(new Home(root,user));
 
                     if (pet.getSpecies().equals("fish"))
                     {
-                        root.changeMessage(pet.getName() + " died due to lack of water.");
+                        //root.changeMessage(pet.getName() + " died due to lack of water.");
+                        root.transitionDisplay(new LivingRoom(user, root, pet.getName() + " died due to lack of water."));
                     }
                     else if (pet.getSpecies().equals("bird"))
                     {
-                        root.changeMessage(pet.getName() + " flew away into the great beyond.");
+                        //root.changeMessage(pet.getName() + " flew away into the great beyond.");
+                        root.transitionDisplay(new LivingRoom(user, root, pet.getName() + " flew away into the great beyond."));
                     }
                 })
         ).play();

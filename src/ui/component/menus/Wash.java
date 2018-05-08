@@ -60,7 +60,7 @@ public class Wash extends HBox
             if (pet.getHungerStat() <= 0)
             {
                 user.removePet(pet);
-                root.transitionDisplay(new LivingRoom(user, root));
+                //root.transitionDisplay(new LivingRoom(user, root));
                 root.transitionMenu(new Home(root, user));
             }
         }));
@@ -69,7 +69,7 @@ public class Wash extends HBox
             if(pet.getThirstStat() <= 0)
             {
                 user.removePet(pet);
-                root.transitionDisplay(new LivingRoom(user, root));
+                //root.transitionDisplay(new LivingRoom(user, root));
                 root.transitionMenu(new Home(root, user));
             }
         }));
@@ -103,7 +103,7 @@ public class Wash extends HBox
         {
             root.changeMessage("You finished washing " + pet.getName() + ". What would you like to do now?");
         }
-        root.transitionDisplay(new LivingRoom(user, root));
+        //root.transitionDisplay(new LivingRoom(user, root));
         root.transitionMenu(new Home(root, user));
     }
 }

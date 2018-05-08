@@ -105,10 +105,11 @@ public class LivingRoom extends VBox
     @FXML
     private Text userMessage;
 
-    public LivingRoom(User user, Root root)
+    public LivingRoom(User user, Root root, String initialMessage)
     {
         this.user = user;
         this.root = root;
+        userMessage.setText(initialMessage);
         this.user.getPets().addListener((ListChangeListener)(change -> {
             while(change.next())
             {
@@ -143,7 +144,39 @@ public class LivingRoom extends VBox
 
                 for (Object obj : change.getAddedSubList())
                 {
-                    createPets((Pet) obj);
+                    Pet pet = (Pet) obj;
+                    createPets(pet);
+
+                    pet.hungerStatProperty().addListener((changeStat ->
+                    {
+                        if (pet.getHungerStat() <= 0)
+                        {
+                            userMessage.setText(pet.getName() + " died from hunger!");
+                            pauseForMessage("What would you like to do now?");
+                            //menuCompositor.transitionTo(new Home(this, user));
+                            showHomeBox();
+
+                        }
+                    }));
+
+                    pet.thirstStatProperty().addListener((changeStat ->
+                    {
+                        if (pet.getThirstStat() <= 0)
+                        {
+                            userMessage.setText(pet.getName() + " died from thirst!");
+                            pauseForMessage("What would you like to do now?");
+                            //menuCompositor.transitionTo(new Home(this, user));
+                            showHomeBox();
+                        }
+                    }));
+
+                    pet.hygieneStatProperty().addListener((changeStat ->
+                    {
+                        if (pet.getHygieneStat() == 0)
+                        {
+                            userMessage.setText(pet.getName() + " is very dirty! You should give them a bath!");
+                        }
+                    }));
                 }
             }
         }));
@@ -315,18 +348,7 @@ public class LivingRoom extends VBox
     protected void cancel(MouseEvent event)
     {
         //root.transitionMenu(new Home(root, user));
-        buyPetsBox.setVisible(false);
-        shopBox.setVisible(false);
-        interactBox.setVisible(false);
-        petNameBox.setVisible(false);
-
-        buyPetsBox.setManaged(false);
-        shopBox.setManaged(false);
-        interactBox.setManaged(false);
-        petNameBox.setManaged(false);
-
-        homeBox.setVisible(true);
-        homeBox.setManaged(true);
+        showHomeBox();
 
         userMessage.setText("What would you like to do now?");
     }
@@ -579,6 +601,22 @@ public class LivingRoom extends VBox
         second.setManaged(true);
     }
 
+    private void showHomeBox()
+    {
+        buyPetsBox.setVisible(false);
+        shopBox.setVisible(false);
+        interactBox.setVisible(false);
+        petNameBox.setVisible(false);
+
+        buyPetsBox.setManaged(false);
+        shopBox.setManaged(false);
+        interactBox.setManaged(false);
+        petNameBox.setManaged(false);
+
+        homeBox.setVisible(true);
+        homeBox.setManaged(true);
+    }
+
     public void createButton(String name)
     {
         Button nameButton = new Button(name);
@@ -599,5 +637,28 @@ public class LivingRoom extends VBox
         });
 
         petNameBox.getChildren().add(nameButton);
+    }
+
+    public void pauseForMessage(String message)
+    {
+        Timeline timeline = new Timeline(new KeyFrame(
+                Duration.millis(2000),
+                ae -> userMessage.setText(message))
+        );
+
+        timeline.play();
+    }
+
+    public boolean checkPrice(int price)
+    {
+        if(!user.canAfford(price))
+        {
+            userMessage.setText("You don't have enough money for that!");
+            //menuCompositor.transitionTo(new Home(this, user));
+            showHomeBox();
+            pauseForMessage("What would you like to do now?");
+            return false;
+        }
+        return true;
     }
 }

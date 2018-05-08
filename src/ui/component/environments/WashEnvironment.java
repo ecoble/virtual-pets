@@ -77,7 +77,7 @@ public class WashEnvironment extends VBox
             if (pet.getHungerStat() <= 0)
             {
                 user.removePet(pet);
-                root.transitionDisplay(new LivingRoom(user, root));
+                root.transitionDisplay(new LivingRoom(user, root, pet.getName() + " died from hunger!"));
                 root.transitionMenu(new Home(root, user));
             }
         }));
@@ -86,7 +86,7 @@ public class WashEnvironment extends VBox
             if(pet.getThirstStat() <= 0)
             {
                 user.removePet(pet);
-                root.transitionDisplay(new LivingRoom(user, root));
+                root.transitionDisplay(new LivingRoom(user, root, pet.getName() + " died from thirst!"));
                 root.transitionMenu(new Home(root, user));
             }
         }));
@@ -107,20 +107,20 @@ public class WashEnvironment extends VBox
         {
             if(user.getMoney() >= 50)
             {
-                root.changeMessage("You finished washing " + pet.getName() + ", but you had to go to the doctor for your scratches. The bill was $50.");
+                root.transitionDisplay(new LivingRoom(user, root, "You finished washing " + pet.getName() + ", but you had to go to the doctor for your scratches. The bill was $50."));
                 user.withdrawMoney(50);
             }
             else
             {
-                root.changeMessage("You finished washing " + pet.getName() + ", and didn't have enough money to see the doctor for you scratches.\nYour scratches cause you great suffering.");
+                root.transitionDisplay(new LivingRoom(user, root, "You finished washing " + pet.getName() + ", and didn't have enough money to see the doctor for you scratches.\nYour scratches cause you great suffering."));
             }
         }
         else
         {
-            root.changeMessage("You finished washing " + pet.getName() + ". What would you like to do now?");
+            root.transitionDisplay(new LivingRoom(user, root, "You finished washing " + pet.getName() + ". What would you like to do now?"));
         }
-        root.transitionDisplay(new LivingRoom(user, root));
-        root.transitionMenu(new Home(root, user));
+        //root.transitionDisplay(new LivingRoom(user, root));
+        //root.transitionMenu(new Home(root, user));
     }
 
 }
