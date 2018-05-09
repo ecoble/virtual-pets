@@ -112,10 +112,10 @@ public class Root extends VBox
             }
         }));
 
-        LivingRoom livingRoom = new LivingRoom(user, this, "");
+        LivingRoom livingRoom;
 
 
-        //menuCompositor = new Compositor(menus);
+        menuCompositor = new Compositor(menus);
 
         if(isNew)
         {
