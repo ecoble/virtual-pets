@@ -37,9 +37,6 @@ public class Root extends VBox
 
 
     @FXML
-    private Text userMessage;
-
-    @FXML
     private StackPane display;
 
     @FXML
@@ -74,48 +71,10 @@ public class Root extends VBox
             user = new User(name);
         }
 
-        user.getPets().addListener((ListChangeListener)(change -> {
-            while(change.next())
-            {
-                for (Object obj : change.getAddedSubList())
-                {
-                    Pet pet = (Pet) obj;
-
-                    pet.hungerStatProperty().addListener((changeStat ->
-                    {
-                        if (pet.getHungerStat() <= 0)
-                        {
-                            changeMessage(pet.getName() + " died from hunger!");
-                            pauseForMessage("What would you like to do now?");
-                            menuCompositor.transitionTo(new Home(this, user));
-                        }
-                    }));
-
-                    pet.thirstStatProperty().addListener((changeStat ->
-                    {
-                        if (pet.getThirstStat() <= 0)
-                        {
-                            changeMessage(pet.getName() + " died from thirst!");
-                            pauseForMessage("What would you like to do now?");
-                            menuCompositor.transitionTo(new Home(this, user));
-                        }
-                    }));
-
-                    pet.hygieneStatProperty().addListener((changeStat ->
-                    {
-                        if (pet.getHygieneStat() == 0)
-                        {
-                            changeMessage(pet.getName() + " is very dirty! You should give them a bath!");
-                        }
-                    }));
-                }
-            }
-        }));
+        menuCompositor = new Compositor(menus);
+        displayCompositor = new Compositor(display);
 
         LivingRoom livingRoom;
-
-
-        menuCompositor = new Compositor(menus);
 
         if(isNew)
         {
@@ -130,7 +89,6 @@ public class Root extends VBox
             //changeMessage("Welcome back " + user.getName() + "! What would you like to do?");
         }
 
-        displayCompositor = new Compositor(display);
         displayCompositor.transitionTo(livingRoom);
     }
 
@@ -144,16 +102,7 @@ public class Root extends VBox
         input.setContentText(message);
         Optional<String> name = input.showAndWait();
 
-        if (!header.equals("Welcome to Virtual Pets!"))
-        {
-            changeMessage("What would you like to do now?");
-        }
         return name.orElse("");
-    }
-
-    public void changeMessage(String message)
-    {
-        userMessage.setText(message);
     }
 
     public void transitionDisplay(Node node)
@@ -164,28 +113,6 @@ public class Root extends VBox
     public void transitionMenu(Node node)
     {
         menuCompositor.transitionTo(node);
-    }
-
-    public boolean checkPrice(int price, User user)
-    {
-        if(!user.canAfford(price))
-        {
-            changeMessage("You don't have enough money for that!");
-            menuCompositor.transitionTo(new Home(this, user));
-            pauseForMessage("What would you like to do now?");
-            return false;
-        }
-        return true;
-    }
-
-    public void pauseForMessage(String message)
-    {
-        Timeline timeline = new Timeline(new KeyFrame(
-                Duration.millis(2000),
-                ae -> changeMessage(message))
-        );
-
-        timeline.play();
     }
 
     private boolean checkNameLength(String name)

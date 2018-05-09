@@ -110,7 +110,7 @@
     </HBox>
 
     <HBox alignment="CENTER">
-        <Button fx:id="cancelButton" onMouseClicked="#cancel" text="Cancel"/>
+        <Button fx:id="cancelButton" onMouseClicked="#cancel" text="Cancel" visible="false" managed="false" />
     </HBox>
 
 </fx:root>

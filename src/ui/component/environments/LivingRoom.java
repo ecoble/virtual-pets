@@ -38,6 +38,7 @@ public class LivingRoom extends VBox
     private User user;
     private Root root;
     private Pet selectedPet;
+    private String initialMessage;
 
     @FXML
     private HBox homeBox;
@@ -71,6 +72,9 @@ public class LivingRoom extends VBox
 
     @FXML
     private Button quitButton;
+
+    @FXML
+    private Button cancelButton;
 
     @FXML
     private Button dogButton;
@@ -109,7 +113,7 @@ public class LivingRoom extends VBox
     {
         this.user = user;
         this.root = root;
-        userMessage.setText(initialMessage);
+        this.initialMessage = initialMessage;
         this.user.getPets().addListener((ListChangeListener)(change -> {
             while(change.next())
             {
@@ -187,6 +191,8 @@ public class LivingRoom extends VBox
     @FXML
     protected void initialize()
     {
+        userMessage.setText(initialMessage);
+
         for(Pet pet : user.getPets())
         {
             createPets(pet);
@@ -235,6 +241,7 @@ public class LivingRoom extends VBox
     {
         //root.transitionMenu(new BuyPets(root, user));
         changeBoxes(homeBox, buyPetsBox);
+        changeBoxes(quitButton, cancelButton);
         userMessage.setText("You have $" + user.getMoney() + ".");
     }
 
@@ -243,6 +250,7 @@ public class LivingRoom extends VBox
     {
         //root.transitionMenu(new Shop(root, user));
         changeBoxes(homeBox, shopBox);
+        changeBoxes(quitButton, cancelButton);
         userMessage.setText("You have $" + user.getMoney() + ". \nFood Inventory: \n"
                 + "Dog: " + user.getFood(FoodType.DOG) + " "
                 + "Cat: " + user.getFood(FoodType.CAT) + " "
@@ -256,6 +264,7 @@ public class LivingRoom extends VBox
     {
         //root.transitionMenu(new PetNames(root, user));
         changeBoxes(homeBox, petNameBox);
+        changeBoxes(quitButton, cancelButton);
         petNameBox.getChildren().clear();
         for(Pet pet : user.getPets())
         {
@@ -318,7 +327,6 @@ public class LivingRoom extends VBox
     {
         PetView view = new PetView(new Cat(), "images/cat_image.png", 150);
         buyPet(view, Cat.price);
-
     }
 
     @FXML
@@ -326,7 +334,6 @@ public class LivingRoom extends VBox
     {
         PetView view = new PetView(new Fish(), "images/goldfish.png", 75);
         buyPet(view, Fish.price);
-
     }
 
     @FXML
@@ -341,7 +348,6 @@ public class LivingRoom extends VBox
     {
         PetView view = new PetView(new Rabbit(), "images/rabbit.png", 50);
         buyPet(view, Rabbit.price);
-
     }
 
     @FXML
@@ -354,7 +360,7 @@ public class LivingRoom extends VBox
     }
 
     private void buyPet(PetView view, int price) {
-        if(!root.checkPrice(price, user))
+        if(!checkPrice(price))
         {
             return;
         }
@@ -368,6 +374,7 @@ public class LivingRoom extends VBox
 
         //root.transitionMenu(new Home(root, user));
         changeBoxes(buyPetsBox, homeBox);
+        changeBoxes(cancelButton, quitButton);
 
         String name = "";
 
@@ -379,6 +386,7 @@ public class LivingRoom extends VBox
             {
                 //root.transitionMenu(new Home(root, user));
                 changeBoxes(buyPetsBox, homeBox);
+                changeBoxes(cancelButton, quitButton);
                 userMessage.setText("What would you like to do now?");
                 return;
             }
@@ -423,7 +431,8 @@ public class LivingRoom extends VBox
             userMessage.setText("You don't have enough space for that!");
             //root.transitionMenu(new Home(root, user));
             changeBoxes(buyPetsBox, homeBox);
-            root.pauseForMessage("What would you like to do now?");
+            changeBoxes(cancelButton, quitButton);
+            pauseForMessage("What would you like to do now?");
             return false;
         }
 
@@ -446,8 +455,9 @@ public class LivingRoom extends VBox
     {
         //root.transitionMenu(new Home(root, user));
         changeBoxes(shopBox, homeBox);
+        changeBoxes(cancelButton, quitButton);
 
-        if(!root.checkPrice(Dog.foodPrice, user))
+        if(!checkPrice(Dog.foodPrice))
         {
             return;
         }
@@ -464,8 +474,9 @@ public class LivingRoom extends VBox
     {
         //root.transitionMenu(new Home(root, user));
         changeBoxes(shopBox, homeBox);
+        changeBoxes(cancelButton, quitButton);
 
-        if(!root.checkPrice(Cat.foodPrice, user))
+        if(!checkPrice(Cat.foodPrice))
         {
             return;
         }
@@ -482,8 +493,9 @@ public class LivingRoom extends VBox
     {
         //root.transitionMenu(new Home(root, user));
         changeBoxes(shopBox, homeBox);
+        changeBoxes(cancelButton, quitButton);
 
-        if(!root.checkPrice(Bird.foodPrice, user))
+        if(!checkPrice(Bird.foodPrice))
         {
             return;
         }
@@ -500,8 +512,9 @@ public class LivingRoom extends VBox
     {
         //root.transitionMenu(new Home(root, user));
         changeBoxes(shopBox, homeBox);
+        changeBoxes(cancelButton, quitButton);
 
-        if(!root.checkPrice(Fish.foodPrice, user))
+        if(!checkPrice(Fish.foodPrice))
         {
             return;
         }
@@ -518,8 +531,9 @@ public class LivingRoom extends VBox
     {
         //root.transitionMenu(new Home(root, user));
         changeBoxes(shopBox, homeBox);
+        changeBoxes(cancelButton, quitButton);
 
-        if(!root.checkPrice(Rabbit.foodPrice, user))
+        if(!checkPrice(Rabbit.foodPrice))
         {
             return;
         }
@@ -570,6 +584,7 @@ public class LivingRoom extends VBox
         }
         //root.transitionMenu(new Home(root, user));
         changeBoxes(interactBox, homeBox);
+        changeBoxes(cancelButton, quitButton);
 
     }
 
@@ -579,6 +594,7 @@ public class LivingRoom extends VBox
         selectedPet.giveWater();
         //root.transitionMenu(new Home(root, user));
         changeBoxes(interactBox, homeBox);
+        changeBoxes(cancelButton, quitButton);
         userMessage.setText("You gave water to " + selectedPet.getName() + "! What would you like to do now?");
     }
 
@@ -613,8 +629,13 @@ public class LivingRoom extends VBox
         interactBox.setManaged(false);
         petNameBox.setManaged(false);
 
+        cancelButton.setVisible(false);
+        cancelButton.setManaged(false);
+
         homeBox.setVisible(true);
         homeBox.setManaged(true);
+        quitButton.setVisible(true);
+        quitButton.setManaged(true);
     }
 
     public void createButton(String name)
