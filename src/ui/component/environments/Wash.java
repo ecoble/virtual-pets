@@ -12,14 +12,13 @@ import model.User;
 import ui.component.Component;
 import ui.component.PetView;
 import ui.component.Root;
-import ui.component.menus.Home;
 
 import static model.PetType.BIRD;
 
 /**
  * Created by M5sp on 11/13/17.
  */
-public class WashEnvironment extends VBox
+public class Wash extends VBox
 {
     private Root root;
     private User user;
@@ -37,12 +36,12 @@ public class WashEnvironment extends VBox
     @FXML
     private Text userMessage;
 
-    public WashEnvironment(Root root, User user, Pet pet)
+    public Wash(Root root, User user, Pet pet)
     {
         this.root = root;
         this.user = user;
         this.pet = pet;
-        Component.load("WashEnvironment.fxml", this);
+        Component.load("Wash.fxml", this);
     }
 
     @FXML
@@ -77,8 +76,7 @@ public class WashEnvironment extends VBox
             if (pet.getHungerStat() <= 0)
             {
                 user.removePet(pet);
-                root.transitionDisplay(new LivingRoom(user, root, pet.getName() + " died from hunger!"));
-                root.transitionMenu(new Home(root, user));
+                root.transition(new LivingRoom(user, root, pet.getName() + " died from hunger!"));
             }
         }));
 
@@ -86,8 +84,7 @@ public class WashEnvironment extends VBox
             if(pet.getThirstStat() <= 0)
             {
                 user.removePet(pet);
-                root.transitionDisplay(new LivingRoom(user, root, pet.getName() + " died from thirst!"));
-                root.transitionMenu(new Home(root, user));
+                root.transition(new LivingRoom(user, root, pet.getName() + " died from thirst!"));
             }
         }));
     }
@@ -107,20 +104,18 @@ public class WashEnvironment extends VBox
         {
             if(user.getMoney() >= 50)
             {
-                root.transitionDisplay(new LivingRoom(user, root, "You finished washing " + pet.getName() + ", but you had to go to the doctor for your scratches. The bill was $50."));
+                root.transition(new LivingRoom(user, root, "You finished washing " + pet.getName() + ", but you had to go to the doctor for your scratches. The bill was $50."));
                 user.withdrawMoney(50);
             }
             else
             {
-                root.transitionDisplay(new LivingRoom(user, root, "You finished washing " + pet.getName() + ", and didn't have enough money to see the doctor for you scratches.\nYour scratches cause you great suffering."));
+                root.transition(new LivingRoom(user, root, "You finished washing " + pet.getName() + ", and didn't have enough money to see the doctor for you scratches.\nYour scratches cause you great suffering."));
             }
         }
         else
         {
-            root.transitionDisplay(new LivingRoom(user, root, "You finished washing " + pet.getName() + ". What would you like to do now?"));
+            root.transition(new LivingRoom(user, root, "You finished washing " + pet.getName() + ". What would you like to do now?"));
         }
-        //root.transitionDisplay(new LivingRoom(user, root));
-        //root.transitionMenu(new Home(root, user));
     }
 
 }

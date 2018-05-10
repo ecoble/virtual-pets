@@ -15,14 +15,13 @@ import model.User;
 import ui.component.Component;
 import ui.component.PetView;
 import ui.component.Root;
-import ui.component.menus.Home;
 
 import static model.PetType.BIRD;
 
 /**
  * Created by M5sp on 11/20/17.
  */
-public class GymEnvironment extends VBox
+public class Gym extends VBox
 {
     private Root root;
     private User user;
@@ -43,12 +42,12 @@ public class GymEnvironment extends VBox
     @FXML
     private Text userMessage;
 
-    public GymEnvironment(Root root, User user, Pet pet)
+    public Gym(Root root, User user, Pet pet)
     {
         this.root = root;
         this.user = user;
         this.pet = pet;
-        Component.load("GymEnvironment.fxml", this);
+        Component.load("Gym.fxml", this);
     }
 
     @FXML
@@ -84,8 +83,7 @@ public class GymEnvironment extends VBox
             if (pet.getHungerStat() <= 0)
             {
                 user.removePet(pet);
-                root.transitionDisplay(new LivingRoom(user, root, pet.getName() + " died from hunger!"));
-                //root.transitionMenu(new Home(root, user));
+                root.transition(new LivingRoom(user, root, pet.getName() + " died from hunger!"));
             }
         }));
 
@@ -93,8 +91,7 @@ public class GymEnvironment extends VBox
             if(pet.getThirstStat() <= 0)
             {
                 user.removePet(pet);
-                root.transitionDisplay(new LivingRoom(user, root, pet.getName() + " died from hunger!"));
-                //root.transitionMenu(new Home(root, user));
+                root.transition(new LivingRoom(user, root, pet.getName() + " died from hunger!"));
             }
         }));
 
@@ -117,9 +114,7 @@ public class GymEnvironment extends VBox
     protected void goHome()
     {
         pet.train();
-        //root.changeMessage("You and " + pet.getName() + " returned home. What would you like to do now?");
-        root.transitionDisplay(new LivingRoom(user, root, "You and " + pet.getName() + " returned home. What would you like to do now?"));
-        //root.transitionMenu(new Home(root, user));
+        root.transition(new LivingRoom(user, root, "You and " + pet.getName() + " returned home. What would you like to do now?"));
     }
 
     private void losePet()
@@ -130,18 +125,14 @@ public class GymEnvironment extends VBox
         new Timeline(new KeyFrame(
                 Duration.millis(3000),
                 ae -> {
-                    //root.transitionMenu(new Home(root,user));
-                    //root.transitionDisplay(new LivingRoom(user, root));
                     if(pet.getSpecies().equals("fish"))
                     {
-                        root.transitionDisplay(new LivingRoom(user, root, pet.getName() + " died due to lack of water."));
-                        //root.changeMessage(pet.getName() + " died due to lack of water.");
+                        root.transition(new LivingRoom(user, root, pet.getName() + " died due to lack of water."));
                     }
                 })
         ).play();
 
         user.removePet(pet);
-
     }
 }
 

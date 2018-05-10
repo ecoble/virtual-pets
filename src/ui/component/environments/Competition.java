@@ -16,12 +16,11 @@ import javafx.util.Duration;
 import model.Pet;
 import model.User;
 import ui.component.*;
-import ui.component.menus.Home;
 
 import javax.swing.text.html.ImageView;
 import java.util.Random;
 
-public class CompetitionEnvironment extends VBox
+public class Competition extends VBox
 {
     private Root root;
     private Pet pet;
@@ -55,14 +54,14 @@ public class CompetitionEnvironment extends VBox
     @FXML
     private Text userMessage;
 
-    public CompetitionEnvironment(Root root, User user, Pet pet)
+    public Competition(Root root, User user, Pet pet)
     {
         this.root = root;
         this.user = user;
         this.pet = pet;
 
         isFrisbeeMoving = new SimpleBooleanProperty(false);
-        Component.load("CompetitionEnvironment.fxml", this);
+        Component.load("Competition.fxml", this);
     }
 
     public boolean getIsFrisbeeMoving()
@@ -99,8 +98,7 @@ public class CompetitionEnvironment extends VBox
             if (pet.getHungerStat() <= 0)
             {
                 user.removePet(pet);
-                root.transitionDisplay(new LivingRoom(user, root, pet.getName() + " died from hunger!"));
-                //root.transitionMenu(new Home(root, user));
+                root.transition(new LivingRoom(user, root, pet.getName() + " died from hunger!"));
             }
         }));
 
@@ -108,8 +106,7 @@ public class CompetitionEnvironment extends VBox
             if(pet.getThirstStat() <= 0)
             {
                 user.removePet(pet);
-                root.transitionDisplay(new LivingRoom(user, root, pet.getName() + " died from thirst!"));
-                //root.transitionMenu(new Home(root, user));
+                root.transition(new LivingRoom(user, root, pet.getName() + " died from thirst!"));
             }
         }));
 
@@ -165,11 +162,9 @@ public class CompetitionEnvironment extends VBox
         new Timeline(new KeyFrame(
                 Duration.millis(3000),
                 ae -> {
-                    //root.transitionMenu(new Home(root,user));
                     if(pet.getSpecies().equals("fish"))
                     {
-                        //root.changeMessage(pet.getName() + " died due to lack of water.");
-                        root.transitionDisplay(new LivingRoom(user, root,pet.getName() + " died due to lack of water."));
+                        root.transition(new LivingRoom(user, root,pet.getName() + " died due to lack of water."));
                     }
                 })
         ).play();
@@ -183,24 +178,18 @@ public class CompetitionEnvironment extends VBox
     {
         if(getNumCaught() > 7)
         {
-            //root.changeMessage("You and " + pet.getName() + " returned home. You won $250! What would you like to do now?");
-            root.transitionDisplay(new LivingRoom(user, root,"You and " + pet.getName() + " returned home. You won $250! What would you like to do now?" ));
+            root.transition(new LivingRoom(user, root,"You and " + pet.getName() + " returned home. You won $250! What would you like to do now?" ));
             user.addMoney(250);
         }
         else if (getNumCaught() >= 4 && getNumCaught() <= 7)
         {
-            //root.changeMessage("You and " + pet.getName() + " returned home. You won $100! What would you like to do now?");
-            root.transitionDisplay(new LivingRoom(user, root, "You and " + pet.getName() + " returned home. You won $100! What would you like to do now?"));
+            root.transition(new LivingRoom(user, root, "You and " + pet.getName() + " returned home. You won $100! What would you like to do now?"));
             user.addMoney(100);
         }
         else
         {
-            //root.changeMessage("You and " + pet.getName() + " returned home. You didn't win any money :( What would you like to do now?");
-            root.transitionDisplay(new LivingRoom(user, root, "You and " + pet.getName() + " returned home. You won $100! What would you like to do now?"));
+            root.transition(new LivingRoom(user, root, "You and " + pet.getName() + " returned home. You didn't win any money :( What would you like to do now?"));
         }
-
-        //root.transitionDisplay(new LivingRoom(user, root));
-        //root.transitionMenu(new Home(root, user));
     }
 
     @FXML

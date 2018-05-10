@@ -1,5 +1,0 @@
-<?import javafx.scene.control.Button?>
-<fx:root type="javafx.scene.layout.HBox" xmlns:fx="http://javafx.com/fxml/1" fx:id="washBox" visible="false" managed="false">
-    <Button fx:id="continueWash" onMouseClicked="#continueWash" text="Continue Washing"></Button>
-    <Button fx:id="finishWash" onMouseClicked="#finishWash" text="Finish Washing"></Button>
-</fx:root>

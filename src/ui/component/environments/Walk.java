@@ -16,7 +16,6 @@ import model.User;
 import ui.component.Component;
 import ui.component.PetView;
 import ui.component.Root;
-import ui.component.menus.Home;
 
 import static model.PetType.BIRD;
 import static model.PetType.LAND;
@@ -24,7 +23,7 @@ import static model.PetType.LAND;
 /**
  * Created by M5sp on 11/10/17.
  */
-public class WalkEnvironment extends VBox
+public class Walk extends VBox
 {
     private Root root;
     private User user;
@@ -46,12 +45,12 @@ public class WalkEnvironment extends VBox
     private Text userMessage;
 
 
-    public WalkEnvironment(Root root, User user, Pet pet)
+    public Walk(Root root, User user, Pet pet)
     {
         this.root = root;
         this.user = user;
         this.pet = pet;
-        Component.load("WalkEnvironment.fxml", this);
+        Component.load("Walk.fxml", this);
     }
 
     @FXML
@@ -88,8 +87,7 @@ public class WalkEnvironment extends VBox
             if (pet.getHungerStat() <= 0)
             {
                 user.removePet(pet);
-                root.transitionDisplay(new LivingRoom(user, root, pet.getName() + " died from hunger!"));
-                //root.transitionMenu(new Home(root, user));
+                root.transition(new LivingRoom(user, root, pet.getName() + " died from hunger!"));
             }
         }));
 
@@ -97,8 +95,7 @@ public class WalkEnvironment extends VBox
             if(pet.getThirstStat() <= 0)
             {
                 user.removePet(pet);
-                root.transitionDisplay(new LivingRoom(user, root, pet.getName() + " died from thirst!"));
-                //root.transitionMenu(new Home(root, user));
+                root.transition(new LivingRoom(user, root, pet.getName() + " died from thirst!"));
             }
         }));
 
@@ -106,7 +103,7 @@ public class WalkEnvironment extends VBox
         {
             if (pet.getHygieneStat() == 0)
             {
-                root.changeMessage(pet.getName() + " is very dirty! You should give them a bath!");
+                userMessage.setText(pet.getName() + " is very dirty! You should give them a bath!");
             }
         }));
     }
@@ -120,9 +117,7 @@ public class WalkEnvironment extends VBox
     @FXML
     protected void goHome()
     {
-        //root.changeMessage("You and " + pet.getName() + " returned home. What would you like to do now?");
-        root.transitionDisplay(new LivingRoom(user, root, "You and " + pet.getName() + " returned home. What would you like to do now?"));
-        //root.transitionMenu(new Home(root, user));
+        root.transition(new LivingRoom(user, root, "You and " + pet.getName() + " returned home. What would you like to do now?"));
     }
 
     private void losePet()
@@ -133,17 +128,13 @@ public class WalkEnvironment extends VBox
         new Timeline(new KeyFrame(
                 Duration.millis(3000),
                 ae -> {
-                    //root.transitionMenu(new Home(root,user));
-
                     if (pet.getSpecies().equals("fish"))
                     {
-                        //root.changeMessage(pet.getName() + " died due to lack of water.");
-                        root.transitionDisplay(new LivingRoom(user, root, pet.getName() + " died due to lack of water."));
+                        root.transition(new LivingRoom(user, root, pet.getName() + " died due to lack of water."));
                     }
                     else if (pet.getSpecies().equals("bird"))
                     {
-                        //root.changeMessage(pet.getName() + " flew away into the great beyond.");
-                        root.transitionDisplay(new LivingRoom(user, root, pet.getName() + " flew away into the great beyond."));
+                        root.transition(new LivingRoom(user, root, pet.getName() + " flew away into the great beyond."));
                     }
                 })
         ).play();

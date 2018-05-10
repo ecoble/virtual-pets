@@ -59,8 +59,6 @@ public class StartMenu extends VBox
             return;
         }
 
-
-
         stage.close();
 
         try
@@ -86,7 +84,6 @@ public class StartMenu extends VBox
         {
             e.printStackTrace();
         }
-
     }
 
     @FXML

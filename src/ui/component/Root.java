@@ -1,23 +1,14 @@
 package ui.component;
-import javafx.collections.ListChangeListener;
 import javafx.scene.Node;
 import javafx.scene.control.ButtonType;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import model.*;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import javafx.scene.text.Text;
-import javafx.util.Duration;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import ui.Compositor;
 import ui.component.environments.LivingRoom;
-import ui.component.menus.BuyPets;
-import ui.component.menus.Home;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -25,9 +16,7 @@ import java.util.Optional;
 public class Root extends VBox
 {
 
-    private Compositor displayCompositor;
-
-    private Compositor menuCompositor;
+    private Compositor compositor;
 
     private User user;
 
@@ -35,12 +24,8 @@ public class Root extends VBox
 
     private boolean isNew;
 
-
     @FXML
     private StackPane display;
-
-    @FXML
-    private HBox menus;
 
     public Root()
     {
@@ -71,25 +56,20 @@ public class Root extends VBox
             user = new User(name);
         }
 
-        menuCompositor = new Compositor(menus);
-        displayCompositor = new Compositor(display);
+        compositor = new Compositor(display);
 
         LivingRoom livingRoom;
 
         if(isNew)
         {
             livingRoom = new LivingRoom(user, this, "Hello " + user.getName() + "! You need to buy your first pet!");
-            //menuCompositor.transitionTo(new BuyPets(this, user));
-            //changeMessage("Hello " + user.getName() + "! You need to buy your first pet!");
         }
         else
         {
             livingRoom = new LivingRoom(user, this, "Welcome back " + user.getName() + "! What would you like to do?");
-            //menuCompositor.transitionTo(new Home(this, user));
-            //changeMessage("Welcome back " + user.getName() + "! What would you like to do?");
         }
 
-        displayCompositor.transitionTo(livingRoom);
+        compositor.transitionTo(livingRoom);
     }
 
 
@@ -105,14 +85,9 @@ public class Root extends VBox
         return name.orElse("");
     }
 
-    public void transitionDisplay(Node node)
+    public void transition(Node node)
     {
-        displayCompositor.transitionTo(node);
-    }
-
-    public void transitionMenu(Node node)
-    {
-        menuCompositor.transitionTo(node);
+        compositor.transitionTo(node);
     }
 
     private boolean checkNameLength(String name)
@@ -128,10 +103,5 @@ public class Root extends VBox
     public String getFileName()
     {
         return fileName;
-    }
-
-    public void clearMenu()
-    {
-        menus.getChildren().clear();
     }
 }
