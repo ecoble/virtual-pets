@@ -27,8 +27,8 @@
     </StackPane>
 
     <HBox fx:id="menu" alignment="center">
-        <Button fx:id="continueWash" onMouseClicked="#continueWash" text="Continue Washing"></Button>
-        <Button fx:id="finishWash" onMouseClicked="#finishWash" text="Finish Washing"></Button>
+        <Button fx:id="continueWash" onAction="#continueWash" text="Continue Washing"></Button>
+        <Button fx:id="finishWash" onAction="#finishWash" text="Finish Washing"></Button>
     </HBox>
 
 </fx:root>

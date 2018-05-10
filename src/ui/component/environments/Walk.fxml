@@ -31,7 +31,7 @@
     </StackPane>
 
     <HBox fx:id="menu" alignment="center">
-        <Button fx:id="continueWalk" onMouseClicked="#continueWalk" text="Continue Walk"></Button>
-        <Button fx:id="goHome" onMouseClicked="#goHome" text="Go Home"></Button>
+        <Button fx:id="continueWalk" onAction="#continueWalk" text="Continue Walk"></Button>
+        <Button fx:id="goHome" onAction="#goHome" text="Go Home"></Button>
     </HBox>
 </fx:root>

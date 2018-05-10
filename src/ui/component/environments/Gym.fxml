@@ -31,8 +31,8 @@
     </StackPane>
 
     <HBox fx:id="menu" alignment="center">
-        <Button fx:id="continueTraining" onMouseClicked="#continueTraining" text="Continue Training"></Button>
-        <Button fx:id="goHome" onMouseClicked="#goHome" text="Go Home"></Button>
+        <Button fx:id="continueTraining" onAction="#continueTraining" text="Continue Training"></Button>
+        <Button fx:id="goHome" onAction="#goHome" text="Go Home"></Button>
     </HBox>
 
 </fx:root>

@@ -37,9 +37,9 @@
     </StackPane>
 
     <HBox fx:id="menu" alignment="center">
-        <Button fx:id="start" onMouseClicked="#start" text="Start Competition"></Button>
-        <Button fx:id="throwFrisbee" onMouseClicked="#throwFrisbee" text="Throw Frisbee Again" visible="false" managed="false"></Button>
-        <Button fx:id="goHome" onMouseClicked="#goHome" text="Go Home"></Button>
+        <Button fx:id="start" onAction="#start" text="Start Competition"></Button>
+        <Button fx:id="throwFrisbee" onAction="#throwFrisbee" text="Throw Frisbee Again" visible="false" managed="false"></Button>
+        <Button fx:id="goHome" onAction="#goHome" text="Go Home"></Button>
     </HBox>
 
 </fx:root>

@@ -11,8 +11,8 @@
         </font>
     </Label>
     <HBox alignment="CENTER" spacing="20">
-        <Button fx:id="start" onMouseClicked="#start" text="New Game"/>
-        <Button fx:id="quit" onMouseClicked="#quit" text="Quit"/>
-        <Button fx:id="load" onMouseClicked="#load" text="Load Game"/>
+        <Button fx:id="start" onAction="#start" text="New Game"/>
+        <Button fx:id="quit" onAction="#quit" text="Quit"/>
+        <Button fx:id="load" onAction="#load" text="Load Game"/>
     </HBox>
 </fx:root>

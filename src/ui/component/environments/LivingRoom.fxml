@@ -57,43 +57,43 @@
     </StackPane>
 
     <HBox fx:id="homeBox" alignment="CENTER">
-        <Button fx:id="buyPetsButton" onMouseClicked="#buyMorePets" text="Buy more pets"/>
-        <Button fx:id="interactButton" onMouseClicked="#showPetNames" text="Interact with pets"/>
-        <Button fx:id="storeButton" onMouseClicked="#showStore" text="Go to store"/>
+        <Button fx:id="buyPetsButton" onAction="#buyMorePets" text="Buy more pets"/>
+        <Button fx:id="interactButton" onAction="#showPetNames" text="Interact with pets"/>
+        <Button fx:id="storeButton" onAction="#showStore" text="Go to store"/>
         <padding>
             <Insets bottom="15.0"/>
         </padding>
     </HBox>
 
     <HBox fx:id="buyPetsBox" alignment="CENTER" visible="false" managed="false">
-        <Button fx:id="dogButton" onMouseClicked="#buyDog"/>
-        <Button fx:id="catButton" onMouseClicked="#buyCat" text="Buy Cat"/>
-        <Button fx:id="fishButton" onMouseClicked="#buyFish" text="Buy Fish"/>
-        <Button fx:id="birdButton" onMouseClicked="#buyBird" text="Buy Bird"/>
-        <Button fx:id="rabbitButton" onMouseClicked="#buyRabbit" text="Buy Rabbit"/>
+        <Button fx:id="dogButton" onAction="#buyDog"/>
+        <Button fx:id="catButton" onAction="#buyCat" text="Buy Cat"/>
+        <Button fx:id="fishButton" onAction="#buyFish" text="Buy Fish"/>
+        <Button fx:id="birdButton" onAction="#buyBird" text="Buy Bird"/>
+        <Button fx:id="rabbitButton" onAction="#buyRabbit" text="Buy Rabbit"/>
         <padding>
             <Insets bottom="15.0"/>
         </padding>
     </HBox>
 
     <HBox fx:id="shopBox" alignment="CENTER" visible="false" managed="false">
-        <Button fx:id="dogFoodButton" onMouseClicked="#buyDogFood"/>
-        <Button fx:id="catFoodButton" onMouseClicked="#buyCatFood" text="Cat Food"/>
-        <Button fx:id="birdFoodButton" onMouseClicked="#buyBirdFood" text="Bird Food"/>
-        <Button fx:id="fishFoodButton" onMouseClicked="#buyFishFood" text="Fish Food"/>
-        <Button fx:id="rabbitFoodButton" onMouseClicked="#buyRabbitFood" text="Rabbit Food"/>
+        <Button fx:id="dogFoodButton" onAction="#buyDogFood"/>
+        <Button fx:id="catFoodButton" onAction="#buyCatFood" text="Cat Food"/>
+        <Button fx:id="birdFoodButton" onAction="#buyBirdFood" text="Bird Food"/>
+        <Button fx:id="fishFoodButton" onAction="#buyFishFood" text="Fish Food"/>
+        <Button fx:id="rabbitFoodButton" onAction="#buyRabbitFood" text="Rabbit Food"/>
         <padding>
             <Insets bottom="15.0"/>
         </padding>
     </HBox>
 
     <HBox fx:id="interactBox" alignment="CENTER" visible="false" managed="false">
-        <Button fx:id="foodButton" onMouseClicked="#feed" userData="You fed " text="Feed"/>
-        <Button fx:id="drinkButton" onMouseClicked="#giveWater" userData="You gave water to " text="Give water"/>
-        <Button fx:id="walkButton" onMouseClicked="#walk" userData="You walked " text="Walk"/>
-        <Button fx:id="washButton" onMouseClicked="#wash" userData="You washed " text="Wash"/>
-        <Button fx:id="trainButton" onMouseClicked="#train" userData="You trained " text="Train"/>
-        <Button fx:id="competitionButton" onMouseClicked="#compete" userData="You entered a competition with " text="Go to competition"/>
+        <Button fx:id="foodButton" onAction="#feed" userData="You fed " text="Feed"/>
+        <Button fx:id="drinkButton" onAction="#giveWater" userData="You gave water to " text="Give water"/>
+        <Button fx:id="walkButton" onAction="#walk" userData="You walked " text="Walk"/>
+        <Button fx:id="washButton" onAction="#wash" userData="You washed " text="Wash"/>
+        <Button fx:id="trainButton" onAction="#train" userData="You trained " text="Train"/>
+        <Button fx:id="competitionButton" onAction="#compete" userData="You entered a competition with " text="Go to competition"/>
         <padding>
             <Insets bottom="15.0"/>
         </padding>
@@ -106,11 +106,11 @@
     </HBox>
 
     <HBox alignment="CENTER">
-        <Button fx:id="quitButton" onMouseClicked="#quit" text="Save and quit" />
+        <Button fx:id="quitButton" onAction="#quit" text="Save and quit" />
     </HBox>
 
     <HBox alignment="CENTER">
-        <Button fx:id="cancelButton" onMouseClicked="#cancel" text="Cancel" visible="false" managed="false" />
+        <Button fx:id="cancelButton" onAction="#cancel" text="Cancel" visible="false" managed="false" />
     </HBox>
 
 </fx:root>
