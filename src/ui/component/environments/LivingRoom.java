@@ -24,6 +24,7 @@ import ui.component.Component;
 import ui.component.PetView;
 import ui.component.Root;
 
+import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.Optional;
@@ -234,7 +235,7 @@ public class LivingRoom extends VBox
 
     //Home menu
     @FXML
-    protected void buyMorePets(MouseEvent event)
+    protected void buyMorePets()
     {
         changeBoxes(homeBox, buyPetsBox);
         changeBoxes(quitButton, cancelButton);
@@ -242,7 +243,7 @@ public class LivingRoom extends VBox
     }
 
     @FXML
-    protected void showStore(MouseEvent event)
+    protected void showStore()
     {
         changeBoxes(homeBox, shopBox);
         changeBoxes(quitButton, cancelButton);
@@ -255,7 +256,7 @@ public class LivingRoom extends VBox
     }
 
     @FXML
-    protected void showPetNames(MouseEvent event)
+    protected void showPetNames()
     {
         changeBoxes(homeBox, petNameBox);
         changeBoxes(quitButton, cancelButton);
@@ -309,42 +310,42 @@ public class LivingRoom extends VBox
 
     //Buy pets menu
     @FXML
-    protected void buyDog(MouseEvent event)
+    protected void buyDog()
     {
         PetView view = new PetView(new Dog(), "images/golden-retriever.png", 250);
         buyPet(view, Dog.price);
     }
 
     @FXML
-    protected void buyCat(MouseEvent event)
+    protected void buyCat()
     {
         PetView view = new PetView(new Cat(), "images/cat_image.png", 150);
         buyPet(view, Cat.price);
     }
 
     @FXML
-    protected void buyFish(MouseEvent event)
+    protected void buyFish()
     {
         PetView view = new PetView(new Fish(), "images/goldfish.png", 75);
         buyPet(view, Fish.price);
     }
 
     @FXML
-    protected void buyBird(MouseEvent event)
+    protected void buyBird()
     {
         PetView view = new PetView(new Bird(), "images/bird.png", 150);
         buyPet(view, Bird.price);
     }
 
     @FXML
-    protected void buyRabbit(MouseEvent event)
+    protected void buyRabbit()
     {
         PetView view = new PetView(new Rabbit(), "images/rabbit.png", 50);
         buyPet(view, Rabbit.price);
     }
 
     @FXML
-    protected void cancel(MouseEvent event)
+    protected void cancel()
     {
         showHomeBox();
 
@@ -531,25 +532,25 @@ public class LivingRoom extends VBox
 
     //Interact menu
     @FXML
-    protected void walk(MouseEvent event)
+    protected void walk()
     {
         root.transition(new Walk(root, user, selectedPet));
     }
 
     @FXML
-    protected void wash(MouseEvent event)
+    protected void wash()
     {
         root.transition(new Wash(root, user, selectedPet));
     }
 
     @FXML
-    protected void train(MouseEvent event)
+    protected void train()
     {
         root.transition(new Gym(root, user, selectedPet));
     }
 
     @FXML
-    protected void feed(MouseEvent event)
+    protected void feed()
     {
         if(user.getFood(selectedPet.getFoodType()) > 0){
             selectedPet.feed();
@@ -566,7 +567,7 @@ public class LivingRoom extends VBox
     }
 
     @FXML
-    protected void giveWater(MouseEvent event)
+    protected void giveWater()
     {
         selectedPet.giveWater();
         changeBoxes(interactBox, homeBox);
@@ -575,7 +576,7 @@ public class LivingRoom extends VBox
     }
 
     @FXML
-    protected void compete(MouseEvent event)
+    protected void compete()
     {
         root.transition(new Competition(root, user, selectedPet));
 

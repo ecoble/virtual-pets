@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
@@ -254,6 +255,14 @@ public class Competition extends VBox
     @FXML
     protected void jump()
     {
+        EventHandler jumpHandler = new EventHandler<javafx.scene.input.MouseEvent>(){
+            public void handle(javafx.scene.input.MouseEvent event){
+                jump();
+            }
+        };
+
+        box.setOnMouseClicked(null);
+
         Timeline jumpUp = new Timeline(new KeyFrame(Duration.millis(3), ae ->
         {
             box.setLayoutY(box.getLayoutY() - 1);
@@ -264,15 +273,16 @@ public class Competition extends VBox
                 box.setLayoutY(box.getLayoutY() + 1);
         }));
 
-        Timeline changeDog = new Timeline(new KeyFrame(Duration.millis(1), ae ->
+        Timeline reset = new Timeline(new KeyFrame(Duration.millis(1), ae ->
         {
             view.getPetView().setImage(new Image("images/golden-retriever.png"));
             view.getPetView().setFitWidth(view.getImageSize());
+            box.setOnMouseClicked(jumpHandler);
         }));
 
         jumpUp.setCycleCount(200);
         jumpDown.setCycleCount(200);
-        SequentialTransition jump = new SequentialTransition(jumpUp, jumpDown, changeDog);
+        SequentialTransition jump = new SequentialTransition(jumpUp, jumpDown, reset);
         jump.play();
 
     }
