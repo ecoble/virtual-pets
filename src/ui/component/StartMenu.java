@@ -63,7 +63,7 @@ public class StartMenu extends VBox
 
         try
         {
-            byte[] encoded = Files.readAllBytes(Paths.get(file.getName()));
+            byte[] encoded = Files.readAllBytes(Paths.get(file.getAbsolutePath()));
             String json = new String(encoded, Charset.defaultCharset());
             User user = Json.from(json, User.class);
 

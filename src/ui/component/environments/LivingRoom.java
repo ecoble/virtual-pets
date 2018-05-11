@@ -290,7 +290,7 @@ public class LivingRoom extends VBox
                 return;
             }
 
-            fileName = file.getName();
+            fileName = file.getAbsolutePath();
 
             Stage stage = (Stage) quitButton.getScene().getWindow();
             stage.close();

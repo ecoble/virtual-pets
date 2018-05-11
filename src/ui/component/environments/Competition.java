@@ -255,12 +255,6 @@ public class Competition extends VBox
     @FXML
     protected void jump()
     {
-        EventHandler jumpHandler = new EventHandler<javafx.scene.input.MouseEvent>(){
-            public void handle(javafx.scene.input.MouseEvent event){
-                jump();
-            }
-        };
-
         box.setOnMouseClicked(null);
 
         Timeline jumpUp = new Timeline(new KeyFrame(Duration.millis(3), ae ->
@@ -277,7 +271,7 @@ public class Competition extends VBox
         {
             view.getPetView().setImage(new Image("images/golden-retriever.png"));
             view.getPetView().setFitWidth(view.getImageSize());
-            box.setOnMouseClicked(jumpHandler);
+            box.setOnMouseClicked(e -> jump());
         }));
 
         jumpUp.setCycleCount(200);
