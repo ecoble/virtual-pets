@@ -20,7 +20,7 @@ public class Root extends VBox
 
     private User user;
 
-    private String fileName;
+    private String filePath;
 
     private boolean isNew;
 
@@ -33,10 +33,10 @@ public class Root extends VBox
         Component.load("Root.fxml", this);
     }
 
-    public Root(User user, String fileName)
+    public Root(User user, String filePath)
     {
         this.user = user;
-        this.fileName = fileName;
+        this.filePath = filePath;
         isNew = false;
         Component.load("Root.fxml", this);
     }
@@ -100,8 +100,8 @@ public class Root extends VBox
         return isNew;
     }
 
-    public String getFileName()
+    public String getFilePath()
     {
-        return fileName;
+        return filePath;
     }
 }

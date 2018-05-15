@@ -271,11 +271,11 @@ public class LivingRoom extends VBox
     @FXML
     protected void quit()
     {
-        String fileName = null;
+        String filePath = null;
 
         if(!root.getIsNew())
         {
-            fileName = root.getFileName();
+            filePath = root.getFilePath();
             Stage stage = (Stage) quitButton.getScene().getWindow();
             stage.close();
         }
@@ -290,7 +290,7 @@ public class LivingRoom extends VBox
                 return;
             }
 
-            fileName = file.getAbsolutePath();
+            filePath = file.getAbsolutePath();
 
             Stage stage = (Stage) quitButton.getScene().getWindow();
             stage.close();
@@ -298,7 +298,7 @@ public class LivingRoom extends VBox
 
         try
         {
-            FileWriter fileWriter = new FileWriter(fileName);
+            FileWriter fileWriter = new FileWriter(filePath);
             fileWriter.write(Json.to(user));
             fileWriter.flush();
         }
