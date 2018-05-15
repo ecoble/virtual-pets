@@ -215,14 +215,42 @@ public class Competition extends VBox
                 boolean didCatch = didCatch();
                 if(didCatch)
                 {
-                    view.getPetView().setImage(new Image("images/dogWithFrisbee.png"));
-                    view.getPetView().setFitWidth(200);
+                    switch (pet.getSpecies())
+                    {
+                        case "dog":
+                            view.getPetView().setImage(new Image("images/dogWithFrisbee.png"));
+                            view.getPetView().setFitWidth(200);
+                            break;
+                        case "cat":
+                            view.getPetView().setImage(new Image("images/catwithfrisbee.jpg"));
+                            view.getPetView().setFitWidth(200);
+                            break;
+                        //case "rabbit":
+                        //    view.getPetView().setImage(new Image("images/rabbit.png"));
+                        //    break;
+                        //case "bird":
+                        //    view.getPetView().setImage(new Image("images/bird.png"));
+                        //    break;
+                        //case "fish":
+                        //    view.getPetView().setImage(new Image("images/goldfish.png"));
+                        //    break;
+                    }
                     numCaught++;
                 }
                 else
                 {
-                    view.getPetView().setImage(new Image("images/dogMissFrisbee.png"));
-                    view.getPetView().setFitWidth(175);
+                    switch (pet.getSpecies())
+                    {
+                        case "dog":
+                            view.getPetView().setImage(new Image("images/dogMissFrisbee.png"));
+                            view.getPetView().setFitWidth(175);
+                            break;
+                        case "cat":
+                            view.getPetView().setImage(new Image("images/catmissfrisbee.png"));
+                            view.getPetView().setFitWidth(120);
+                            break;
+                    }
+
                 }
 
                 frisbeeBox.setVisible(false);
@@ -269,7 +297,24 @@ public class Competition extends VBox
 
         Timeline reset = new Timeline(new KeyFrame(Duration.millis(1), ae ->
         {
-            view.getPetView().setImage(new Image("images/golden-retriever.png"));
+            switch (pet.getSpecies())
+            {
+                case "dog":
+                    view.getPetView().setImage(new Image("images/golden-retriever.png"));
+                    break;
+                case "cat":
+                    view.getPetView().setImage(new Image("images/cat_image.png"));
+                    break;
+                case "rabbit":
+                    view.getPetView().setImage(new Image("images/rabbit.png"));
+                    break;
+                case "bird":
+                    view.getPetView().setImage(new Image("images/bird.png"));
+                    break;
+                case "fish":
+                    view.getPetView().setImage(new Image("images/goldfish.png"));
+                    break;
+            }
             view.getPetView().setFitWidth(view.getImageSize());
             box.setOnMouseClicked(e -> jump());
         }));

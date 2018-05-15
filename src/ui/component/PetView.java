@@ -187,11 +187,6 @@ public class PetView extends VBox
         return imageSize;
     }
 
-    public double getCanvasHeight()
-    {
-        return canvas.getHeight();
-    }
-
     public ImageView getPetView()
     {
         return petView;
