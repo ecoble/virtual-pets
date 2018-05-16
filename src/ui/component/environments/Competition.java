@@ -3,14 +3,9 @@ package ui.component.environments;
 import javafx.animation.*;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.value.ObservableBooleanValue;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
@@ -18,7 +13,6 @@ import model.Pet;
 import model.User;
 import ui.component.*;
 
-import javax.swing.text.html.ImageView;
 import java.util.Random;
 
 public class Competition extends VBox
@@ -218,22 +212,21 @@ public class Competition extends VBox
                     switch (pet.getSpecies())
                     {
                         case "dog":
-                            view.getPetView().setImage(new Image("images/dogWithFrisbee.png"));
+                            view.getPetView().setImage(new Image("images/dogwithfrisbee.png"));
                             view.getPetView().setFitWidth(200);
                             break;
                         case "cat":
-                            view.getPetView().setImage(new Image("images/catwithfrisbee.jpg"));
+                            view.getPetView().setImage(new Image("images/catwithfrisbee.png"));
                             view.getPetView().setFitWidth(200);
                             break;
-                        //case "rabbit":
-                        //    view.getPetView().setImage(new Image("images/rabbit.png"));
-                        //    break;
-                        //case "bird":
-                        //    view.getPetView().setImage(new Image("images/bird.png"));
-                        //    break;
-                        //case "fish":
-                        //    view.getPetView().setImage(new Image("images/goldfish.png"));
-                        //    break;
+                        case "rabbit":
+                            view.getPetView().setImage(new Image("images/rabbitwithfrisbee.png"));
+                            view.getPetView().setFitWidth(110);
+                            break;
+                        case "bird":
+                            view.getPetView().setImage(new Image("images/birdwithfrisbee.png"));
+                            view.getPetView().setFitWidth(200);
+                            break;
                     }
                     numCaught++;
                 }
@@ -242,12 +235,20 @@ public class Competition extends VBox
                     switch (pet.getSpecies())
                     {
                         case "dog":
-                            view.getPetView().setImage(new Image("images/dogMissFrisbee.png"));
+                            view.getPetView().setImage(new Image("images/dogmissfrisbee.png"));
                             view.getPetView().setFitWidth(175);
                             break;
                         case "cat":
                             view.getPetView().setImage(new Image("images/catmissfrisbee.png"));
                             view.getPetView().setFitWidth(120);
+                            break;
+                        case "rabbit":
+                            view.getPetView().setImage(new Image("images/rabbitmissfrisbee.png"));
+                            view.getPetView().setFitWidth(120);
+                            break;
+                        case "bird":
+                            view.getPetView().setImage(new Image("images/birdmissfrisbee.png"));
+                            view.getPetView().setFitWidth(200);
                             break;
                     }
 
@@ -353,7 +354,6 @@ public class Competition extends VBox
         }
 
         return num >= 75;
-
     }
 }
 
