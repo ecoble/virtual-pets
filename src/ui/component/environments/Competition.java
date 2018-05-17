@@ -9,6 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+import model.NumberGenerator;
 import model.Pet;
 import model.RandomNumberGenerator;
 import model.User;
@@ -207,8 +208,7 @@ public class Competition extends VBox
             {
                 throwFrisbee.setDisable(false);
                 throwF.stop();
-                boolean didCatch = didCatch();
-                if(didCatch)
+                if(pet.didCatch(new RandomNumberGenerator()))
                 {
                     switch (pet.getSpecies())
                     {
@@ -336,25 +336,5 @@ public class Competition extends VBox
            && box.getLayoutY() + view.getHeight() >= frisbeeBox.getLayoutY();
     }
 
-    public boolean didCatch()
-    {
-        RandomNumberGenerator rand = new RandomNumberGenerator();
-        int num = 0;
-
-        if(pet.getSkillPoints() > 100)
-        {
-            num = rand.nextInt(50, 100);
-        }
-        else if(pet.getSkillPoints() >= 50 && pet.getSkillPoints() <= 100)
-        {
-            num = rand.nextInt(25, 100);
-        }
-        else
-        {
-            num = rand.nextInt(0, 100);
-        }
-
-        return num >= 75;
-    }
 }
 

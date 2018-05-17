@@ -149,6 +149,26 @@ public abstract class Pet
         return hygieneStat;
     }
 
+    public boolean didCatch(NumberGenerator rand)
+    {
+        int num = 0;
+
+        if(getSkillPoints() > 100)
+        {
+            num = rand.nextInt(50, 100);
+        }
+        else if(getSkillPoints() >= 50 && getSkillPoints() <= 100)
+        {
+            num = rand.nextInt(25, 100);
+        }
+        else
+        {
+            num = rand.nextInt(0, 100);
+        }
+
+        return num >= 75;
+    }
+
 
 
 }
