@@ -10,6 +10,7 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 import model.Pet;
+import model.RandomNumberGenerator;
 import model.User;
 import ui.component.*;
 
@@ -337,20 +338,20 @@ public class Competition extends VBox
 
     public boolean didCatch()
     {
-        Random rand = new Random();
+        RandomNumberGenerator rand = new RandomNumberGenerator();
         int num = 0;
 
         if(pet.getSkillPoints() > 100)
         {
-            num = rand.nextInt(50) + 50;
+            num = rand.nextInt(50, 100);
         }
         else if(pet.getSkillPoints() >= 50 && pet.getSkillPoints() <= 100)
         {
-            num = rand.nextInt(75) + 25;
+            num = rand.nextInt(25, 100);
         }
         else
         {
-            num = rand.nextInt(100);
+            num = rand.nextInt(0, 100);
         }
 
         return num >= 75;
